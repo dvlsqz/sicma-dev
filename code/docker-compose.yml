@@ -19,7 +19,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports: 
-      - 8200:80
+      - 8500:80
     volumes:
       - ./sicma:/var/www/
       - ./sicma/public:/var/www/html
