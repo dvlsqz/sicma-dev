@@ -1,38 +1,44 @@
 version: '3.7'
-services:
-  laravel-db:
-    image: mysql:5.7
+services: 
+  sidex-db:
+    image: mysql:5.7 
     environment: 
       MYSQL_ROOT_PASSWORD: Igss.2021
-      MYSQL_DATABASE: sicma_dev
+      MYSQL_DATABASE: sidex_prod
       MYSQL_USER: usr_laravel
-      MYSQL_PAASWORD: usr.igss.2021
+      MYSQL_PASSWORD: Usr.igss.2021
     ports: 
       - 33069:3306
-    volumes: 
+    volumes:
       - ./database/schemas/:/var/lib/mysql
     networks:
-      laravel_net:
-        ipv4_address: 174.22.100.9
-  laravel_prod:
+      laravel_prod_net:
+        ipv4_address: 173.16.100.9
+  sidex-prod:
     build: 
       context: ./
       dockerfile: Dockerfile
     ports: 
-      - 8500:80
-    volumes: 
-      - ./sicma:/var/www/
-      - ./sicma/public:/var/www/html
+      - 8200:80
+    volumes:
+      - ./code-prod:/var/www/
+      - ./code-prod/public:/var/www/html
     networks: 
-      laravel_net:
-        ipv4_address: 174.22.100.10
+      laravel_prod_net:
+        ipv4_address: 173.16.100.10
     depends_on: 
-      - laravel-db
-  volumes: 
-    sicma:
-    database:
-  networks: 
-    laravel_net:
+      - sidex-db 
+volumes: 
+  code-prod:
+  database:
+networks: 
+  laravel_prod_net:
+    driver: bridge
+    ipam: 
+      driver: default
+      config: 
+        - 
+          subnet: 173.16.100.0/24
       driver: bridge
       ipam: 
         driver: default
