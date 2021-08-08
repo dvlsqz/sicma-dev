@@ -1,46 +1,41 @@
 version: '3.7'
 services: 
-  sicma-db:
-    image: mysql:5.7 
-    environment: 
-      MYSQL_ROOT_PASSWORD: Igss.2021
-      MYSQL_DATABASE: sicma_dev
-      MYSQL_USER: usr_laravel
-      MYSQL_PASSWORD: Usr.igss.2021
-    ports: 
-      - 33070:3306
-    volumes:
-      - ./database/schemas/:/var/lib/mysql
-    networks:
-      laravel_prod_net:
-        ipv4_address: 180.20.100.9
-  sicma-dev:
-    build: 
-      context: ./
-      dockerfile: Dockerfile
-    ports: 
-      - 8280:80
-    volumes:
-      - ./sicma:/var/www/
-      - ./sicma/public:/var/www/html
-    networks: 
-      laravel_prod_net:
-        ipv4_address: 180.20.100.10
-    depends_on: 
-      - sicma-db 
+ sicma-db:
+  image: mysql:5.7
+  environment:
+   MYSQL_ROOT_PASSWORD: Igss.2021
+   MYSQL_DATABASE: sicma_dev
+   MYSQL_USER: usr_laravel
+   MYSQL_PASSWORD: Usr.igss.2021
+  ports:
+   - 33070:3306
+  volumes: 
+   - ./database/schemas/:/var/lib/mysql
+  networks: 
+   laravel_prod_net:
+    ipv4_address: 175.21.100.9
+ sicma-dev:
+  build:
+   context: ./
+   dockerfile: Dockerfile 
+  ports: 
+   - 8500:80
+  volumes: 
+   - ./code-dev:/var/www
+   - ./code-dev/public:/var/www/html
+  networks: 
+   laravel_prod_net:
+    ipv4_address: 175.21.100.10
+  depends_on: 
+   - sicma-db
 volumes: 
-  sicma-dev:
-  database:
+ code-dev:
+ database:
 networks: 
-  laravel_prod_net:
-    driver: bridge
-    ipam: 
-      driver: default
-      config: 
-        - 
-          subnet: 180.20.100.0/24
-
-
-
-
-
+ laravel_prod_net:
+  driver: bridge
+  ipam: 
+   driver: default
+   config: 
+    - 
+     subnet: 175.21.100.0/24 
