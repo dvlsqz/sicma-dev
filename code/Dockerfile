@@ -9,4 +9,4 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-RUN sudo chmod -R 777 storage && sudo chmod -R 777 bootstrap/cache
+RUN chmod 777 -R -c /var/www
