@@ -165,7 +165,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
+        yajra\Datatables\DatatablesServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
 
         /*
@@ -236,7 +236,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Datatables' => yajra\Datatables\Datatables::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
 
     ],
