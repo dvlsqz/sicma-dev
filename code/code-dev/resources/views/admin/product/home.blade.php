@@ -82,7 +82,7 @@
                 paging: true,
                 "ajax": {
                     "url": "/admin/products/all",
-                    "type": "GET"
+                    "type": "POST"
                 },
                 columns: [
                     {data: 'row', name: 'row'}            
