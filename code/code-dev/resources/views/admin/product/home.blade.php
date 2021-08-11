@@ -81,7 +81,7 @@
                 serverSide: true,
                 paging: true,
                 "ajax": {
-                    "url": "products_index",
+                    "url": "/admin/products/all",
                     "type": "GET"
                 },
                 columns: [
