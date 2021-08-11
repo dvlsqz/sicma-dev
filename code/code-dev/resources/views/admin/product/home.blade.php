@@ -80,7 +80,7 @@
                 processing: true,
                 serverSide: true,
                 paging: true,
-                ajax: "{{ route('products_index') }}"
+                ajax: "{{ route('products_index') }}",
                 columns: [
                     {data: 'row', name: 'row'}            
                 ]
