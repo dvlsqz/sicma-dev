@@ -83,7 +83,7 @@
                 ajax: "{{ route('products_index') }}",
                 columns: [
                     {data: 'action', name: 'action', orderable: false, searchable: false},
-                    {data: 'row', name: 'row' },               
+                    {data: 'row', name: 'row' }               
                 ]
             });
         });
