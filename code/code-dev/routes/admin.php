@@ -53,7 +53,7 @@
        Route::get('/product/add', 'Admin\ProductController@getProductAdd')->name('product_add');
        Route::post('/product/add', 'Admin\ProductController@postProductAdd')->name('product_add');
        Route::get('/product/{status}', 'Admin\ProductController@getProduct')->name('product_list');
-       Route::get('/products/all', 'Admin\ProductController@index')->name('products_index');
+       Route::post('/products/all', 'Admin\ProductController@index')->name('products_index');
        Route::get('/product/{id}/edit', 'Admin\ProductController@getProductEdit')->name('product_edit');
        Route::post('/product/{id}/edit', 'Admin\ProductController@postProductEdit')->name('product_edit');
        Route::post('/product/{id}/edit_stock', 'Admin\ProductController@postProductStockEdit')->name('product_edit_stock');
