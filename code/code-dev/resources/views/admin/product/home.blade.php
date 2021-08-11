@@ -85,7 +85,7 @@
                     "type": "GET"
                 },
                 columns: [
-                    {data: 'action', name: 'action', orderable: false, searchable: false}            
+                    {data: 'row', name: 'row'}            
                 ]
             });
         });
