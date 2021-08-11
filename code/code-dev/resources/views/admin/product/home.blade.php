@@ -80,7 +80,7 @@
                 processing: true,
                 serverSide: true,
                 paging: true,
-                ajax: "{{ route('products_index') }}",
+                ajax: "{{ url('/admin/products/all') }}",
                 columns: [
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                     {data: 'row', name: 'row' }               
