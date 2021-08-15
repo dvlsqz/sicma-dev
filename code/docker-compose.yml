@@ -13,7 +13,7 @@ services:
    - ./database/schemas/:/var/lib/mysql
   networks: 
    laravel_prod_net:
-    ipv4_address: 175.21.100.9
+    ipv4_address: 176.25.100.11
  sicma-dev:
   build:
    context: ./
@@ -25,7 +25,7 @@ services:
    - ./code-dev/public:/var/www/html
   networks: 
    laravel_prod_net:
-    ipv4_address: 175.21.100.10
+    ipv4_address: 176.25.100.12
   depends_on: 
    - sicma-db
 volumes: 
@@ -38,4 +38,4 @@ networks:
    driver: default
    config: 
     - 
-     subnet: 175.21.100.0/24 
+     subnet: 176.25.100.0/24 

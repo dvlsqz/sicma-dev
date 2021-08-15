@@ -59,7 +59,7 @@ class ProductController extends Controller
                         $btn = $btn."<a href='/admin/product/$row->id/record' class='btn btn-light btn-sm' title='Historial de Movimientos'><i class='fas fa-history'></i></a>";
                         return $btn;        
                     })        
-                    ->rawColumns(['action'])        
+                    ->rawColumns(['action']) 
                     ->make(true);        
         }
 
