@@ -53,7 +53,7 @@ class ProductController extends Controller
         //if ($request->ajax()){
             $data = Product::where('type', '5' )->get(); 
             
-            return $data;
+            return response()->json($data);
             
            //return Datatables::of($data)        
                    // ->addIndexColumn()        
