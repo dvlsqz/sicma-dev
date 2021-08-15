@@ -51,7 +51,7 @@ class ProductController extends Controller
     public function index(Request $request){
         
         if ($request->ajax()){
-            $data = Product::where('type', '5' )->get(); 
+            $data = Product::all(); 
             
             
             
