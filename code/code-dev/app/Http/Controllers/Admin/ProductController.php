@@ -53,20 +53,20 @@ class ProductController extends Controller
         if (!$request->ajax()){
             $data = Product::where('type', '5' )->get(); 
             
-            return response()->json($data);
             
-           //return Datatables::of($data)        
-                   // ->addIndexColumn()        
-                   // ->addColumn('action', function($row){     
-                    //    $btn = "<a href='/admin/product/$row->id/edit' class='btn btn-light btn-sm' style='margin-right: 4px;' title='Editar'><i class='fas fa-edit' style='color: #256B92;'></i></a>";
-                 //       $btn = $btn."<a href='/admin/product/$row->id/record' class='btn btn-light btn-sm' title='Historial de Movimientos'><i class='fas fa-history'></i></a>";
-                 //       return $btn;        
-                 //   })        
-                 //   ->rawColumns(['action']) 
-                  //  ->make(true);   ->     
+            
+           return Datatables::of($data)        
+                   ->addIndexColumn()        
+                   ->addColumn('action', function($row){     
+                       $btn = "<a href='/admin/product/$row->id/edit' class='btn btn-light btn-sm' style='margin-right: 4px;' title='Editar'><i class='fas fa-edit' style='color: #256B92;'></i></a>";
+                        $btn = $btn."<a href='/admin/product/$row->id/record' class='btn btn-light btn-sm' title='Historial de Movimientos'><i class='fas fa-history'></i></a>";
+                       return $btn;        
+                   })        
+                    ->rawColumns(['action']) 
+                    ->make(true);   ->     
        }
 
-       // return view('admin.product.home');
+        return view('admin.product.home');
     }
 
     public function getProductAdd(Request $request){
