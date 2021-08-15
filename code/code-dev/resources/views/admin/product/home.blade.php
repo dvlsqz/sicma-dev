@@ -56,12 +56,7 @@
                 <table class="table table-bordered table-striped " id="yajra-datatable">
                     <thead>
                         <tr>
-                            <td width="24px"><strong>OPCIONES</strong></td>
                             <td width="120px"><strong>REGLÓN y CODIGO PPR</strong></td>
-                            <td><strong>NOMBRE y DESCRIPCION</strong></td>
-                            <td><strong>PRESENTACIÓN</strong></td>
-                            <td width="120px"><strong>CANTIDAD DISPONIBLE</strong></td>
-                            <td width="120px"><strong>PRECIO UNITARIO</strong></td>
                         </tr>
                     </thead>
                     <tbody>
