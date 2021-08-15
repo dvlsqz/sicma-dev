@@ -63,7 +63,7 @@ class ProductController extends Controller
                        return $btn;        
                    })        
                     ->rawColumns(['action']) 
-                    ->make(true);   ->     
+                    ->make(true);   
        }
 
         return view('admin.product.home');
