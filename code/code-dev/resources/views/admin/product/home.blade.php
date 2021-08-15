@@ -76,9 +76,6 @@
                 serverSide: true,
                 paging: true,
                 ajax: "{{ route('products_index') }}",
-                headers: {
-                    'CSRFToken': TOKEN
-                },
                 columns: [
                     {data: 'row', name: 'row'}            
                 ]
