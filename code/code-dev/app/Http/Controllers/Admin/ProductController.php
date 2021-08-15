@@ -50,7 +50,7 @@ class ProductController extends Controller
 
     public function index(Request $request){
         
-        if ($request->ajax()){
+        //if ($request->ajax()){
             $data = Product::all(); 
             
             return $data;
@@ -64,7 +64,7 @@ class ProductController extends Controller
                  //   })        
                  //   ->rawColumns(['action']) 
                   //  ->make(true);   ->     
-        }
+       // }
 
        // return view('admin.product.home');
     }
