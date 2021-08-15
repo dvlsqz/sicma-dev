@@ -51,7 +51,7 @@ class ProductController extends Controller
     public function index(Request $request){
         
         if ($request->ajax()){
-            $data = Product::where('type', '3')->get();        
+            $data = Product::where('type', '0')->get();        
             
            return Datatables::of($data)        
                    ->addIndexColumn()        
