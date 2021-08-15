@@ -51,9 +51,9 @@ class ProductController extends Controller
     public function index(Request $request){
         
         //if ($request->ajax()){
-            //$data = Product::all(); 
+            $data = Product::where('type', '5' )->get(); 
             
-            return "hello world";
+            return $data;
             
            //return Datatables::of($data)        
                    // ->addIndexColumn()        
