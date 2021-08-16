@@ -56,7 +56,6 @@
                 <table class="table table-bordered table-striped " id="yajra-datatable">
                     <thead>
                             <tr>
-                             <th>No</th>
                                 <td width="24px"><strong>OPCIONES</strong></td>
                                 <td width="120px"><strong>REGLÓN y CODIGO PPR</strong></td>
                                 <td><strong>NOMBRE y DESCRIPCION</strong></td>
@@ -82,7 +81,6 @@
                 paging: true,
                 ajax: "{{ route('products_index') }}",
                 columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                     {
                         data: 'row', 
