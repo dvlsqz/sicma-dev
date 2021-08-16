@@ -32,10 +32,6 @@ class ProductController extends Controller
                 $product = Product::where('type', '2')->orderBy('id', 'Asc')->paginate(25);
             break;
 
-            case '3':
-                $product = Product::where('type', '3')->orderBy('id', 'Asc')->paginate(25);
-            break;
-
             case 'trash':
                 $product = Product::onlyTrashed()->orderBy('id', 'Asc')->paginate(25);
             break;
