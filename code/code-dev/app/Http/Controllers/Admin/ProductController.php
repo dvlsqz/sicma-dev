@@ -52,7 +52,7 @@ class ProductController extends Controller
     public function getProductAll(){
            $data = Product::select('row','code_ppr')->get();        
             
-           return DataTables()->of($data)->json();    
+           return DataTables()->of($data)->toJson();    
     }
 
     public function getProductAdd(Request $request){
