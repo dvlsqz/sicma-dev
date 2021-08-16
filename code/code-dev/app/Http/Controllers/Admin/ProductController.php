@@ -46,8 +46,8 @@ class ProductController extends Controller
 
     public function index(){
         
-        
-            $data = Product::latest()->get();        
+        if ($request->ajax()) {
+           $data = Product::latest()->get();        
             
            return Datatables::of($data)   
                    ->addIndexColumn()        
@@ -58,9 +58,7 @@ class ProductController extends Controller
                    })        
                     ->rawColumns(['action']) 
                     ->make(false);   
-      
-
-        return view('admin.product.home');
+        }
     }
 
     public function getProductAdd(Request $request){
