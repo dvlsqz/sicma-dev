@@ -61,7 +61,7 @@ class ProductController extends Controller
                        return $btn;        
                    })        
                     ->rawColumns(['action']) 
-                    ->make(false);   
+                    ->make(true);   
         }
     }
 
