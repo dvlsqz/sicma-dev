@@ -56,12 +56,8 @@
                 <table class="table table-bordered table-striped " id="yajra-datatable">
                     <thead>
                             <tr>
-                                <td width="24px"><strong>OPCIONES</strong></td>
-                                <td width="120px"><strong>REGLÓN y CODIGO PPR</strong></td>
-                                <td><strong>NOMBRE y DESCRIPCION</strong></td>
-                                <td><strong>PRESENTACIÓN</strong></td>
-                                <td width="120px"><strong>CANTIDAD DISPONIBLE</strong></td>
-                                <td width="120px"><strong>PRECIO UNITARIO</strong></td>
+                                <td width="120px"><strong>REGLÓN</strong></td>
+                                <td width="120px"><strong> CODIGO PPR</strong></td>
                             </tr>
                     </thead>
                     <tbody>
@@ -82,10 +78,8 @@
                 ajax: "{{ route('products_index') }}",
                 columns: [
                     {data: 'action', name: 'action', orderable: false, searchable: false}, 
-                    { data: 'row', render: function ( data, type, row ) { return row.row + ' / ' + row.code_ppr; } }, 
-                    { data: 'name', render: function ( data, type, row ) { return row.name + ' / ' + row.description; } }, 
-                    {data: 'presentation', name: 'presentation'}, {data: 'stock', name: 'stock'}, 
-                    { data: 'price_unit', render: function ( data, type, row ) { return 'Q.' + row.price_unit; } },            
+                    { data: 'row'},    
+                    { data: 'code_ppr'},  
                 ]
             });
         });
