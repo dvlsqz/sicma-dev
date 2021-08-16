@@ -81,13 +81,11 @@
                 paging: true,
                 ajax: "{{ route('products_index') }}",
                 columns: [
-                    
-                    {
-                        data: 'row', 
-                        render: function ( data, type, row ) {
-                            return row.row + ' / ' + row.code_ppr;
-                        }
-                    }              
+                    {data: 'action', name: 'action', orderable: false, searchable: false}, 
+                    { data: 'row', render: function ( data, type, row ) { return row.row + ' / ' + row.code_ppr; } }, 
+                    { data: 'name', render: function ( data, type, row ) { return row.name + ' / ' + row.description; } }, 
+                    {data: 'presentation', name: 'presentation'}, {data: 'stock', name: 'stock'}, 
+                    { data: 'price_unit', render: function ( data, type, row ) { return 'Q.' + row.price_unit; } },            
                 ]
             });
         });
