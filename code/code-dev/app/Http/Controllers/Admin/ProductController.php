@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function getProduct($status){
         switch ($status) {
             case '0':
-                $product = Product::where('type', '3')->orderBy('id', 'Asc')->get();
+                $product = Product::where('type', '0')->orderBy('id', 'Asc')->get();
             break;
 
             case '1':
@@ -51,7 +51,7 @@ class ProductController extends Controller
     public function index(Request $request){
         
         if ($request->ajax()){
-            $data = Product::where('type', '0')->get();        
+            $data = Product::where('type', '3')->get();        
             
            return Datatables::of($data)        
                    ->addIndexColumn()        
