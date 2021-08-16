@@ -49,16 +49,10 @@ class ProductController extends Controller
         return view('admin.product.home');
     }
     
-    public function getProductAll(Request $request){
-        
-        if ($request->ajax()) {
+    public function getProductAll(){
            $data = Product::select('row','code_prr')->get();        
             
-           return DataTables::of($data)     
-                   ->addColumn('action', function($row){ 
-                       $btn = "<a href='/admin/product/$row->id/edit' class='btn btn-light btn-sm' style='margin-right: 4px;' title='Editar'><i class='fas fa-edit' style='color: #256B92;'></i></a>"; $btn = $btn."<a href='/admin/product/$row->id/record' class='btn btn-light btn-sm' title='Historial de Movimientos'><i class='fas fa-history'></i></a>"; return $btn; }) ->rawColumns(['action'])
-                    ->make(true);   
-        }
+           return DataTables()->of($data)->json();    
     }
 
     public function getProductAdd(Request $request){
