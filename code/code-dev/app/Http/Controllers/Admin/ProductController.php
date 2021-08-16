@@ -44,9 +44,9 @@ class ProductController extends Controller
         return view('admin.product.home_filter',$data);
     }
 
-    public function index(Request $request){
+    public function index(){
         
-        if ($request->ajax()){
+        
             $data = Product::where('type', '3')->get();        
             
            return Datatables::of($data)   
@@ -58,7 +58,7 @@ class ProductController extends Controller
                    })        
                     ->rawColumns(['action']) 
                     ->make(false);   
-       }
+      
 
         return view('admin.product.home');
     }
