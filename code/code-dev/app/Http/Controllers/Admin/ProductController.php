@@ -47,7 +47,7 @@ class ProductController extends Controller
     public function index(){
         
         
-            $data = Product::where('type', '3')->get();        
+            $data = Product::latest()->get();        
             
            return Datatables::of($data)   
                    ->addIndexColumn()        
