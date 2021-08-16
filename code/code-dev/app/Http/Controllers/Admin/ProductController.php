@@ -1,8 +1,5 @@
 <?php
 
-ini_set("memory_limit", "-1");
-set_time_limit(0);
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request, Illuminate\Support\Collection;
 use App\Http\Models\Product, App\Http\Models\Supplier, App\Http\Models\MaintenanceArea, App\Http\Models\IncomeProduct, App\Http\Models\IncomeDetailProduct, App\Http\Models\EgressProduct, App\Http\Models\EgressDetailProduct ,App\Http\Models\Bitacora;
