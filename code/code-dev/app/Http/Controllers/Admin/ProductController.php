@@ -3,7 +3,7 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request, Illuminate\Support\Collection;
 use App\Http\Models\Product, App\Http\Models\Supplier, App\Http\Models\MaintenanceArea, App\Http\Models\IncomeProduct, App\Http\Models\IncomeDetailProduct, App\Http\Models\EgressProduct, App\Http\Models\EgressDetailProduct ,App\Http\Models\Bitacora;
-use Validator, Str, Config, Auth, Session, DB, Response;
+use  Str, Config, Auth, Session, DB, Response;
 use Yajra\DataTables\DataTables;
 
 
