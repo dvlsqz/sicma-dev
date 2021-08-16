@@ -77,7 +77,6 @@
                 paging: true,
                 ajax: "{{ route('products_index') }}",
                 columns: [
-                    {data: 'action', name: 'action', orderable: false, searchable: false}, 
                     { data: 'row'},    
                     { data: 'code_ppr'},  
                 ]
