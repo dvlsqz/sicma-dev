@@ -44,7 +44,7 @@ class ProductController extends Controller
         return view('admin.product.home_filter',$data);
     }
 
-    public function index(){
+    public function index(Request $request){
         
         if ($request->ajax()) {
            $data = Product::latest()->get();        
