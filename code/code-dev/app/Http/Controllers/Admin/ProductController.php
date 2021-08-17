@@ -52,7 +52,7 @@ class ProductController extends Controller
     }
     
     public function getProductAll(){
-           $data = Product::select('row','code_ppr', 'name', 'description', 'presentation', 'stock', 'price_unit')->get();        
+           $data = Product::select('id','row','code_ppr', 'name', 'description', 'presentation', 'stock', 'price_unit')->get();        
             
            return DataTables()->of($data)
                ->addColumn('action', function($row){     
