@@ -21,6 +21,10 @@ class IsAdmin
             return $next($request);
         elseif(Auth::user()->role == "2"):
             return $next($request);
+        elseif(Auth::user()->role == "3"):
+            return $next($request);
+        elseif(Auth::user()->role == "4"):
+            return $next($request);
         else:
             return redirect('/logout');
         endif;
