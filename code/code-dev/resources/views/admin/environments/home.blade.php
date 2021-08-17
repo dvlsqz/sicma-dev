@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                @if(kvfj(Auth::user()->permissions, 'unit_add'))
+                @if(kvfj(Auth::user()->permissions, 'environment_add'))
                     <div class="panel shadow">
                         <div class="header">
                             <h2 class="title"><i class="fas fa-plus-circle"></i> Agregar Servicio General</h2>
