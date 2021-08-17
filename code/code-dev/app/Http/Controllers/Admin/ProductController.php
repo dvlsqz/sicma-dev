@@ -28,15 +28,15 @@ class ProductController extends Controller
             break;
 
             case '1':
-                $product = Product::where('type', '1')->orderBy('id', 'Asc')->paginate(25);
+                $product = Product::where('type', '1')->orderBy('id', 'Asc')->get();
             break;
 
             case '2':
-                $product = Product::where('type', '2')->orderBy('id', 'Asc')->paginate(25);
+                $product = Product::where('type', '2')->orderBy('id', 'Asc')->get();
             break;
 
             case 'trash':
-                $product = Product::onlyTrashed()->orderBy('id', 'Asc')->paginate(25);
+                $product = Product::onlyTrashed()->orderBy('id', 'Asc')->get();
             break;
         }
 
