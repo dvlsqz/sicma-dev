@@ -20,19 +20,19 @@ class UserController extends Controller
     public function getUsers($status){
         switch ($status) {
             case '0':
-                $users = User::where('status', '0')->orderBy('id', 'Asc')->paginate(25);
+                $users = User::where('status', '0')->orderBy('id', 'Asc')->get();
             break;
 
             case '1':
-                $users = User::where('status', '1')->orderBy('id', 'Asc')->paginate(25);
+                $users = User::where('status', '1')->orderBy('id', 'Asc')->get();
             break;
 
             case 'all':
-                $users = User::orderby('id','Asc')->paginate(30);
+                $users = User::orderby('id','Asc')->get();
             break;
 
             case 'trash':
-                $users = User::onlyTrashed()->orderBy('id', 'Asc')->paginate(25);
+                $users = User::onlyTrashed()->orderBy('id', 'Asc')->get();
             break;
         }
 
