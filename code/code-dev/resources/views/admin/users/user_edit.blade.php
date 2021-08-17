@@ -103,7 +103,7 @@
                                                 {!! Form::select('user_type', getRoleUserArray('list', null),$u->role,['class'=>'form-select']) !!}
                                             </div>
                                             
-                                            @if($u->role != '0')
+                                            @if($u->role != '0' || $u->role != '4')
                                                 <label for="module" class="mtop16">Área de Trabajo:</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
