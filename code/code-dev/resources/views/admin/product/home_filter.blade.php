@@ -25,7 +25,7 @@
                                 <li><a href="{{url('/admin/product/0')}}"><i class="fas fa-filter"></i> Insumos</a></li>
                                 <li><a href="{{url('/admin/product/1')}}"><i class="fas fa-filter"></i> Herramientas</a></li>
                                 <li><a href="{{url('/admin/product/2')}}"><i class="fas fa-filter"></i> Repuestos</a></li>
-                                <li><a href="{{url('/admin/products/all')}}"><i class="fas fa-filter"></i> Todos</a></li>
+                                <li><a href="{{url('/admin/products/home')}}"><i class="fas fa-filter"></i> Todos</a></li>
                             </ul>
                         </div>
                     </li>
