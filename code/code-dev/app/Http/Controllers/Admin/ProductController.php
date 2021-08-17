@@ -108,7 +108,7 @@ class ProductController extends Controller
                 $b->user_id = Auth::id();
                 $b->save();
 
-                return redirect('/admin/products/all')->with('messages', '¡Insumo registrado y guardado con exito!.')
+                return redirect('/admin/products/home')->with('messages', '¡Insumo registrado y guardado con exito!.')
                     ->with('typealert', 'success');
             endif;
         endif;
@@ -239,7 +239,7 @@ class ProductController extends Controller
                 $b->user_id = Auth::id();
                 $b->save();
 
-                return redirect('/admin/products/all')->with('messages', '¡Ingreso registrado y guardado con exito!.')
+                return redirect('/admin/products/home')->with('messages', '¡Ingreso registrado y guardado con exito!.')
                     ->with('typealert', 'success');
             endif;
 
@@ -308,7 +308,7 @@ class ProductController extends Controller
                 $b->user_id = Auth::id();
                 $b->save();
 
-                return redirect('/admin/products/all')->with('messages', '¡Egreso registrado y guardado con exito!.')
+                return redirect('/admin/products/home')->with('messages', '¡Egreso registrado y guardado con exito!.')
                     ->with('typealert', 'success');
             endif;
 
