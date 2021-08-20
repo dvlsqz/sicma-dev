@@ -32,6 +32,14 @@
                         </div>
 
                         <div class="col-md-6">
+                            <label for="lastname"> <strong> Reglón Presupuestario: </strong></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                                {!! Form::text('row', null, ['class'=>'form-control']) !!}
+                            </div>                            
+                        </div>
+
+                        <div class="col-md-12 mtop16">
                             <label for="name"> <strong>Nombre: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
