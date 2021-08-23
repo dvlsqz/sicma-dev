@@ -221,6 +221,7 @@
             $("#code_ppr").val("");
             $("#pidarticulo").val("");
             $("#particulo").val("");
+            $("#description").val("");            
             $("#pcantidad").val("");
         }
 
