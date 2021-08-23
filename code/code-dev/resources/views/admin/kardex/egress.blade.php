@@ -24,10 +24,10 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <label for="idsupplier">Área:</label>
+                        <label for="idsupplier"> <strong> Área: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            <select name="idsupplier" id="idsupplier" style="width: 97%;">
+                            <select name="idsupplier" id="idsupplier" style="width: 95%;">
                                 @foreach ($maintenance_areas as $ma)
                                     <option value=""></option>
                                     <option value="{{$ma->id}}">{{$ma->code.' - '.$ma->name}}</option>
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="col-md-6 mtop16">
-                        <label for="type_doc">Tipo de Documento:</label>
+                        <label for="type_doc"> <strong> Tipo de Documento: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
                             {!! Form::select('type_doc', getFormaKardexEgressArray('list',null), null,['class'=>'form-select']) !!}
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="col-md-6 mtop16">
-                        <label for="name">Numero de Documento:</label>
+                        <label for="name"> <strong> Numero de Documento: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('no_doc', null, ['class'=>'form-control']) !!}
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="col-md-6 mtop16">
-                        <label for="name">IBM Responsable:</label>
+                        <label for="name"> <strong> IBM Responsable: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('ibm-accountable', null, ['class'=>'form-control']) !!}
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="col-md-6 mtop16">
-                        <label for="name">Responsable:</label>
+                        <label for="name"> <strong> Responsable: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('accountable', null, ['class'=>'form-control']) !!}
@@ -73,7 +73,7 @@
                 <div class="row">
                     <div class="col-md-5 mtop16">
                         <div class="form">
-                            <label>Articulo</label>
+                            <label> <strong> Articulo: </strong></label>
                             <select name="pidarticulo" id="pidarticulo" class="form-control" data-live-search="true">
                             @foreach($kardex as $k)
                             <option value="{{$k->id}}">{{'ppr: '.$k->code_mantto_int.' - '.$k->product->name}}</option>
@@ -84,7 +84,7 @@
 
                     <div class="col-md-5 mtop16">
                         <div class="form-group">
-                            <label for="cantidad">Cantidad</label>
+                            <label for="cantidad"> <strong> Cantidad: </strong></label>
                             <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="Cantidad">
                         </div>
                     </div>
@@ -100,9 +100,9 @@
                 <div class="card-body table-responsive">
                     <table id="detalles" class= "table table-striped table-bordered table-condensed table-hover">
                         <thead style="background-color: #c3f3ea">
-                            <th>ELIMINAR</th>
-                            <th>PRODUCTO</th>
-                            <th>CANTIDAD</th>
+                            <th><strong> ELIMINAR </strong></th>
+                            <th><strong> PRODUCTO </strong></th>
+                            <th><strong> CANTIDAD </strong></th>
                         </thead>
 
                         <tbody>
