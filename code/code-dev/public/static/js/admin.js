@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function(){
     var servicegeneral = document.getElementById('servicegeneral');
     var service = document.getElementById('service');
     var btn_income_product_search = document.getElementById('btn_income_product_search');
+    var btn_add_product_search = document.getElementById('btn_add_product_search');
+    
     
     if(btn_search){
         btn_search.addEventListener('click', function(e){
@@ -24,6 +26,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
     if(btn_income_product_search){
         btn_income_product_search.addEventListener('click', function(e){
+            e.preventDefault();
+            setInfoIncomeProduct();
+        });
+    }
+
+    if(btn_add_product_search){
+        btn_add_product_search.addEventListener('click', function(e){
             e.preventDefault();
             setInfoIncomeProduct();
         });
@@ -180,6 +189,7 @@ function delete_object(e){
 
 function setServiceToEquipment(){
     var parent_id = servicegeneral.value;
+    console.log(parent_id);
     var servicegeneral_actual = document.getElementById('servicegeneral_actual').value;
     select = document.getElementById('service');
     select.innerHTML = "";
@@ -258,11 +268,11 @@ function setInfoEgressProduct(){
     var url = base + '/admin/sicma/api/load/egress/product/'+code_ppr;
     var idproduct = document.getElementById('pidarticulo');
     var name = document.getElementById('particulo');
-    var description = document.getElementById('description');
+    var description = document.getElementById('pdescription');
 
     http.open('GET', url, true);
     http.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-    http.send();
+    http.send(); 
     http.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             var data = this.responseText;

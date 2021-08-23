@@ -65,7 +65,7 @@
                         <label for="ibm" class="mtop16"><strong>Nivel Critico:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::select('critico', getLevelEquipment('list', null),0,['class'=>'form-select', 'id' => 'servicegeneral']) !!}
+                            {!! Form::select('critico', getLevelEquipment('list', null),0,['class'=>'form-select']) !!}
                         </div>
                     </div>
 
@@ -79,13 +79,16 @@
                     </div>
 
                     <div class="inside">
-                        <label> <strong> Proveedor: </strong></label>
-                        <select name="idproveedor" id="idproduct" style="width: 100%;">
-                            @foreach ($suppliers as $s)                                    
-                                <option></option>
-                                <option value="{{$s->id}}">{{$s->nit.' / '.$s->name}}</option>
-                            @endforeach
-                        </select>
+                        <label for="idsupplier"><strong>Proveedor:</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
+                            <select name="idproveedor" id="idproduct" style="width: 88%;">
+                                @foreach ($suppliers as $s)                                    
+                                    <option></option>
+                                    <option value="{{$s->id}}">{{$s->nit.' / '.$s->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <label for="name" class="mtop16"> <strong>Garantía (Meses):</strong></label>
                         <div class="input-group">
