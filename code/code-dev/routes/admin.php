@@ -4,6 +4,7 @@
 
         //Dashboard
         Route::get('/','Admin\DashboardController@getDashboard')->name('dashboard');
+        Route::get('/grafica','Admin\DashboardController@graficaUsuarios')->name('dashboard');
 
         //Units
         Route::get('/units', 'Admin\UnitsController@getHome')->name('units');
@@ -123,4 +124,6 @@
         //Request Ajax
         Route::get('/sicma/api/load/services/{parent}', 'Admin\ApiController@getService');
         Route::get('/sicma/api/load/environments/{parent}', 'Admin\ApiController@getEnvironment');
+        Route::get('/sicma/api/load/income/product/{code_ppr}', 'Admin\ApiController@getProduct');
+        Route::get('/sicma/api/load/egress/product/{code_ppr}', 'Admin\ApiController@getProduct');
     });

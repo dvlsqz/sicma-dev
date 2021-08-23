@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var form_search = document.getElementById('form_search');
     var servicegeneral = document.getElementById('servicegeneral');
     var service = document.getElementById('service');
-    var code_ambiente;
+    var btn_income_product_search = document.getElementById('btn_income_product_search');
     
     if(btn_search){
         btn_search.addEventListener('click', function(e){
@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', function(){
             }else{
                 form_search.style.display = 'block';
             }
+        });
+    }
+
+    if(btn_income_product_search){
+        btn_income_product_search.addEventListener('click', function(e){
+            e.preventDefault();
+            setInfoIncomeProduct();
         });
     }
 
@@ -218,6 +225,52 @@ function setEnvironmentToEquipment(){
                     select.innerHTML += "<option value=\""+element.id+"\">"+element.name+"</option>";
                     console.log(element.code);
                 }
+            });
+        }
+    }
+}
+
+function setInfoIncomeProduct(){
+    var code_ppr = document.getElementById('code_ppr').value;    
+    var url = base + '/admin/sicma/api/load/income/product/'+code_ppr;
+    var idproduct = document.getElementById('pidarticulo');
+    var name = document.getElementById('particulo');
+    var description = document.getElementById('description');
+
+    http.open('GET', url, true);
+    http.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var data = this.responseText;
+            data = JSON.parse(data);
+            data.forEach( function(element){
+                  idproduct.value = element.id; 
+                  name.value = element.name; 
+                  description.value = element.description;             
+            });
+        }
+    }
+}
+
+function setInfoEgressProduct(){
+    var code_ppr = document.getElementById('code_ppr').value;    
+    var url = base + '/admin/sicma/api/load/egress/product/'+code_ppr;
+    var idproduct = document.getElementById('pidarticulo');
+    var name = document.getElementById('particulo');
+    var description = document.getElementById('description');
+
+    http.open('GET', url, true);
+    http.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var data = this.responseText;
+            data = JSON.parse(data);
+            data.forEach( function(element){
+                  idproduct.value = element.id; 
+                  name.value = element.name; 
+                  description.value = element.description;             
             });
         }
     }
