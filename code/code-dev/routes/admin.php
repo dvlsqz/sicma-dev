@@ -124,6 +124,6 @@
         //Request Ajax
         Route::get('/sicma/api/load/services/{parent}', 'Admin\ApiController@getService');
         Route::get('/sicma/api/load/environments/{parent}', 'Admin\ApiController@getEnvironment');
-        Route::get('/sicma/api/load/income/product/{code_ppr}', 'Admin\ApiController@getProduct');
-        Route::get('/sicma/api/load/egress/product/{code_ppr}', 'Admin\ApiController@getProduct');
+        Route::get('/sicma/api/load/income/product/{code}', 'Admin\ApiController@getProduct');
+        Route::get('/sicma/api/load/egress/product/{code}', 'Admin\ApiController@getProduct');
     });

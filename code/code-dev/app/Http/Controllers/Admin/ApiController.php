@@ -26,10 +26,12 @@ class ApiController extends Controller
         return response()->json($environment);
     }
 
-    public function getproduct($code_ppr){
+    public function getproduct($code){
 
-        if(!is_null($code_ppr)):
-            $product = Product::where('code_ppr', $code_ppr)->get();
+        if(!is_null($code)):
+            $product = Product::where('code_ppr', $code)
+                ->orWhere('code_int', $code)
+                ->get();
         else:
             $product = "";
         endif;

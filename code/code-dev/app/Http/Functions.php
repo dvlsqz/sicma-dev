@@ -164,7 +164,7 @@
         $status = [           
             '0' => 'ING-7',
             '1' => 'OT´S',
-            '2' => 'ASIGANDO',
+            '2' => 'ASIGNADO',
             '3' => 'VALE EPP'
         ];
 

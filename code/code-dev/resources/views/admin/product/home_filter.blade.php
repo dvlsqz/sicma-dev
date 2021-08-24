@@ -18,14 +18,15 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle"
                                     data-toggle="dropdown">
-                            Filtrar <span class="caret"></span>
+                                    <i class="fas fa-filter"></i>  Filtrar <span class="caret"></span>
                             </button>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{url('/admin/product/0')}}"><i class="fas fa-filter"></i> Insumos</a></li>
-                                <li><a href="{{url('/admin/product/1')}}"><i class="fas fa-filter"></i> Herramientas</a></li>
-                                <li><a href="{{url('/admin/product/2')}}"><i class="fas fa-filter"></i> Repuestos</a></li>
-                                <li><a href="{{url('/admin/products/home')}}"><i class="fas fa-filter"></i> Todos</a></li>
+                                <li><a href="{{url('/admin/product/0')}}">Insumos</a></li>
+                                <li><a href="{{url('/admin/product/1')}}"> Herramientas</a></li>
+                                <li><a href="{{url('/admin/product/2')}}"> Repuestos</a></li>
+                                <li><a href="{{url('/admin/product/3')}}"> Sin Código PPR</a></li>
+                                <li><a href="{{url('/admin/products/home')}}"> Todos</a></li>
                             </ul>
                         </div>
                     </li>
