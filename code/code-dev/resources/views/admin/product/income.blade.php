@@ -22,7 +22,7 @@
                 <div class="modal-body">
 
                     <div class="col-md-12">
-                        <label for="name"> <strong>Ingrese Código PPR para Bucar: </strong></label>
+                        <label for="name"> <strong>Ingrese Código PPR para Buscar: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('code_ppr', null, ['class'=>'form-control', 'id'=> 'code_ppr']) !!}
