@@ -23,7 +23,7 @@
                 {!! Form::open(['url'=>'/admin/product/add']) !!}
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="lastname"> <strong> Código Financiero/PPR: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
@@ -31,7 +31,15 @@
                             </div>                            
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <label for="lastname"> <strong> Código Interno (Llenar si PPR es S/C): </strong></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                                {!! Form::text('code_int', null, ['class'=>'form-control']) !!}
+                            </div>                            
+                        </div>
+
+                        <div class="col-md-4">
                             <label for="lastname"> <strong> Reglón Presupuestario: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>

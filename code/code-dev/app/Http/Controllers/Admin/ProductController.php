@@ -96,6 +96,8 @@ class ProductController extends Controller
 
             $p = new Product;
             $p->code_ppr =  $request->input('code_ppr');
+            $p->code_int =  $request->input('code_int');
+            $p->row =  $request->input('row');
             $p->name = e($request->input('name'));
             $p->stock = '0';
             $p->presentation = e($request->input('presentation'));
@@ -157,6 +159,7 @@ class ProductController extends Controller
         else:
 
             $p = Product::findOrFail($id);
+            $p->row =  $request->input('row');
             $p->name = e($request->input('name'));
             $p->stock = $request->input('stock');
             $p->presentation = e($request->input('presentation'));
