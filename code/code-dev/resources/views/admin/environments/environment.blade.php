@@ -75,7 +75,6 @@
                                 <td><strong>OPCIONES</strong></td>
                                 <td><strong>CODIGO</strong></td>
                                 <td><strong>NOMBRE</strong></td>
-                                <td><strong>DESCRIPCIÓN / REFERENCIA </strong></td>
                                 <td><strong>ESTADO</strong></td>
                             </tr>
                         </thead>
@@ -90,7 +89,6 @@
                                     </td>
                                     <td>{{ $environment->code }}</td>
                                     <td>{{ $environment->name }}</td>
-                                    <td>{{ $environment->description.' / '.$environment->reference }} </td>
                                     <td>
                                         @if($environment->status == '0')
                                             <a href="#" class="btn btn-sm btn-success " ><i class="fas fa-check-circle"></i> En Funcionamiento</a>

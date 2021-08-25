@@ -42,22 +42,7 @@
                 <div class="panel shadow">
                     <div class="header">
                         <h2 class="title"><i class="fas fa-database"></i> Servicios Generales </h2>
-                        <ul>
-                            <li>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle"
-                                            data-toggle="dropdown">
-                                            <i class="fas fa-filter"></i>  Filtrar <span class="caret"></span>
-                                    </button>
-
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{url('/admin/kardex/0')}}"><i class="fas fa-filter"></i> Inactivos</a></li>
-                                        <li><a href="{{url('/admin/kardex/1')}}"><i class="fas fa-filter"></i> Activos</a></li>
-                                        <li><a href="{{url('/admin/kardex/all')}}"><i class="fas fa-filter"></i> Todos</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
+                        
                     </div>
 
                     <div class="inside">
@@ -66,7 +51,6 @@
                                 <tr>
                                     <td><strong>OPCIONES</strong></td>
                                     <td><strong>NOMBRE</strong></td>
-                                    <td><strong>DESCRIPCIÓN</strong></td>
                                     <td><strong>ESTADO</strong></td>
                                 </tr>
                             </thead>
@@ -84,7 +68,6 @@
                                             </div>
                                         </td>
                                         <td>{{$env->name}}</td>
-                                        <td>{{$env->description}}</td>
                                         <td>
                                             @if($env->status == '0')
                                                 <a href="#" class="btn btn-sm btn-success " ><i class="fas fa-check-circle"></i> En Funcionamiento</a>

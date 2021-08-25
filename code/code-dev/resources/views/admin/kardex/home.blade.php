@@ -43,11 +43,12 @@
                     <thead>
                         <tr>
                             <td> <strong> OPCIONES</strong></td>
-                            <td><strong>NOMBRE y DESCRIPCION</strong></td>
+                            <td><strong>CÓDIGO PPR</strong></td>
+                            <td><strong>NOMBRE, DESCRIPCION y Observaciones </strong></td>
                             <td><strong>PRESENTACIÓN</strong></td>
                             <td><strong>CANTIDAD DISPONIBLE</strong></td>
                             <td><strong>PRECIO UNITARIO</strong></td>
-                            <td><strong>AREA</strong></td>
+                            @if(Auth::user()->role == "0") <td><strong>AREA</strong></td> @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -63,11 +64,12 @@
 
                                     </div>
                                 </td>
-                                <td>{{$kardex->product->name.' / '.$kardex->product->description}}</td>
+                                <td>{{$kardex->product->code_ppr}}</td>
+                                <td>{{$kardex->product->name.' / '.$kardex->product->description.' / Obs: '.$kardex->observations}}</td>
                                 <td>{{$kardex->product->presentation}}</td>
                                 <td>{{$kardex->stock}}</td>
                                 <td>{{'Q.'.$kardex->product->price_unit}}</td>
-                                <td>{{$kardex->area->name}}</td>
+                                @if(Auth::user()->role == "0") <td>{{$kardex->area->name}}</td> @endif
                             </tr>
                         @endforeach
 

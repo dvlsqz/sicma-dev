@@ -18,6 +18,7 @@
 
                 <div class="header">
                     <h2 class="title"><i class="fas fa-plus-circle"></i> Agregar Servicios</h2>
+                    
                 </div>
 
                 <div class="inside">
@@ -61,6 +62,11 @@
 
                 <div class="header">
                     <h2 class="title"><i class="fas fa-shipping-fast"></i> Servicios de: <b>{{ $environment->name }}</b></h2>
+                    <ul>
+                        <li>
+                            <a href="{{ url('/uploads/') }}" target="_blank"><i class="fas fa-image"></i> Ver Imagen</a>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="inside">
@@ -70,7 +76,6 @@
                                 <td><strong>OPCIONES</strong></td>
                                 <td><strong>NIVEL DEL EDIFICIO</strong></td>
                                 <td><strong>NOMBRE</strong></td>
-                                <td><strong>DESCRIPCIÓN / REFERENCIA </strong></td>
                                 <td><strong>ESTADO</strong></td>
                             </tr>
                         </thead>
@@ -86,7 +91,6 @@
                                     </td>
                                     <td>{{ $service->level }}</td>
                                     <td>{{ $service->name }}</td>
-                                    <td>{{ $service->description.' / '.$service->reference }} </td>
                                     <td>
                                         @if($service->status == '0')
                                             <a href="#" class="btn btn-sm btn-success " ><i class="fas fa-check-circle"></i> En Funcionamiento</a>
