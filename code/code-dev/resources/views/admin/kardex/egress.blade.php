@@ -76,7 +76,7 @@
                             <label> <strong> Articulo: </strong></label>
                             <select name="pidarticulo" id="pidarticulo" class="form-control" data-live-search="true">
                             @foreach($kardex as $k)
-                            <option value="{{$k->id}}">{{'ppr: '.$k->code_mantto_int.' - '.$k->product->name}}</option>
+                            <option value="{{$k->id}}">{{'ppr: '.$k->product->code_ppr.' - '.$k->product->name.' - '.$k->product->description}}</option>
                             @endforeach
                             </select>
                         </div>
