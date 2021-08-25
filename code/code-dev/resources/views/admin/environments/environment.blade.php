@@ -6,7 +6,7 @@
         <a href="{{ url('/admin/environments/all') }}" class="nav-link"><i class="fa fa-object-group"></i> Servicios Generales</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/servicies_g/'.$service->id.'/servicies') }}" class="nav-link"><i class="fa fa-object-group"></i> Ambientes de: {{ $service->name }}</a>
+        <a href="{{ url('/admin/servicies/'.$service->id.'/servicies') }}" class="nav-link"><i class="fa fa-object-group"></i> Ambientes de: {{ $service->name }}</a>
     </li>
 @endsection
 

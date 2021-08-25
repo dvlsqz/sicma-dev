@@ -61,10 +61,10 @@
             <div class="panel shadow">
 
                 <div class="header">
-                    <h2 class="title"><i class="fas fa-shipping-fast"></i> Servicios de: <b>{{ $environment->name }}</b></h2>
+                    <h2 class="title"><i class="fas fa-shipping-fast"></i> Servicios de: <b>{{ $environment->name}}</b></h2>
                     <ul>
                         <li>
-                            <a href="{{ url('/uploads/') }}" target="_blank"><i class="fas fa-image"></i> Ver Imagen</a>
+                            <a href="{{ url('/uploads/services_photos/'.$environment->file_path.'/'.$environment->file_name) }}" target="_blank"><i class="fas fa-image"></i> Ver Plano General</a>
                         </li>
                     </ul>
                 </div>
@@ -84,7 +84,8 @@
                                 <tr>
                                     <td>
                                         <div class="opts">
-                                            <a href="{{ url('/admin/coverage/'.$service->id.'/delete') }}" data-action="delete" data-path="admin/coverage" data-object="{{ $service->id }}" data-toogle="tooltrip" data-placement="top" title="Eliminar" class="btn-deleted deleted"><i class="fas fa-trash-alt"></i></a>
+                                            <!-- <a href="{{ url('/admin/coverage/'.$service->id.'/delete') }}" data-action="delete" data-path="admin/coverage" data-object="{{ $service->id }}" data-toogle="tooltrip" data-placement="top" title="Eliminar" class="btn-deleted deleted"><i class="fas fa-trash-alt"></i></a> -->
+                                            <a href="{{ url('/uploads/services_photos/'.$service->file_path.'/'.$service->file_name) }}" target="_blank" data-toogle="tooltrip" data-placement="top" title="Ver Plano" class="edit"><i class="fas fa-image"></i></a>
                                             <a href="{{ url('/admin/coverage/city/'.$service->id.'/edit') }}" data-toogle="tooltrip" data-placement="top" title="Editar" class="edit"><i class="fas fa-edit"></i></a>
                                             <a href="{{ url('/admin/services/'.$service->id.'/environments') }}"  title="Ambientes"><i class="fas fa-stream"></i></a>
                                         </div>

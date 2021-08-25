@@ -70,6 +70,11 @@ return [
             'root' => 'C:/xampp/htdocs/sicma/public/uploads_users'
         ],
 
+        'uploads_services_photos' => [
+            'driver' => 'local',
+            'root' => 'C:/xampp/htdocs/sicma/public/services_photos'
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
