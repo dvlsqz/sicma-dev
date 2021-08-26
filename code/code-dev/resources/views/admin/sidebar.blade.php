@@ -42,9 +42,9 @@
                 </li>
             @endif
 
-            @if(kvfj(Auth::user()->permissions, 'environments_list'))
+            @if(kvfj(Auth::user()->permissions, 'serviceg_list'))
                 <li>
-                    <a href="{{ url('/admin/environments/all') }}" class="lk-environments_list lk-environment_add"><i class="fa fa-object-group"></i> Servicios y Ambientes</a>
+                    <a href="{{ url('/admin/services_g/all') }}" class="lk-serviceg_list lk-serviceg_add lk-serviceg_edit lk-service_list lk-service_add lk-service_edit lk-environment_list lk-environment_add lk-environment_edit"><i class="fa fa-object-group"></i> Servicios y Ambientes</a>
                 </li>
             @endif
 

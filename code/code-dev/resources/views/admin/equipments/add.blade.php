@@ -67,6 +67,14 @@
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::select('critico', getLevelEquipment('list', null),0,['class'=>'form-select']) !!}
                         </div>
+
+                        @if(Auth::user()->role == '0' || Auth::user()->idmaintenancearea == '8')
+                            <label for="ibm" class="mtop16"><strong>Capacidad:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                                {!! Form::text('capacity', null, ['class'=>'form-control']) !!}
+                            </div>
+                        @endif
                     </div>
 
                 </div>

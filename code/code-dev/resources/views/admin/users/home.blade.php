@@ -58,10 +58,10 @@
                 <table id="table-modules" class="table table-striped table-hover mtop16">
                     <thead>
                         <tr>
-                            <td>OPCIONES</td>
-                            <td>NOMBRE</td>
-                            <td>ROL</td>
-                            <td>ESTADO</td>
+                            <td><strong> OPCIONES </strong></td>
+                            <td><strong> NOMBRE </strong></td>
+                            <td><strong> ROL </strong></td>
+                            <td><strong> ESTADO </strong></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,7 +77,7 @@
                                         @endif
                                     </div>
                                 </td>
-                                <td>{{$user->name.' '.$user->lastname}}</td>
+                                <td>{{'IBM:'.$user->ibm.' - '.$user->name.' '.$user->lastname}}</td>
                                 <td>{{ getRoleUserArray(null, $user->role) }}</td>
                                 <td>{{ getUserStatusArray(null, $user->status) }}</td>
                             </tr>

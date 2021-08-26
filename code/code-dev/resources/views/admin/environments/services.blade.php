@@ -13,7 +13,8 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
+        @if(kvfj(Auth::user()->permissions, 'service_add'))
             <div class="panel shadow">
 
                 <div class="header">
@@ -55,18 +56,15 @@
                 </div>
 
             </div>
+        @endif
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="panel shadow">
 
                 <div class="header">
-                    <h2 class="title"><i class="fas fa-shipping-fast"></i> Servicios de: <b>{{ $environment->name}}</b></h2>
-                    <ul>
-                        <li>
-                            <a href="{{ url('/uploads/services_photos/'.$environment->file_path.'/'.$environment->file_name) }}" target="_blank"><i class="fas fa-image"></i> Ver Plano General</a>
-                        </li>
-                    </ul>
+                    <h2 class="title"><i class="fa fa-object-group"></i> Servicios de: <b>{{ $environment->name}}</b></h2>
+                    
                 </div>
 
                 <div class="inside">
@@ -85,9 +83,19 @@
                                     <td>
                                         <div class="opts">
                                             <!-- <a href="{{ url('/admin/coverage/'.$service->id.'/delete') }}" data-action="delete" data-path="admin/coverage" data-object="{{ $service->id }}" data-toogle="tooltrip" data-placement="top" title="Eliminar" class="btn-deleted deleted"><i class="fas fa-trash-alt"></i></a> -->
-                                            <a href="{{ url('/uploads/services_photos/'.$service->file_path.'/'.$service->file_name) }}" target="_blank" data-toogle="tooltrip" data-placement="top" title="Ver Plano" class="edit"><i class="fas fa-image"></i></a>
-                                            <a href="{{ url('/admin/coverage/city/'.$service->id.'/edit') }}" data-toogle="tooltrip" data-placement="top" title="Editar" class="edit"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ url('/admin/services/'.$service->id.'/environments') }}"  title="Ambientes"><i class="fas fa-stream"></i></a>
+                                            
+                                            @if(!is_null($service->file_path) && !is_null($service->file_name))
+                                                <a href="{{ url('/uploads/services_photos/'.$service->file_path.'/'.$service->file_name) }}" target="_blank" data-toogle="tooltrip" data-placement="top" title="Ver Plano" class="edit"><i class="fas fa-image"></i></a>
+                                            @endif
+                                            
+                                            @if(kvfj(Auth::user()->permissions, 'service_edit'))
+                                                <a href="{{ url('/admin/services_g/services/'.$service->id.'/edit') }}" data-toogle="tooltrip" data-placement="top" title="Editar" class="edit"><i class="fas fa-edit"></i></a>
+                                            @endif
+
+                                            @if(kvfj(Auth::user()->permissions, 'environment_list'))
+                                                <a href="{{ url('/admin/services/'.$service->id.'/environments') }}"  title="Ambientes"><i class="fas fa-stream"></i></a>
+                                            @endif
+
                                         </div>
                                     </td>
                                     <td>{{ $service->level }}</td>

@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                @if(kvfj(Auth::user()->permissions, 'environment_add'))
+                @if(kvfj(Auth::user()->permissions, 'serviceg_add'))
                     <div class="panel shadow">
                         <div class="header">
                             <h2 class="title"><i class="fas fa-plus-circle"></i> Agregar Servicio General</h2>
@@ -59,11 +59,17 @@
                                     <tr>
                                         <td>
                                             <div class="opts">
-                                                @if(kvfj(Auth::user()->permissions, 'environment_edit'))
-                                                    <a href="{{ url('/admin/environment/'.$env->id.'/edit') }}"  title="Editar"><i class="fas fa-edit"></i></a>
+                                                @if(!is_null($env->file_path) && !is_null($env->file_name))
+                                                    <a href="{{ url('/uploads/services_photos/'.$env->file_path.'/'.$env->file_name) }}" target="_blank" title="Ver Plano General"><i class="fas fa-image"></i> </a>
                                                 @endif
-                                                <!--<a href="{{ url('/admin/coverage/'.$env->id.'/cities') }}" data-toogle="tooltrip" data-placement="top" title="Municipios" class="inventory"><i class="fas fa-list-ul"></i></a>-->
-                                                <a href="{{ url('/admin/services_g/'.$env->id.'/services') }}"  title="Servicios"><i class="fas fa-list-ul"></i></a>
+
+                                                @if(kvfj(Auth::user()->permissions, 'serviceg_edit'))
+                                                    <a href="{{ url('/admin/services_g/'.$env->id.'/edit') }}"  title="Editar"><i class="fas fa-edit"></i></a>
+                                                @endif                                             
+                                                
+                                                @if(kvfj(Auth::user()->permissions, 'service_list'))
+                                                    <a href="{{ url('/admin/services_g/'.$env->id.'/services') }}"  title="Servicios"><i class="fas fa-list-ul"></i></a>
+                                                @endif  
 
                                             </div>
                                         </td>

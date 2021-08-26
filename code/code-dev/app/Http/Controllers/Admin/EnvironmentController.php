@@ -43,6 +43,7 @@ class EnvironmentController extends Controller
         return view('admin.environments.home',$data);
     }
 
+    //Servicios Generales
     public function postServicesGeneralAdd(Request $request){
         $rules = [
     		'name' => 'required'
@@ -66,12 +67,52 @@ class EnvironmentController extends Controller
                 $b->user_id = Auth::id();
                 $b->save();
 
-                return back()->with('messages', 'Creada y guardada con exito!.')
+                return back()->with('messages', 'Creado y guardado con exito!.')
                     ->with('typealert', 'success');
     		endif;
         endif;
     }
 
+    public function getServicesGeneralEdit($id){
+        $servicesg = Environment::find($id);
+
+        $data = [
+            'servicesg' => $servicesg
+        ];
+
+        return view('admin.environments.edit_sg', $data);
+    }
+
+    public function postServicesGeneralEdit(Request $request, $id){
+        $rules = [
+    		'name' => 'required'
+    	];
+    	$messagess = [
+    		'name.required' => 'Se requiere un nombre para el servicio general.'
+    	];
+
+        $validator = Validator::make($request->all(), $rules, $messagess);
+    	if($validator->fails()):
+    		return back()->withErrors($validator)->with('messages', 'Se ha producido un error.')->with('typealert', 'danger');
+        else: 
+            $sg = Environment::findOrFail($id);
+            $sg->name = e($request->input('name'));
+            $sg->parent = '0';
+            $sg->description = e($request->input('description'));
+
+            if($sg->save()):
+                $b = new Bitacora;
+                $b->action = "Actualización de servicio general ".$sg->name;
+                $b->user_id = Auth::id();
+                $b->save();
+
+                return redirect('/admin/services_g/all')->with('messages', 'Actualizado y guardado con exito!.')
+                    ->with('typealert', 'success');
+    		endif;
+        endif;
+    }
+
+    //Servicios
     public function getServicesGeneralServices($id){
         $environment = Environment::findOrFail($id);
         $services = Environment::where('parent', $id)->get();
@@ -116,7 +157,52 @@ class EnvironmentController extends Controller
     		endif;
         endif;
     }
+    
+    public function getServicesGeneralServicesEdit($id){
+        $environment = Environment::findOrFail($id);
+        $services = Environment::find($id);
+        $id = $id;
 
+        $data = [
+            'environment' => $environment,
+            'services' => $services,
+            'id' => $id
+        ];
+
+        return view('admin.environments.edit_s', $data);
+    }
+
+    public function postServicesGeneralServicesEdit(Request $request, $id){
+        $rules = [
+    		'name' => 'required'
+    	];
+    	$messagess = [
+    		'name.required' => 'Se requiere un nombre para el servicio general.'
+    	];
+
+        $validator = Validator::make($request->all(), $rules, $messagess);
+    	if($validator->fails()):
+    		return back()->withErrors($validator)->with('messages', 'Se ha producido un error.')->with('typealert', 'danger');
+        else: 
+            $s = Environment::findOrFail($id);
+            $s->level = e($request->input('level'));
+            $s->name = e($request->input('name'));
+            $s->description = e($request->input('description'));
+            $s->reference = e($request->input('reference'));
+
+            if($s->save()):
+                $b = new Bitacora;
+                $b->action = "Actualizacion de servicio ".$s->name." del servicio general";
+                $b->user_id = Auth::id();
+                $b->save();
+
+                return back()->with('messages', 'Actualizado y guardado con exito!.')
+                    ->with('typealert', 'success');
+    		endif;
+        endif;
+    }
+    
+    //Ambientes
     public function getServicesEnvironments($id){
         $service = Environment::findOrFail($id);
         $environments = Environment::where('parent', $id)->get();
@@ -158,6 +244,51 @@ class EnvironmentController extends Controller
                 $b->save();
 
                 return back()->with('messages', 'Creado y guardado con exito!.')
+                    ->with('typealert', 'success');
+    		endif;
+        endif;
+    }
+
+    public function getServicesEnvironmentsEdit($id){
+        $service = Environment::findOrFail($id);
+        $environments = Environment::where('parent', $id)->get();
+        $id = $id;
+
+        $data = [
+            'service' => $service,
+            'environments' => $environments,
+            'id' => $id
+        ];
+
+        return view('admin.environments.edit_e', $data);
+    }
+
+    public function postServicesEnvironmentsEdit(Request $request, $id){
+        $rules = [
+    		'name' => 'required'
+    	];
+    	$messagess = [
+    		'name.required' => 'Se requiere un nombre para el servicio general.'
+    	];
+
+        $validator = Validator::make($request->all(), $rules, $messagess);
+    	if($validator->fails()):
+    		return back()->withErrors($validator)->with('messages', 'Se ha producido un error.')->with('typealert', 'danger');
+        else: 
+            $env = Environment::findOrFail($id);
+            $env->code = e($request->input('code'));
+            $env->name = e($request->input('name'));
+            $env->measures = $request->input('measures');
+            $env->description = e($request->input('description'));
+            $env->reference = e($request->input('reference'));
+
+            if($env->save()):
+                $b = new Bitacora;
+                $b->action = "Actualizacion de ambiente: ".$env->name." del servicio: ";
+                $b->user_id = Auth::id();
+                $b->save();
+
+                return back()->with('messages', 'Actualizado y guardado con exito!.')
                     ->with('typealert', 'success');
     		endif;
         endif;

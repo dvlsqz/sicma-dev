@@ -13,7 +13,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="panel shadow">
 
                 <div class="header">
@@ -61,11 +61,11 @@
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="panel shadow">
 
                 <div class="header">
-                    <h2 class="title"><i class="fas fa-shipping-fast"></i> Ambientes del servicio: <b>{{ $service->name }}</b></h2>
+                    <h2 class="title"><i class="fa fa-object-group"></i> Ambientes del servicio: <b>{{ $service->name }}</b></h2>
                 </div>
 
                 <div class="inside">
@@ -83,8 +83,9 @@
                                 <tr>
                                     <td>
                                         <div class="opts">
-                                            <a href="{{ url('/admin/coverage/'.$environment->id.'/delete') }}" data-action="delete" data-path="admin/coverage" data-object="{{ $environment->id }}" data-toogle="tooltrip" data-placement="top" title="Eliminar" class="btn-deleted deleted"><i class="fas fa-trash-alt"></i></a>
-                                            <a href="{{ url('/admin/coverage/city/'.$environment->id.'/edit') }}" data-toogle="tooltrip" data-placement="top" title="Editar" class="edit"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ url('/admin/services/environments/'.$environment->id.'/edit') }}" data-toogle="tooltrip" data-placement="top" title="Editar" class="edit"><i class="fas fa-edit"></i></a>
+                                            <!-- <a href="{{ url('/admin/coverage/'.$environment->id.'/delete') }}" data-action="delete" data-path="admin/coverage" data-object="{{ $environment->id }}" data-toogle="tooltrip" data-placement="top" title="Eliminar" class="btn-deleted deleted"><i class="fas fa-trash-alt"></i></a> -->
+                                            
                                         </div>
                                     </td>
                                     <td>{{ $environment->code }}</td>

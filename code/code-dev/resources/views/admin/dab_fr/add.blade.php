@@ -11,6 +11,62 @@
 @endsection
 
 @section('content')
+    <!-- Modal -->  
+    <div class="modal" id="modelId" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#256B92; color:#fff; text-align:center;">
+                    <h5 class="modal-title">Agregar Producto/Insumo al Detalle</h5>
+                </div>
+                
+                <div class="modal-body">
+
+                    <div class="col-md-12">
+                        <label for="name"> <strong>Ingrese Código PPR  para Buscar: </strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                            {!! Form::text('code_ppr', null, ['class'=>'form-control', 'id'=> 'code_ppr']) !!}
+                            <button type="button" id="btn_income_product_search" class="btn btn-warning">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+
+                    
+                    {!! Form::hidden('pidarticulo', null, ['class'=>'form-control', 'id'=> 'pidarticulo', 'placeholder' => 'Cantidad' ]) !!}
+                        
+
+                    <div class="col-md-12 mtop16">
+                        <div class="form-group">
+                            <label for="no_doc"> <strong> Nombre: </strong></label>
+                            {!! Form::textarea('particulo', null, ['class'=>'form-control', 'id'=> 'particulo', 'rows'=>'2']) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mtop16">
+                        <div class="form-group">
+                            <label for="no_doc"> <strong> Descripción: </strong></label>
+                            {!! Form::textarea('description', null, ['class'=>'form-control','id'=>'description', 'rows'=>'2', 'readonly']) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mtop16">
+                        <div class="form-group">
+                            <label for="no_doc"> <strong>Ingrese Cantidad: </strong></label>
+                            {!! Form::text('pcantidad', null, ['class'=>'form-control', 'id'=> 'pcantidad', 'placeholder' => 'Cantidad' ]) !!}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="bt_closeModal" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" id="bt_add" class="btn btn-primary">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="panel shadow">
 
@@ -70,41 +126,28 @@
                     </div>                    
                 </div>
                 
-                <div class="row">
-                        <div class="col-md-6 mtop16">
-                            <div class="form">
-                                <label>Articulo</label>
-                                <select name="pidarticulo" id="pidarticulo" class="form-control" data-live-search="true">
-                                @foreach($products as $p)
-                                    <option value=""></option>
-                                    <option value="{{$p->id}}">{{'ppr: '.$p->code_ppr.' - '.$p->name}}</option>
-                                @endforeach
-                                </select>
+                <hr>
+
+                    <p> <strong>Detalle de la DAB </strong> </p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                
+                                <button type="button" id="bt_search" class="btn btn-info">
+                                    Agregar Producto
+                                </button>
                             </div>
                         </div>
 
-                        <div class="col-md-5 mtop16">
-                            <div class="form-group">
-                                <label for="cantidad">Cantidad</label>
-                                <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="Cantidad" >
-                            </div>
-                        </div>
-                        
-
-                        <div class="col-md-1 mtop16">
-                        <div class="form-group">
-                            <button type="button" id="bt_add" class="btn btn-primary">
-                                Agregar
-                            </button>
-                        </div>
                     </div>
 
                     <div class="card-body table-responsive">
                         <table id="detalles" class= "table table-striped table-bordered table-condensed table-hover">
                             <thead style="background-color: #c3f3ea">
-                                <th>ELIMINAR</th>
-                                <th>PRODUCTO</th>
-                                <th>CANTIDAD</th>
+                                <th><strong>ELIMINAR</strong></th>
+                                <th><strong>PRODUCTO</strong></th>
+                                <th><strong>CANTIDAD</strong></th>
                             </thead>
 
                             <tbody>
@@ -116,10 +159,11 @@
                     <div class=" col-md-6 " id="guardar">
                         <div class="form-group">
                             <input name="_token" value="{{ csrf_token() }}" type="hidden"></input>
-                            <button class="btn btn-primary" type="submit"> Guardar </button>
+                            <button class="btn btn-success" type="submit"> Guardar </button>
                             <button class="btn btn-danger" type="reset"> Cancelar </button>
                         </div>
                     </div>
+
 
 
                 {!!Form::close()!!}
@@ -128,26 +172,33 @@
     </div>
 
 
-    <script>
-
-        $(document).ready(function(){
-            $('#bt_add').click(function(){
-            agregar();
-            });
-        });
-
-
+    <script> 
+        var modal = document.getElementById('modelId');
         var cont=0;
         total=0;
         subtotal=[];
         $("#guardar").hide();
 
+        $(document).ready(function(){
+            $('#bt_add').click(function(){
+                agregar();
+            });
+
+            $('#bt_search').click(function(){
+                $('#modelId').modal("show");
+            });
+
+            $('#bt_closeModal').click(function(){
+                $('#modelId').modal("hide");
+            });
+        });
+
         function agregar(){
             idarticulo=$("#pidarticulo").val();
-            articulo=$("#pidarticulo option:selected").text();
+            articulo=$("#particulo").val();
             cantidad=$("#pcantidad").val();
 
-            if (idarticulo!="" && cantidad!="" && cantidad == "0" ){
+            if (idarticulo!="" && cantidad!="" && cantidad>0 ){
                 var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td></tr>';
                 cont++;
                 limpiar();
@@ -159,6 +210,10 @@
         }
 
         function limpiar(){
+            $("#code_ppr").val("");
+            $("#pidarticulo").val("");
+            $("#particulo").val("");
+            $("#description").val("");            
             $("#pcantidad").val("");
         }
 

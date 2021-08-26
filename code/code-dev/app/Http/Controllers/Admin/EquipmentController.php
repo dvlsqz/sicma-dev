@@ -96,6 +96,7 @@ class EquipmentController extends Controller
             $e->model =  e($request->input('model'));
             $e->serie =  e($request->input('serie'));
             $e->no_bien =  e($request->input('no_bien'));
+            $e->capacity =  e($request->input('capacity'));
             $e->year_warranty =  $request->input('year_warranty');
             $e->date_instalaction =  $request->input('date_instalaction');
             $e->features =  e($request->input('features'));
@@ -111,14 +112,6 @@ class EquipmentController extends Controller
                 return redirect('/admin/equipments/all');
             endif;
         endif;
-
-
-        
-        
-
-
-        
-
     }
 
     public function GenerateCode($r_area, $r_ambiente, $r_equipon){
@@ -165,6 +158,58 @@ class EquipmentController extends Controller
         ];
 
         return view('admin.equipments.edit',$data);
+    }
+
+    public function postEquipmentEdit(Request $request, $id){
+        $rules = [
+            'name' => 'required',
+            'brand' => 'required',
+            'no_bien' => 'required',
+            'year_warranty' => 'required',
+            'date_instalaction' => 'required'
+        ];
+
+        $messages = [
+            'name.required' => 'Se require que ingrese el nombre del equipo.',
+            'brand.required' => 'Se require que ingrese la marca del equipo.',
+            'no_bien.required' => 'Se requiere que ingrese el numero de bien del equipo',
+            'year_warranty.required' => 'Se requiere que ingrese la cantidad de meses de garantia del equipo',
+            'date_instalaction.required' => 'Se requiere que ingrese la fecha de instalacion o entrega del equipo'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$messages);
+
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('error', '¡Se ha producido un error!.')
+            ->withInput();
+        else:
+
+            $e = Equipment::findOrFail($id);
+            $e->id =  $request->input('id');
+            $e->idmaintenancearea =  $request->input('idmaintenancearea');
+            $e->code_old = $request->input('code_old');
+            $e->code_new =  $this->GenerateCode($request->input('idsupplier'),$request->input('environment'), $request->input('name'));
+            $e->name =  e($request->input('name'));
+            $e->brand =  e($request->input('brand'));
+            $e->model =  e($request->input('model'));
+            $e->serie =  e($request->input('serie'));
+            $e->no_bien =  e($request->input('no_bien'));
+            $e->capacity =  e($request->input('capacity'));
+            $e->year_warranty =  $request->input('year_warranty');
+            $e->date_instalaction =  $request->input('date_instalaction');
+            $e->features =  e($request->input('features'));
+            $e->description =  e($request->input('description'));
+            $e->status =  "0";
+
+            if($e->save()):
+                $b = new Bitacora;
+                $b->action = "Actualización de equipo ".$e->code_new." del area ".$e->area->name;
+                $b->user_id = Auth::id();
+                $b->save();
+                Session::flash('success', '¡Equipo actualizado con exito!.');
+                return redirect('/admin/equipments/all');
+            endif;
+        endif;
     }
 
     public function getEquipmentFiles($id){

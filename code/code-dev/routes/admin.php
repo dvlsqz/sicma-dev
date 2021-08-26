@@ -111,15 +111,20 @@
         Route::get('/equipment/{id}/transfer', 'Admin\EquipmentController@getEquipmentTransfer')->name('equipment_transfer');
 
         //Enviroments
-        Route::post('/services_g/add', 'Admin\EnvironmentController@postServicesGeneralAdd')->name('environment_add');
-        Route::get('/services_g/{id}/services','Admin\EnvironmentController@getServicesGeneralServices')->name('environments_list');
-        Route::post('/services_g/services/add','Admin\EnvironmentController@postServicesGeneralServicesAdd')->name('environment_add');
-        Route::get('/services/{id}/environments','Admin\EnvironmentController@getServicesEnvironments')->name('environments_list');
-        Route::post('/services/environments/add','Admin\EnvironmentController@postServicesEnvironmentsAdd')->name('environment_add');
-        Route::get('/environments/{status}', 'Admin\EnvironmentController@getHome')->name('environments_list');
-        Route::get('/environment/{id}/edit', 'Admin\EnvironmentController@getSupplierEdit')->name('environment_edit');
-        Route::post('/environment/{id}/edit', 'Admin\EnvironmentController@postSupplierEdit')->name('environment_edit');
-        Route::get('/environment/{id}/delete', 'Admin\EnvironmentController@getSupplierDelete')->name('environment_delete');
+        Route::post('/services_g/add', 'Admin\EnvironmentController@postServicesGeneralAdd')->name('serviceg_add');
+        Route::get('/services_g/{status}', 'Admin\EnvironmentController@getHome')->name('serviceg_list');
+        Route::get('/services_g/{id}/edit', 'Admin\EnvironmentController@getServicesGeneralEdit')->name('serviceg_edit');
+        Route::post('/services_g/{id}/edit', 'Admin\EnvironmentController@postServicesGeneralEdit')->name('serviceg_edit');
+
+        Route::get('/services_g/{id}/services','Admin\EnvironmentController@getServicesGeneralServices')->name('service_list');
+        Route::post('/services_g/services/add','Admin\EnvironmentController@postServicesGeneralServicesAdd')->name('service_add');
+        Route::get('/services_g/services/{id}/edit','Admin\EnvironmentController@getServicesGeneralServicesEdit')->name('service_edit');
+        Route::post('/services_g/services/{id}/edit','Admin\EnvironmentController@postServicesGeneralServicesEdit')->name('service_edit');
+
+        Route::get('/services/{id}/environments','Admin\EnvironmentController@getServicesEnvironments')->name('environment_list');
+        Route::post('/services/environments/add','Admin\EnvironmentController@postServicesEnvironmentsAdd')->name('environment_add');       
+        Route::get('/services/environments/{id}/edit','Admin\EnvironmentController@getServicesEnvironmentsEdit')->name('environment_edit');
+        Route::post('/services/environments/{id}/edit','Admin\EnvironmentController@postServicesEnvironmentsEdit')->name('environment_edit');
 
         //Request Ajax
         Route::get('/sicma/api/load/services/{parent}', 'Admin\ApiController@getService');

@@ -60,6 +60,14 @@
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('serie', $equipment->serie, ['class'=>'form-control']) !!}
                         </div>
+
+                        @if(Auth::user()->role == '0' && Auth::user()->role == '8')
+                            <label for="ibm" class="mtop16"><strong>Capacidad:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                                {!! Form::text('capacity', $equipment->capacity, ['class'=>'form-control']) !!}
+                            </div>
+                        @endif
                     </div>
 
                 </div>

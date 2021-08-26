@@ -358,10 +358,16 @@
                 'icon' => '<i class="fas fa-object-group"></i> ',
                 'title' => 'Modulo de Ambientes',
                 'keys' => [
-                    'environments_list' => 'Puede ver el listado.',
-                    'environment_add' => 'Puede agregar Ambientes.',
+                    'serviceg_list' => 'Puede ver el listado de servicios general.',
+                    'serviceg_add' => 'Puede agregar servicios genereales.',
+                    'serviceg_edit' => 'Puede editar servicios generales.',
+                    'service_list' => 'Puede ver el listado de servicios .',
+                    'service_add' => 'Puede agregar servicios.',
+                    'service_edit' => 'Puede editar servicios.',
+                    'environment_list' => 'Puede ver el listado de ambientes .',
+                    'environment_add' => 'Puede agregar ambientes.',
                     'environment_edit' => 'Puede editar ambientes.',
-                    'environment_banned' => 'Puede dar de baja ambientes.',
+                    'environment_banned' => 'Puede dar de baja ambientes.' 
                 ]
             ]
 
