@@ -112,9 +112,9 @@
 
         //Enviroments
         Route::post('/services_g/add', 'Admin\EnvironmentController@postServicesGeneralAdd')->name('environment_add');
-        Route::get('/services_g/{id}/services','Admin\EnvironmentController@getServicesGeneralServices')->name('environment_add');
+        Route::get('/services_g/{id}/services','Admin\EnvironmentController@getServicesGeneralServices')->name('environments_list');
         Route::post('/services_g/services/add','Admin\EnvironmentController@postServicesGeneralServicesAdd')->name('environment_add');
-        Route::get('/services/{id}/environments','Admin\EnvironmentController@getServicesEnvironments')->name('environment_add');
+        Route::get('/services/{id}/environments','Admin\EnvironmentController@getServicesEnvironments')->name('environments_list');
         Route::post('/services/environments/add','Admin\EnvironmentController@postServicesEnvironmentsAdd')->name('environment_add');
         Route::get('/environments/{status}', 'Admin\EnvironmentController@getHome')->name('environments_list');
         Route::get('/environment/{id}/edit', 'Admin\EnvironmentController@getSupplierEdit')->name('environment_edit');
