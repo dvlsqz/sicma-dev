@@ -25,17 +25,13 @@
             </tr>
 
             <tr>
-                <td id="gris"> 
+                <td id="gris" colspan="2"> 
                     <div align="center"> 
                         <b>  Codigo del Equipo <br><small>Anterio / Nuevo</small> </b>
                     </div>
                 </td>
 
-                <td id="gris" > 
-                    <div align="center"> 
-                        <b> QR </b>
-                    </div>
-                </td>
+                
 
                 <td id="negrita" rowspan="2" > 
                     <div align="center"> 
@@ -45,8 +41,8 @@
             </tr> 
 
             <tr>
-                <td id="neg">  <div align="center"> {{ $equipment->code_old === NULL ? "SN ".' / '.$equipment->code_new : $equipment->code_old.' / '.$equipment->code_new }} </div></td>
-                <td id="neg"> <div align="center"> <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(75)->generate('http://www.sicma.igss/admin/equipment/'.$equipment->id.'/data_sheet')) !!} "> </div></td>
+                <td id="neg" colspan="2">  <div align="center"> {{ $equipment->code_old === NULL ? "SN ".' / '.$equipment->code_new : $equipment->code_old.' / '.$equipment->code_new }} </div></td>
+                
             </tr>
 
             <tr>
@@ -148,12 +144,12 @@
             </tr>
 
             <tr>
-                <td  colspan="2"> <strong>  Proveedor:  </strong> {{ $equipment->sup->name }}</div></td>
+                <td  colspan="2"> <strong>  Proveedor:  </strong> @if(empty($equipment->sup->name))  @else {{ $equipment->sup->name }} @endif</div></td>
                 <td  colspan="2"> <div align="center"> <strong> MANUALES DEL EQUIPO </div></td>
             </tr>
 
             <tr>
-                <td  colspan="2"><strong>  Nit: </strong>{{ $equipment->sup->nit }}</td>
+                <td  colspan="2"><strong>  Nit: </strong> @if(empty($equipment->sup->nit))  @else {{ $equipment->sup->nit }} @endif </td>
                 <td colspan="2" rowspan="4">                    
                     <div id="neg" >	
                         @foreach($files as $f)
@@ -164,15 +160,15 @@
             </tr>
 
             <tr>
-                <td  colspan="2"> <strong> Nombre de Contacto: {{ $equipment->sup->name_contact }}</strong></td>
+                <td  colspan="2"> <strong> Nombre de Contacto: @if(empty($equipment->sup->name_contact))  @else {{ $equipment->sup->name_contact }} @endif</strong></td>
             </tr>
 
             <tr>
-                <td  colspan="2">  <strong>Telefono: </strong> {{ $equipment->sup->phone }}</td>
+                <td  colspan="2">  <strong>Telefono: </strong> @if(empty($equipment->sup->phone))  @else {{ $equipment->sup->phone }} @endif</td>
             </tr>
 
             <tr>
-                <td  colspan="2"> <strong> Correo Electronico:  </strong> {{ $equipment->sup->email }}</td>
+                <td  colspan="2"> <strong> Correo Electronico:  </strong> @if(empty($equipment->sup->email))  @else {{ $equipment->sup->email }} @endif</td>
             </tr>
 
             <tr>
