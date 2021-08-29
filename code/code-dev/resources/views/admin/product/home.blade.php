@@ -18,7 +18,7 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle"
                                     data-toggle="dropdown">
-                                    <i class="fas fa-filter"></i> Filtrar <span class="caret"></span>
+                                    <i class="fas fa-filter"></i>  Filtrar <span class="caret"></span>
                             </button>
 
                             <ul class="dropdown-menu" role="menu">
@@ -30,6 +30,9 @@
                             </ul>
                         </div>
                     </li>
+                    
+                    @include('admin.product.renglones')
+
                     @if(kvfj(Auth::user()->permissions, 'product_add'))
                         <li>
                             <a href="{{ url('/admin/product/add') }}" ><i class="fas fa-plus-circle"></i> Agregar</a>
@@ -54,18 +57,37 @@
             </div>
 
             <div class="inside">
-                <table class="table table-bordered table-striped " id="yajra-datatable">
+                <table id="table-modules" class="table table-bordered table-striped" style="background-color:#EDF4FB;">
                     <thead>
-                            <tr>
-                                <td width="24px"><strong>OPCIONES</strong></td>
-                                <td width="120px"><strong>REGLÓN y CODIGO PPR</strong></td>
-                                <td><strong>NOMBRE y DESCRIPCION</strong></td>
-                                <td><strong>PRESENTACIÓN</strong></td>
-                                <td width="120px"><strong>CANTIDAD DISPONIBLE</strong></td>
-                                <td width="120px"><strong>PRECIO UNITARIO</strong></td>
-                            </tr>
+                        <tr>
+                            <td width="24px"><strong>OPCIONES</strong></td>
+                            <td width="120px"><strong>REGLÓN y CODIGO PPR</strong></td>
+                            <td><strong>NOMBRE y DESCRIPCION</strong></td>
+                            <td><strong>PRESENTACIÓN</strong></td>
+                            <td width="120px"><strong>CANTIDAD DISPONIBLE</strong></td>
+                            <td width="120px"><strong>PRECIO UNITARIO</strong></td>
+                        </tr>
                     </thead>
                     <tbody>
+                        @foreach($product as $p)
+                            <tr>
+                                <td>
+                                    <div class="opts">
+                                        @if(kvfj(Auth::user()->permissions, 'product_edit'))
+                                            <a href="{{ url('/admin/product/'.$p->id.'/edit') }}"  title="Editar"><i class="fas fa-edit"></i></a>
+                                        @endif
+
+                                        <a href="{{ url('/admin/product/'.$p->id.'/record') }}"  title="Historial de Movimientos"><i class="fas fa-history"></i></a>
+                                    </div>
+                                </td>
+                                <td>{{$p->row.' / '.$p->code_ppr}}</td>
+                                <td>{{$p->name.' / '.$p->description}}</td>
+                                <td>{{$p->presentation}}</td>
+                                <td>{{$p->stock}}</td>
+                                <td>{{'Q.'.$p->price_unit}}</td>
+                            </tr>
+                        @endforeach
+
 
                     </tbody>
                 </table>
@@ -73,42 +95,6 @@
 
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(function () { 
-            var table = $('#yajra-datatable').DataTable({
-                language: {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"},
-                processing: true,
-                paging: true,
-                ajax: "{{ route('products_index') }}",
-                columns: [
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                    {
-                        data: 'row', 
-                        render: function ( data, type, row ) {
-                            return row.row + ' / ' + row.code_ppr;
-                        }
-                    },
-                    {
-                        data: 'name', 
-                        render: function ( data, type, row ) {
-                            return row.name + ' / ' + row.description;
-                        }
-                    },
-                    {data: 'presentation', name: 'presentation'}, 
-                    {data: 'stock', name: 'stock'}, 
-                    {
-                        data: 'price_unit', 
-                        render: function ( data, type, row ) {
-                            return 'Q.' + row.price_unit;
-                        }
-                    },   
-                ]
-            });
-        });
-    </script>
-    
-
     
 @endsection
     

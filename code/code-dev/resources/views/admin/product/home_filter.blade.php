@@ -30,6 +30,9 @@
                             </ul>
                         </div>
                     </li>
+
+                    @include('admin.product.renglones')
+
                     @if(kvfj(Auth::user()->permissions, 'product_add'))
                         <li>
                             <a href="{{ url('/admin/product/add') }}" ><i class="fas fa-plus-circle"></i> Agregar</a>

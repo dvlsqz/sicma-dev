@@ -51,12 +51,24 @@ class ProductController extends Controller
         return view('admin.product.home_filter',$data);
     }
 
-    public function index(){        
-        return view('admin.product.home');
+    public function index($r){  
+        
+        if(!is_null($r)):
+            $product = Product::where('row', $r)->orderBy('id', 'Asc')->get();
+        else:
+            $product = Product::where('row', '0')->orderBy('id', 'Asc')->get();
+        endif;
+
+        $data = [
+            'product'=>$product
+        ];
+
+        return view('admin.product.home',$data);
     }
     
     public function getProductAll(){
-           $data = Product::select('id','row','code_ppr', 'name', 'description', 'presentation', 'stock', 'price_unit')->get();        
+           $data = Product::select('id','row','code_ppr', 'name', 'description', 'presentation', 'stock', 'price_unit')
+                ->get();        
             
            return DataTables()->of($data)
                ->addColumn('action', function($row){     
