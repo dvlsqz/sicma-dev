@@ -108,21 +108,19 @@
                         <label for="category">Servicio General:</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            {!! Form::select('servicegeneral', $servicegeneral, $equipment->idservicegeneral,['class'=>'form-select', 'id' => 'servicegeneral']) !!}
-                            {!! Form::hidden('servicegeneral_actual', $equipment->idservice, ['id' => 'servicegeneral_actual']) !!}
+                            
                         </div>
 
                         <label for="category" class="mtop16">Servicio:</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            {!! Form::select('service', [], null,['class'=>'form-select', 'id' => 'service', 'required']) !!}
-                            {!! Form::hidden('service_actual', 0, ['id' => 'service_actual']) !!}
+                            
                         </div>
 
                         <label for="category" class="mtop16">Ambiente:</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            {!! Form::select('environment', [], null,['class'=>'form-select', 'id' => 'environment', 'required']) !!}
+                            
                         </div>
 
                         <label for="lastname" class="mtop16">Persona Responable en el Servicio ó Ubicación:</label>

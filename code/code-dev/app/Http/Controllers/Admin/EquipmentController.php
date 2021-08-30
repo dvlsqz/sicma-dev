@@ -101,11 +101,14 @@ class EquipmentController extends Controller
             $e->date_instalaction =  $request->input('date_instalaction');
             $e->features =  e($request->input('features'));
             $e->description =  e($request->input('description'));
+            $e->idservicegeneral = $request->input('servicegeneral');
+            $e->idservice = $request->input('service'); 
+            $e->idenvironment = $request->input('environment');
             $e->status =  "0";
 
             if($e->save()):
                 $b = new Bitacora;
-                $b->action = "Registro de equipo ".$e->code_new." del area ".$e->area->name;
+                $b->action = "Registro de equipo ".$e->code_new;
                 $b->user_id = Auth::id();
                 $b->save();
                 Session::flash('success', '¡Equipo guardado con exito!.');
@@ -188,7 +191,6 @@ class EquipmentController extends Controller
             $e->id =  $request->input('id');
             $e->idmaintenancearea =  $request->input('idmaintenancearea');
             $e->code_old = $request->input('code_old');
-            $e->code_new =  $this->GenerateCode($request->input('idsupplier'),$request->input('environment'), $request->input('name'));
             $e->name =  e($request->input('name'));
             $e->brand =  e($request->input('brand'));
             $e->model =  e($request->input('model'));
@@ -203,7 +205,7 @@ class EquipmentController extends Controller
 
             if($e->save()):
                 $b = new Bitacora;
-                $b->action = "Actualización de equipo ".$e->code_new." del area ".$e->area->name;
+                $b->action = "Actualización de equipo ".$e->code_new;
                 $b->user_id = Auth::id();
                 $b->save();
                 Session::flash('success', '¡Equipo actualizado con exito!.');
@@ -353,7 +355,7 @@ class EquipmentController extends Controller
         ];
 
         $pdf = PDF::loadView('admin.equipments.data_sheet',$data);
-        return $pdf->stream('Ficha Tecnica-');
+        return $pdf->download('Ficha Tecnica.pdf');
     }
 
     public function getEquipmentParts($id){
