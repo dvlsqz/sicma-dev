@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+ sicma-dev:
+  build:
+   context: ./
+   dockerfile: Dockerfile 
+  ports: 
+   - 8500:80
+  volumes: 
+   - ./code-dev:/var/www
+   - ./code-dev/public:/var/www/html
+  networks: 
+   laravel_prod_net:
+    ipv4_address: 176.25.100.12
+volumes: 
+ code-dev:
+ database:
+networks: 
+ laravel_prod_net:
+  driver: bridge
+  ipam: 
+   driver: default
+   config: 
+    - 
+     subnet: 176.25.100.0/24 
