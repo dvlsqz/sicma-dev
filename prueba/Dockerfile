@@ -1,8 +1,9 @@
 FROM php:7.4-apache
 
 RUN apt-get update && apt-get install -y \
-    && docker-php-ext-install mysqli pdo pdo_mysql \
-    && libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-install mysqli pdo pdo_mysql 
+
+RUN apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 RUN printf "\n" | pecl install imagick
 
