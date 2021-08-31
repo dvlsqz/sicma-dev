@@ -61,7 +61,7 @@
                             {!! Form::text('serie', $equipment->serie, ['class'=>'form-control']) !!}
                         </div>
 
-                        @if(Auth::user()->role == '0' && Auth::user()->role == '8')
+                        @if(Auth::user()->role == '0' || Auth::user()->idmaintenancearea == '8')
                             <label for="ibm" class="mtop16"><strong>Tipo:</strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
@@ -120,19 +120,19 @@
                         <label for="category">Servicio General:</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            
+                            {!! Form::text('servicegeneral', $equipment->servicegeneral->name, ['class'=>'form-control']) !!}
                         </div>
 
                         <label for="category" class="mtop16">Servicio:</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            
+                            {!! Form::text('servicegeneral', $equipment->service->level.' - '.$equipment->service->name, ['class'=>'form-control']) !!}
                         </div>
 
                         <label for="category" class="mtop16">Ambiente:</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            
+                            {!! Form::textarea('servicegeneral', $equipment->environment->code.' - '.$equipment->environment->name, ['class'=>'form-control', 'rows'=>'2']) !!}
                         </div>
 
                         <label for="lastname" class="mtop16">Persona Responable en el Servicio ó Ubicación:</label>
@@ -184,7 +184,7 @@
 
                         <label for="name" class="mtop16">Codigo QR Actual:</label>
                         <div class="input-group">
-                            {!! QrCode::size(75)->generate('http://sicma.igss/admin/equipment/'.$equipment->id.'/edit'); !!}
+                            {!! QrCode::size(75)->generate('http://10.11.0.30:8500/admin/equipment/'.$equipment->id.'/edit'); !!}
                         </div>
                         
                     </div>

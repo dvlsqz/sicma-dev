@@ -359,7 +359,7 @@ class EquipmentController extends Controller
         ];
 
         $pdf = PDF::loadView('admin.equipments.data_sheet',$data);
-        return $pdf->download('Ficha Tecnica.pdf');
+        return $pdf->stream('Ficha Tecnica.pdf');
     }
 
     public function getEquipmentParts($id){

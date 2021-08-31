@@ -57,11 +57,10 @@
                                         @endif
 
                                         <a href="{{ url('/admin/equipment/'.$eq->id.'/files') }}"  title="Visualización y Carga de Archivos"><i class="fas fa-file-upload"></i></a>
-                                        <a href="{{ url('/admin/equipment/'.$eq->id.'/data_sheet') }}"  title="Ficha Tecnica"><i class="fas fa-file-invoice"></i></a> 
+                                        <a href="{{ url('/admin/equipment/'.$eq->id.'/data_sheet') }}" target="_blank"  title="Ficha Tecnica"><i class="fas fa-file-invoice"></i></a> 
                                         <a href="{{ url('/admin/equipment/'.$eq->id.'/equipment_parts') }}"  title="Partes del Equipo"><i class="fas fa-cogs"></i></a>
                                         <a href="{{ url('/admin/equipment/'.$eq->id.'/connection_to_equipment') }}"  title="Conexión a otros Equipos"><i class="fas fa-project-diagram"></i></a>
                                         <a href="{{ url('/admin/equipment/'.$eq->id.'/transfer') }}"  title="Traslado de Ambiente"><i class="fas fa-people-carry"></i></a>
-
                                     </div>
                                 </td>
                                 <td>{{$eq->code_old.' / '.$eq->code_new}}</td>

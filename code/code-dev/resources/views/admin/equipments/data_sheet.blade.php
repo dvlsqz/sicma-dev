@@ -11,38 +11,50 @@
 
         <table id="table" width="100%" border="5" cellpadding="5" cellspacing="0" bordercolor="#000000">
             <tr>
-                <td id="gris" colspan="3"> 	
+                <td id="gris" colspan="2"> 	
                     <div align="center"> 
                         <b> FICHA TÉCNICA </b>
                     </div>  
                 </td>
 
-                <td rowspan="3" >
+                <td id="negrita" rowspan="3" colspan="2"> 
+                    <div align="center"> 
+                        <b>   INSTITUTO GUATEMALTECO DE <BR> SEGURIDAD SOCIAL (IGSS)    </b>
+                    </div>
+                </td>
+
+                <!--<td rowspan="3" >
                     <div align="center">
                         <img src="#" width="70" height="70">  
                     </div>
-                </td>
+                </td>-->
             </tr>
 
             <tr>
-                <td id="gris" colspan="2"> 
+                <td id="gris"  colspan="1"> 
                     <div align="center"> 
                         <b>  Codigo del Equipo <br><small>Anterio / Nuevo</small> </b>
                     </div>
                 </td>
 
-                
+                <td id="gris"  colspan="1"> 
+                    <div align="center"> 
+                        <b>  Número de Bien<br> </b>
+                    </div>
+                </td>
 
-                <td id="negrita" rowspan="2" > 
+                <!--<td id="negrita" rowspan="3" colspan="2"> 
                     <div align="center"> 
                         <b>   INSTITUTO GUATEMALTECO DE <BR> SEGURIDAD SOCIAL (IGSS)    </b>
                     </div>
-                </td>
+                </td>-->
+
+                
             </tr> 
 
             <tr>
-                <td id="neg" colspan="2">  <div align="center"> {{ $equipment->code_old === NULL ? "SN ".' / '.$equipment->code_new : $equipment->code_old.' / '.$equipment->code_new }} </div></td>
-                
+                <td id="neg" colspan="1">  <div align="center"> {{ $equipment->code_old === NULL ? "SN ".' / '.$equipment->code_new : $equipment->code_old.' / '.$equipment->code_new }} </div></td>
+                <td id="neg" colspan="1">  <div align="center">  </div></td>
             </tr>
 
             <tr>
@@ -171,7 +183,7 @@
                 <td  colspan="2"> <strong> Correo Electronico:  </strong> @if(empty($equipment->sup->email))  @else {{ $equipment->sup->email }} @endif</td>
             </tr>
 
-            <tr>
+            <!--<tr>
                 <td id="gris" colspan="4"> 
                     <div align="center"> 
                         <b> FOTOS DEL EQUIPO </b>
@@ -192,7 +204,7 @@
                         @endforeach
                     </div>
                 </td>
-            </tr>
+            </tr>-->
 
             <tr>
                 <td id="gris" colspan="4"> 
