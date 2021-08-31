@@ -96,7 +96,9 @@ class EquipmentController extends Controller
             $e->model =  e($request->input('model'));
             $e->serie =  e($request->input('serie'));
             $e->no_bien =  e($request->input('no_bien'));
+            $e->type =  e($request->input('type'));
             $e->capacity =  e($request->input('capacity'));
+            $e->num_station =  e($request->input('num_station'));
             $e->year_warranty =  $request->input('year_warranty');
             $e->date_instalaction =  $request->input('date_instalaction');
             $e->features =  e($request->input('features'));
@@ -196,7 +198,9 @@ class EquipmentController extends Controller
             $e->model =  e($request->input('model'));
             $e->serie =  e($request->input('serie'));
             $e->no_bien =  e($request->input('no_bien'));
+            $e->type =  e($request->input('type'));
             $e->capacity =  e($request->input('capacity'));
+            $e->num_station =  e($request->input('num_station'));
             $e->year_warranty =  $request->input('year_warranty');
             $e->date_instalaction =  $request->input('date_instalaction');
             $e->features =  e($request->input('features'));

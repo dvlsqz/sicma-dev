@@ -62,10 +62,22 @@
                         </div>
 
                         @if(Auth::user()->role == '0' && Auth::user()->role == '8')
+                            <label for="ibm" class="mtop16"><strong>Tipo:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                                {!! Form::text('type', $equipment->type, ['class'=>'form-control']) !!}
+                            </div>
+
                             <label for="ibm" class="mtop16"><strong>Capacidad:</strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('capacity', $equipment->capacity, ['class'=>'form-control']) !!}
+                            </div>
+
+                            <label for="ibm" class="mtop16"><strong>Número de Equipo/Estación:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                                {!! Form::text('num_station', $equipment->num_station, ['class'=>'form-control']) !!}
                             </div>
                         @endif
                     </div>

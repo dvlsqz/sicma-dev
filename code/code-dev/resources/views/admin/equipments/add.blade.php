@@ -69,10 +69,22 @@
                         </div>
 
                         @if(Auth::user()->role == '0' || Auth::user()->idmaintenancearea == '8')
+                            <label for="ibm" class="mtop16"><strong>Tipo:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                                {!! Form::text('type', null, ['class'=>'form-control']) !!}
+                            </div>
+
                             <label for="ibm" class="mtop16"><strong>Capacidad:</strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('capacity', null, ['class'=>'form-control']) !!}
+                            </div>
+
+                            <label for="ibm" class="mtop16"><strong>Número de Equipo/Estación:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                                {!! Form::text('num_station', null, ['class'=>'form-control']) !!}
                             </div>
                         @endif
                     </div>
