@@ -48,7 +48,13 @@
                 </li>
             @endif
 
-            @if(kvfj(Auth::user()->permissions, 'units'))
+            @if(kvfj(Auth::user()->permissions, 'works_list'))
+                <li>
+                    <a href="{{ url('/admin/works/all') }}" class="lk-user_add lk-user_list lk-user_edit lk-user_permissions lk-user_assignments"><i class="fas fa-tools"></i> Trabajos</a>
+                </li>
+            @endif
+
+            @if(kvfj(Auth::user()->permissions, 'maintenance_areas'))
                 <li>
                     <a href="{{ url('admin/maintenance_areas') }}" class="lk-maintenance_areas lk-maintenance_area_add lk-maintenance_area_edit lk-maintenance_area_delete"><i class="fas fa-hard-hat"></i> Áreas de Mantenimiento</a>
                 </li>

@@ -11,13 +11,13 @@
 
         <table id="table" width="100%" border="5" cellpadding="5" cellspacing="0" bordercolor="#000000">
             <tr>
-                <td id="gris" colspan="2"> 	
+                <td id="gris" colspan="2" style="background-color: #256B92; color:white;"> 	
                     <div align="center"> 
                         <b> FICHA TÉCNICA </b>
                     </div>  
                 </td>
 
-                <td id="negrita" rowspan="3" colspan="2"> 
+                <td id="negrita" rowspan="3" colspan="2" > 
                     <div align="center"> 
                         <b>   INSTITUTO GUATEMALTECO DE <BR> SEGURIDAD SOCIAL (IGSS)    </b>
                     </div>
@@ -31,13 +31,13 @@
             </tr>
 
             <tr>
-                <td id="gris"  colspan="1"> 
+                <td id="gris"  colspan="1" > 
                     <div align="center"> 
                         <b>  Codigo del Equipo <br><small>Anterio / Nuevo</small> </b>
                     </div>
                 </td>
 
-                <td id="gris"  colspan="1"> 
+                <td id="gris"  colspan="1" > 
                     <div align="center"> 
                         <b>  Número de Bien<br> </b>
                     </div>
@@ -57,9 +57,9 @@
                 <td id="neg" colspan="1">  <div align="center">  </div></td>
             </tr>
 
-            <tr>
-                <td id="gris" colspan="4"> 
-                    <div align="center"> 
+            <tr >
+                <td id="gris" colspan="4" style="background-color: #256B92; color:white;" > 
+                    <div align="center" > 
                         <b> IDENTIFICACIÓN </b>
                     </div>
                 </td>
@@ -99,7 +99,7 @@
             </tr>
 
             <tr>
-                <td id="gris" colspan="4"> 
+                <td id="gris" colspan="4" style="background-color: #256B92; color:white;"> 
                     <div align="center"> 
                         <b> LOCALIZACIÓN Y FRECUENCIA DE USO </b>
                     </div>
@@ -122,7 +122,7 @@
             </tr>
 
             <tr>
-                <td id="gris" colspan="4"> 
+                <td id="gris" colspan="4" style="background-color: #256B92; color:white;"> 
                     <div align="center"> 
                         <b> INFORMACIÓN TÉCNICA </b>
                     </div>
@@ -135,7 +135,7 @@
             </tr>
 
             <tr>
-                <td id="gris" colspan="4"> 
+                <td id="gris" colspan="4" style="background-color: #256B92; color:white;"> 
                     <div align="center"> 
                         <b>   CARACTERISTICAS ESPECIALES </b> 
                     </div>
@@ -148,7 +148,7 @@
             </tr>
 
             <tr>
-                <td id="gris" colspan="4"> 
+                <td id="gris" colspan="4" style="background-color: #256B92; color:white;"> 
                     <div align="center"> 
                         <b> INFORMACIÓN DEL PROVEEDOR Y TECNICA </b>
                     </div>
@@ -207,7 +207,7 @@
             </tr>-->
 
             <tr>
-                <td id="gris" colspan="4"> 
+                <td id="gris" colspan="4" style="background-color: #256B92; color:white;"> 
                     <div align="center"> 
                         <b> Historial de Movimientos del Equipo </b>
                     </div>

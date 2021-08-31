@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
-    if(route == "equipment_add" || route == "equipment_edit"){        
+    if(route == "equipment_add"){        
         setServiceToEquipment();
         setEnvironmentToEquipment();
     }

@@ -76,7 +76,7 @@
     }
 
      //Estado de insumos/herramientas/equipos de Bodega/Inventario
-     function getTipoBodegaArray($mode, $id){
+    function getTipoBodegaArray($mode, $id){
         $status = [
             '0' => 'Insumo',
             '1' => 'Herramienta',
@@ -215,6 +215,26 @@
             return $roles;
         else:
             return $roles[$id];
+        endif;
+    }
+
+     //Estado de insumos/herramientas/equipos de Bodega/Inventario
+    function getFrecuenciasUsosArray($mode, $id){
+        $status = [
+            '0' => 'Diario',
+            '1' => '2 veces por semana',
+            '2' => 'Semanal',
+            '3' => 'Quincenal',
+            '4' => 'Mensual',
+            '5' => 'Semestral',
+            '6' => 'Anual',
+            '7' => 'Emergencia'
+        ];
+
+        if(!is_null($mode)):
+            return $status;
+        else:
+            return $status[$id];
         endif;
     }
 

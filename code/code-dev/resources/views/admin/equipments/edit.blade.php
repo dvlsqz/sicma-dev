@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="inside">
-                        <label for="lastname">Área Encargada:</label>
+                        <label for="lastname"><strong> Área Encargada: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             <select name="idmaintenancearea" id="idmaintenancearea" class="form-select select2" searchable="Search here..">
@@ -31,38 +31,38 @@
                             </select>
                         </div>
 
-                        <label for="name" class="mtop16">No. Bien:</label>
+                        <label for="name" class="mtop16"><strong> No. Bien: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('no_bien', $equipment->no_bien, ['class'=>'form-control']) !!}
                         </div>
 
-                        <label for="name" class="mtop16">Nombre:</label>
+                        <label for="name" class="mtop16"><strong> Nombre: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('name', $equipment->name, ['class'=>'form-control']) !!}
                         </div>
 
-                        <label for="name" class="mtop16">Marca:</label>
+                        <label for="name" class="mtop16"><strong> Marca: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('brand', $equipment->brand, ['class'=>'form-control']) !!}
                         </div>
 
-                        <label for="lastname" class="mtop16">Modelo:</label>
+                        <label for="lastname" class="mtop16"><strong> Modelo: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('model', $equipment->model, ['class'=>'form-control']) !!}
                         </div>
 
-                        <label for="ibm" class="mtop16">Serie:</label>
+                        <label for="ibm" class="mtop16"><strong> Serie: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('serie', $equipment->serie, ['class'=>'form-control']) !!}
                         </div>
 
                         @if(Auth::user()->role == '0' || Auth::user()->idmaintenancearea == '8')
-                            <label for="ibm" class="mtop16"><strong>Tipo:</strong></label>
+                            <label for="ibm" class="mtop16"><strong>Tipo: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('type', $equipment->type, ['class'=>'form-control']) !!}
@@ -92,13 +92,13 @@
                     </div>
 
                     <div class="inside">
-                        <label for="name">Garantía (Meses):</label>
+                        <label for="name"><strong> Garantía (Meses): </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::number('year_warranty', $equipment->year_warranty, ['class'=>'form-control','placeholder'=>'Ingrese la cantidad en meses']) !!}
                         </div>
 
-                        <label for="name" class="mtop16">Fecha de Instalación o Entrega:</label>
+                        <label for="name" class="mtop16"><strong> Fecha de Instalación o Entrega: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::date('date_instalaction', $equipment->date_instalaction, ['class'=>'form-control']) !!}
@@ -117,37 +117,37 @@
                     </div>
 
                     <div class="inside">
-                        <label for="category">Servicio General:</label>
+                        <label for="category"><strong> Servicio General: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
                             {!! Form::text('servicegeneral', $equipment->servicegeneral->name, ['class'=>'form-control']) !!}
                         </div>
 
-                        <label for="category" class="mtop16">Servicio:</label>
+                        <label for="category" class="mtop16"><strong> Servicio: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
                             {!! Form::text('servicegeneral', $equipment->service->level.' - '.$equipment->service->name, ['class'=>'form-control']) !!}
                         </div>
 
-                        <label for="category" class="mtop16">Ambiente:</label>
+                        <label for="category" class="mtop16"><strong> Ambiente: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
                             {!! Form::textarea('servicegeneral', $equipment->environment->code.' - '.$equipment->environment->name, ['class'=>'form-control', 'rows'=>'2']) !!}
                         </div>
 
-                        <label for="lastname" class="mtop16">Persona Responable en el Servicio ó Ubicación:</label>
+                        <label for="lastname" class="mtop16"><strong> Persona Responable en el Servicio ó Ubicación: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('model', null, ['class'=>'form-control']) !!}
                         </div>
 
-                        <label for="name" class="mtop16">Frencuencia de Uso (Días):</label>
+                        <label for="name" class="mtop16"><strong>Frencuencia de Uso:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::number('frequency', null, ['class'=>'form-control']) !!}
+                            {!! Form::select('frequency', getFrecuenciasUsosArray('list', null),$equipment->frequency,['class'=>'form-select']) !!}
                         </div>
 
-                        <label for="lastname" class="mtop16">¿Cuenta con personal capacitado el servicio?:</label>
+                        <label for="lastname" class="mtop16"><strong> ¿Cuenta con personal capacitado el servicio?: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             <select name="idmaintenancearea" id="idmaintenancearea" class="form-select select2" searchable="Search here..">
@@ -169,7 +169,7 @@
                     </div>
 
                     <div class="inside">
-                        <label for="lastname">¿Cuenta con un código anterior el equipo?:</label>
+                        <label for="lastname"><strong> ¿Cuenta con un código anterior el equipo?: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('code_old', $equipment->code_old, ['class'=>'form-control']) !!}
@@ -182,7 +182,7 @@
                             <a href="#" class="btn btn-sm btn-primary " ><i class="fas fa-qrcode"></i> Generar Codigo</a>
                         </div>-->
 
-                        <label for="name" class="mtop16">Codigo QR Actual:</label>
+                        <label for="name" class="mtop16"><strong> Codigo QR Actual: </strong></label>
                         <div class="input-group">
                             {!! QrCode::size(75)->generate('http://10.11.0.30:8500/admin/equipment/'.$equipment->id.'/edit'); !!}
                         </div>
@@ -199,13 +199,13 @@
                     </div>
 
                     <div class="inside">               
-                        <label for="ibm">Características:</label>
+                        <label for="ibm"><strong> Características: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::textarea('features', $equipment->features, ['class'=>'form-control', 'rows'=>'4']) !!}
                         </div>
 
-                        <label for="ibm" class="mtop16">Observaciones:</label>
+                        <label for="ibm" class="mtop16"><strong> Observaciones: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::textarea('description', $equipment->description, ['class'=>'form-control', 'rows'=>'4']) !!}

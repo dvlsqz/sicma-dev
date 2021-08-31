@@ -101,6 +101,7 @@ class EquipmentController extends Controller
             $e->num_station =  e($request->input('num_station'));
             $e->year_warranty =  $request->input('year_warranty');
             $e->date_instalaction =  $request->input('date_instalaction');
+            $e->frequency =  $request->input('frequency');
             $e->features =  e($request->input('features'));
             $e->description =  e($request->input('description'));
             $e->idservicegeneral = $request->input('servicegeneral');
@@ -203,6 +204,7 @@ class EquipmentController extends Controller
             $e->num_station =  e($request->input('num_station'));
             $e->year_warranty =  $request->input('year_warranty');
             $e->date_instalaction =  $request->input('date_instalaction');
+            $e->frequency =  $request->input('frequency');
             $e->features =  e($request->input('features'));
             $e->description =  e($request->input('description'));
             $e->status =  "0";

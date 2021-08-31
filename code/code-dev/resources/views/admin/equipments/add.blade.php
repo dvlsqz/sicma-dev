@@ -159,10 +159,10 @@
                             {!! Form::text('model', null, ['class'=>'form-control']) !!}
                         </div>
 
-                        <label for="name" class="mtop16"><strong>Frencuencia de Uso (Días):</strong></label>
+                        <label for="name" class="mtop16"><strong>Frencuencia de Uso:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::number('frequency', null, ['class'=>'form-control']) !!}
+                            {!! Form::select('frequency', getFrecuenciasUsosArray('list', null),0,['class'=>'form-select']) !!}
                         </div>
 
                         <label for="lastname" class="mtop16"><strong>¿Cuenta con personal capacitado el servicio?:</strong></label>
