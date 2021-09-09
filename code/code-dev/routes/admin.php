@@ -69,7 +69,6 @@
        Route::post('/product/egress/add', 'Admin\ProductController@postProductEgress')->name('product_egress');
        Route::get('/product/{id}/record', 'Admin\ProductController@getProductRecord')->name('product_record');
        
-
         //Kardex
         Route::get('/kardex/add', 'Admin\KardexController@getKardexAdd')->name('kardex_add');
         Route::post('/kardex/add', 'Admin\KardexController@postKardexAdd')->name('kardex_add');
@@ -115,16 +114,31 @@
         Route::get('/services_g/{status}', 'Admin\EnvironmentController@getHome')->name('serviceg_list');
         Route::get('/services_g/{id}/edit', 'Admin\EnvironmentController@getServicesGeneralEdit')->name('serviceg_edit');
         Route::post('/services_g/{id}/edit', 'Admin\EnvironmentController@postServicesGeneralEdit')->name('serviceg_edit');
-
         Route::get('/services_g/{id}/services','Admin\EnvironmentController@getServicesGeneralServices')->name('service_list');
         Route::post('/services_g/services/add','Admin\EnvironmentController@postServicesGeneralServicesAdd')->name('service_add');
         Route::get('/services_g/services/{id}/edit','Admin\EnvironmentController@getServicesGeneralServicesEdit')->name('service_edit');
         Route::post('/services_g/services/{id}/edit','Admin\EnvironmentController@postServicesGeneralServicesEdit')->name('service_edit');
-
         Route::get('/services/{id}/environments','Admin\EnvironmentController@getServicesEnvironments')->name('environment_list');
         Route::post('/services/environments/add','Admin\EnvironmentController@postServicesEnvironmentsAdd')->name('environment_add');       
         Route::get('/services/environments/{id}/edit','Admin\EnvironmentController@getServicesEnvironmentsEdit')->name('environment_edit');
         Route::post('/services/environments/{id}/edit','Admin\EnvironmentController@postServicesEnvironmentsEdit')->name('environment_edit');
+
+        //ING-7
+        Route::get('/ing_7', 'Admin\Ing7Controller@getHome')->name('ing7_list');
+        Route::get('/ing_7/add', 'Admin\Ing7Controller@getIng7Add')->name('ing7_add');
+        Route::post('/ing_7/add', 'Admin\Ing7Controller@postIng7Add')->name('ing7_add');
+        Route::get('/ing_7/{id}/print', 'Admin\Ing7Controller@getIng7Print')->name('ing7_print');
+        Route::get('/ing_7/{id}/classification', 'Admin\Ing7Controller@getIng7Classification')->name('ing7_classification');
+        Route::post('/ing_7/{id}/classification_type_work', 'Admin\Ing7Controller@postIng7ClassificationTypeWork')->name('ing7_classification');
+        Route::post('/ing_7/{id}/classification_area_work', 'Admin\Ing7Controller@postIng7ClassificationAreaWork')->name('ing7_classification');
+        Route::get('/ing_7/{id}/buy_hire', 'Admin\Ing7Controller@getIng7ClassificationBuyHire')->name('ing7_buy_hire');
+        Route::post('/ing_7/{id}/buy_hire', 'Admin\Ing7Controller@postIng7ClassificationBuyHire')->name('ing7_buy_hire');
+        Route::get('/ing_7/{id}/follow', 'Admin\Ing7Controller@getIng7Follow')->name('ing7_follow');
+        Route::post('/ing_7/{id}/follow', 'Admin\Ing7Controller@postIng7Follow')->name('ing7_follow');
+        Route::get('/ing_7/{id}/assignments_areas', 'Admin\Ing7Controller@getIng7AssignmentsAreas')->name('ing7_assignments_areas');
+        Route::post('/ing_7/{id}/assignments_areas', 'Admin\Ing7Controller@postIng7AssignmentsAreas')->name('ing7_assignments_areas');
+        Route::get('/ing_7/{id}/assignments_personal', 'Admin\Ing7Controller@getIng7AssignmentsPersonal')->name('ing7_assignments_personal');
+        Route::post('/ing_7/{id}/assignments_personal', 'Admin\Ing7Controller@postIng7AssignmentsPersonal')->name('ing7_assignments_personal');
 
         //Request Ajax
         Route::get('/sicma/api/load/services/{parent}', 'Admin\ApiController@getService');

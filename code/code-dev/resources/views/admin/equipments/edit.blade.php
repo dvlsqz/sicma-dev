@@ -135,7 +135,7 @@
                             {!! Form::textarea('servicegeneral', $equipment->environment->code.' - '.$equipment->environment->name, ['class'=>'form-control', 'rows'=>'2']) !!}
                         </div>
 
-                        <label for="lastname" class="mtop16"><strong> Persona Responable en el Servicio ó Ubicación: </strong></label>
+                        <label for="lastname" class="mtop16"><strong> Persona Responsable en el Servicio ó Ubicación: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('model', null, ['class'=>'form-control']) !!}

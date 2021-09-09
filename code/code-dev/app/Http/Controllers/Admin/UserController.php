@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\User, App\Http\Models\Unit, App\Http\Models\Service, App\Http\Models\Bitacora, App\Http\Models\MaintenanceArea;
+use App\User, App\Http\Models\Unit, App\Http\Models\Service, App\Http\Models\Bitacora, App\Http\Models\MaintenanceArea, App\Http\Models\Environment;
 use Validator, Auth, Hash, Config;
 
 class UserController extends Controller
@@ -66,13 +66,14 @@ class UserController extends Controller
         if($validator->fails()):
             return back()->withErrors($validator)->with('error', '¡Se ha producido un error!.')->withInput();
         else:
-            $password = Config::get('sidex.default_password');
+            $password = Config::get('sicma.default_password');
 
             $user = new User;
             $user->name = e($request->input('name'));
             $user->lastname = e($request->input('lastname'));
             $user->ibm = e($request->input('ibm'));
             $user->password = Hash::make($password);
+
             $permissions = [
                 'dashboard' => true
             ];
@@ -88,7 +89,8 @@ class UserController extends Controller
                 $b->user_id = Auth::id();
                 $b->save();
 
-                return back()->with('success', '¡El usuario se creo con éxito, ahora puede iniciar sesión!');
+                return back()->with('messages', '¡El usuario se creo con éxito, ahora puede iniciar sesión!')
+                    ->with('typealert', 'success');
             endif;
         endif;
     }
@@ -97,10 +99,12 @@ class UserController extends Controller
 
         $u = User::findOrFail($id);
         $maintenance_areas = MaintenanceArea::pluck('name','id');
+        $services = Environment::where('type','1')->pluck('name','id');
 
         $data = [
             'u' => $u,
-            'maintenance_areas' => $maintenance_areas
+            'maintenance_areas' => $maintenance_areas,
+            'services' => $services
         ];
 
         return view('admin.users.user_edit',$data);
@@ -134,51 +138,18 @@ class UserController extends Controller
             if($request->input('user_type') == "1" ):
                 if(!is_null($u->permissions) || !is_null($u->permissions) ):
                     $permissions = [
-                        'home' => true,
-                        'dashboard' => true,
-                        'units'=>true,
-                        'unit_edit'=>true,
-                        'services'=>true,
-                        'service_add'=>true,
-                        'service_edit'=>true,
-                        'service_delete'=>true,
-                        'service_search'=>true,
-                        'telephone_extensions'=>true,
-                        'telephone_extension_add'=>true,
-                        'telephone_extension_edit'=>true,
-                        "telephone_extension_location_edit"=>true,
-                        "telephone_extension_status_edit"=>true,
-                        'telephone_extension_delete'=>true,
-                        'telephone_extension_search'=>true,
-                        'report_user'=>true,
-                        "report_informatica"=>true,
-                        'report_bitacora'=>true,
-                        'user_list'=>true,
-                        'user_add'=>true,
-                        'user_edit'=>true,
-                        'user_banned'=>true,
-                        'user_delete'=>true,
-                        'user_reset_password'=>true,
-                        'user_permissions'=>true,
-                        'user_assignments'=>true,
-                        'user_assignments_units'=>true,
-                        'user_assignments_services'=>true,
-                        'user_assignments_delete'=>true
+                        'dashboard' => true
                     ];
 
                     $permissions = json_encode($permissions);
                     $u->permissions = $permissions;
+
+                    $u->idmaintenancearea = '0';
                 endif;
             elseif($request->input('user_type') == "2"):
                 if(is_null($u->permissions) || !is_null($u->permissions) ):
                     $permissions = [
-                        'home' => true,
-                        'dashboard' => true,
-                        'services'=>true,
-                        'telephone_extensions'=>true,
-                        'telephone_extension_edit'=>true,
-                        'telephone_extension_search'=>true,
-                        'report_user'=>true
+                        'dashboard' => true
                     ];
 
                     $permissions = json_encode($permissions);
@@ -187,15 +158,20 @@ class UserController extends Controller
             endif;
         endif;
 
+        if($rol_actual == '6'):
+            $u->idservice = $request->input('idservice');
+        else:
+            $u->idservice = 'NULL';
+        endif;
+
         if($u->save()):
             $b = new Bitacora;
             $b->action = "Actualización de datos de usuario con IBM: ".$ibm;
             $b->user_id = Auth::id();
             $b->save();
 
-            /*return back()->with('messages', 'La información del usuario, se actualizo con éxito!.')
-                ->with('typealert', 'success');*/
-            return back()->with('success','La información del usuario, se actualizo con éxito!.');
+            return back()->with('messages', 'La información del usuario, se actualizo con éxito!.')
+                ->with('typealert', 'success');
 
         endif;
     }
@@ -243,7 +219,8 @@ class UserController extends Controller
             $b->user_id = Auth::id();
             $b->save();
 
-            return back()->with('success', '¡Los permisos del usuario fueron actualizados con éxito!.');
+            return back()->with('messages','¡Los permisos del usuario fueron actualizados con éxito!.')
+                ->with('typealert', 'success');
         endif;
     }
 
@@ -276,7 +253,8 @@ class UserController extends Controller
                 $b->action = "Restablecimiento de contraseña de usuario con IBM: ".$u->ibm;
                 $b->user_id = Auth::id();
                 $b->save();
-                return back()->with('success', '¡La contraseña se restablecio con exito!.');
+                return back()->with('messages','¡La contraseña se restablecio con exito!.')
+                ->with('typealert', 'success');
             endif;
 
         endif;
@@ -324,10 +302,12 @@ class UserController extends Controller
                     $b->user_id = Auth::id();
                     $b->save();
 
-                    return back()->with('success', 'La contraseña se actualizo con exito!.');
+                    return back()->with('messages', 'La contraseña se actualizo con exito!.')
+                        ->with('typealert', 'success');
                 endif;
             else:
-                return back()->with('error', 'Su contraseña actual es errónea, verifiquela por favor.');
+                return back()->with('messages', 'Su contraseña actual es errónea, verifiquela por favor.')
+                    ->with('typealert', 'danger');
             endif;
         endif;
     }

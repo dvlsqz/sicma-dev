@@ -40,9 +40,16 @@
                                     <span class="title"><i class="fas fa-user-shield"></i> Rol de Usuario:</span>
                                     <span class="text">{{ getRoleUserArray(null, $u->role) }}</span>
 
-                                    @if($u->role != '0' && $u->idmaintenancearea != '0' )
+                                    @if($u->role != '0' || $u->role != '1' || $u->role != '4')
+
+                                    @else
                                         <span class="title"><i class="fas fa-hard-hat"></i> Área de Trabajo:</span>
                                         <span class="text">{{ $u->area->code.' - '.$u->area->name }}</span>
+                                    @endif
+
+                                    @if($u->role == '6')
+                                        <span class="title"><i class="fa fa-object-group"></i> Servicio a Cargo:</span>
+                                        <span class="text">{{ $u->service->name }}</span>
                                     @endif
                                 </div>
 
@@ -79,35 +86,45 @@
                                 {!! Form::open(['url'=> '/admin/user/'.$u->id.'/edit']) !!}
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label for="name" >Nombre:</label>
+                                            <label for="name" ><strong>Nombre:</strong></label>
                                             <div class="input-group">
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                                 {!! Form::text('name', null, ['class'=>'form-control']) !!}
                                             </div>
 
-                                            <label for="lastname" class="mtop16">Apellidos:</label>
+                                            <label for="lastname" class="mtop16"><strong>Apellidos:</strong></label>
                                             <div class="input-group">
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                                 {!! Form::text('lastname', null, ['class'=>'form-control']) !!}
                                             </div>
 
-                                            <label for="ibm" class="mtop16">IBM:</label>
+                                            <label for="ibm" class="mtop16"><strong>IBM:</strong></label>
                                             <div class="input-group">
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                                 {!! Form::text('ibm', null, ['class'=>'form-control']) !!}
                                             </div>
 
-                                            <label for="module" class="mtop16">Tipo de Usuario:</label>
+                                            <label for="module" class="mtop16"><strong>Tipo de Usuario:</strong></label>
                                             <div class="input-group">
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
                                                 {!! Form::select('user_type', getRoleUserArray('list', null),$u->role,['class'=>'form-select']) !!}
                                             </div>
                                             
-                                            @if($u->role != '0' || $u->role == '4')
-                                                <label for="module" class="mtop16">Área de Trabajo:</label>
+                                            @if($u->role != '0' || $u->role != '1' || $u->role == '4')
+
+                                            @else
+                                                <label for="module" class="mtop16"><strong> Área de Trabajo: </strong></label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
                                                     {!! Form::select('idarea', $maintenance_areas, $u->idmaintenancearea,['class'=>'form-select']) !!}
+                                                </div>
+                                            @endif
+
+                                            @if($u->role == '6' )
+                                                <label for="module" class="mtop16"><strong> Servicio a Cargo: </strong></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
+                                                    {!! Form::select('idservice', $services,$u->idservice,['class'=>'form-select']) !!}
                                                 </div>
                                             @endif
 
@@ -136,7 +153,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label for="name">Nueva Contraseña:</label>
+                                            <label for="name"><strong>Nueva Contraseña:</strong></label>
                                             <div class="input-group">
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                                 {!! Form::password('password', ['class'=>'form-control']) !!}
@@ -147,7 +164,7 @@
 
                                     <div class="row mtop16">
                                         <div class="col-md-12">
-                                            <label for="name">Confirmar Contraseña:</label>
+                                            <label for="name"><strong>Confirmar Contraseña:</strong></label>
                                             <div class="input-group">
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                                 {!! Form::password('cpassword', ['class'=>'form-control']) !!}

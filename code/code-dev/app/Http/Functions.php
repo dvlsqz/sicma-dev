@@ -6,7 +6,10 @@
             '1' => 'Administrador',
             '2' => 'Encargado de Area',
             '3' => 'Operador - Tecnico',
-            '4' => 'Bodeguero'
+            '4' => 'Bodeguero',
+            '5' => 'Inventario',
+            '6' => 'Jefe de Servicio',
+            '7' => 'Admistración'
         ];
 
         if(!is_null($mode)):
@@ -21,6 +24,20 @@
         $status = [
             '0' => 'Suspendido',
             '1' => 'Activo'
+        ];
+
+        if(!is_null($mode)):
+            return $status;
+        else:
+            return $status[$id];
+        endif;
+    }
+
+    //Encargados de Mantenimiento y Seguridad Ocupacional
+    function getEncargadosManttoArray($mode, $id){
+        $status = [
+            '0' => 'Ing. Jahen Figueroa',
+            '1' => 'Ing. Sergio Martinez'
         ];
 
         if(!is_null($mode)):
@@ -203,7 +220,7 @@
         endif;
     }
 
-    //Rol de usuarios
+    //Nivel critico de equipos
     function getLevelEquipment($mode, $id){
         $roles = [
             '0' => 'Bajo',
@@ -238,6 +255,83 @@
         endif;
     }
 
+    function getBuyHireArray($mode, $id){
+        $status = [
+            '0' => 'Sin Asignar',
+            '1' => 'Sí',
+            '2' => 'No'
+        ];
+
+        if(!is_null($mode)):
+            return $status;
+        else:
+            return $status[$id];
+        endif;
+    }
+
+    //tipos de estados
+    function getTypeIng7($mode, $id){
+        $roles = [
+            '0' => 'Registrado',
+            '1' => 'Autorizado',
+            '2' => 'Recibido por Mantenimiento',
+            '3' => 'Asignado a Area de Trabajo',
+            '4' => 'En Revision',
+            '5' => 'En Proceso',
+            '6' => 'Terminado'
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
+        endif;
+    }
+
+    //Tipo de Trabajos Mantenimiento
+    function TipoTrabajosMantto(){
+        $p = [
+
+            'trabajos' => [
+                'icon' => '<i class="fas fa-tachometer-alt"></i>',
+                'title' => 'Area ',
+                'keys' => [
+                    
+                    't_1' => 'Supervisión de Trabajos Contratados',
+                    't_2' => 'Evaluación y Mediciones para Contratar',
+                    't_3' => 'Supervisión y Reparación de Trabajos'
+                ]
+            ]        
+
+        ];
+
+        return $p;
+    }    
+
+    function areasMantto(){
+        $p = [
+
+            'area' => [
+                'keys' => [
+                    'a_1' => 'Pintura e Impermeabilización',
+                    'a_2' => 'Autoclaves',
+                    'a_3' => 'Herreria',
+                    'a_4' => 'Equipos Médicos',
+                    'a_5' => 'Plomería y Drenajes',
+                    'a_6' => 'Calderas',
+                    'a_7' => 'Carpinteria',
+                    'a_8' => 'Otros',
+                    'a_9' => 'Electricidad y Telefonia',
+                    'a_10' => 'Albañiles',
+                    'a_11' => 'Plantas Electricas'
+                ]
+            ]        
+
+        ];
+
+        return $p;
+    }
+
     //Key Value From JSON
     function kvfj($json, $key){
         if($json == null):
@@ -265,6 +359,7 @@
                     'dashboard_small_stats' => 'Puede ver las estadísticas rápidas.'
                 ]
             ],
+
             'units' => [
                 'icon' => '<i class="fas fa-hospital-user"></i>',
                 'title' => 'Modulo de Unidades Medicas',
@@ -276,6 +371,7 @@
                     'unit_search' => 'Puede buscar unidades.'
                 ]
             ],
+            
             'maintenance_areas' => [
                 'icon' => '<i class="fas fa-hard-hat"></i>',
                 'title' => 'Modulo de Areas de Mantenimiento',
@@ -287,6 +383,7 @@
                     'maintenance_area_search' => 'Puede buscar areas de mantenimiento.'
                 ]
             ],
+
             'suppliers' => [
                 'icon' => '<i class="fas fa-users"></i>',
                 'title' => 'Modulo de Proveedores',
@@ -298,6 +395,7 @@
                     'supplier_search' => 'Puede buscar proveedores.'
                 ]
             ],
+
             'bitacoras' => [
                 'icon' => '<i class="fas fa-clipboard-list"></i> ',
                 'title' => 'Modulo de Bitacoras',
@@ -305,6 +403,7 @@
                     'bitacoras' => 'Puede ver el listado de bitacoras.'
                 ]
             ],
+
             'users' => [
                 'icon' => '<i class="fas fa-user-lock"></i> ',
                 'title' => 'Modulo de Usuarios',
@@ -320,6 +419,7 @@
                     'user_change_password' => 'Puede cambiar su contraseña de inicio de sesión'
                 ]
             ],
+
             'product' => [
                 'icon' => '<i class="fas fa-database"></i> ',
                 'title' => 'Modulo de Bodega',
@@ -351,6 +451,7 @@
                     'kardex_egress' => 'Puede registrar egresos de kardex'
                 ]
             ],
+
             'dab_fr' => [
                 'icon' => '<i class="fas fa-file-signature"></i> ',
                 'title' => 'Modulo de Control de DAB-75 para Fondo Rotativo',
@@ -360,6 +461,7 @@
                     'dabs_show' => 'Puede ver la informacion y detalles de la DAB-75.'
                 ]
             ],
+
             'equipments' => [
                 'icon' => '<i class="fas fa-object-group"></i> ',
                 'title' => 'Modulo de Equipos',
@@ -374,6 +476,7 @@
                     'equipment_banned' => 'Puede dar de baja a equipos.'
                 ]
             ],
+
             'environments' => [
                 'icon' => '<i class="fas fa-object-group"></i> ',
                 'title' => 'Modulo de Ambientes',
@@ -389,7 +492,40 @@
                     'environment_edit' => 'Puede editar ambientes.',
                     'environment_banned' => 'Puede dar de baja ambientes.' 
                 ]
+            ],
+
+            'ing7' => [
+                'icon' => '<i class="fas fa-copy"></i>',
+                'title' => 'Modulo de ING 7',
+                'keys' => [
+                    'ing7_list' => 'Puede ver el listado de ING-7.',
+                    'ing7_add' => 'Puede realizar solicitudes de ING-7.',
+                    'ing7_classification' => 'Puede realizar la clasificación de ING-7.',
+                    'ing7_buy_hire' => 'Puede realizar la clasificación de compra ó contratación de ING-7.',
+                    'ing7_print' => 'Puede imprimir el ING-7.',
+                    'ing7_follow' => 'Puede llenar la ficha de seguimiento del ING-7.',
+                    'ing7_assignments_areas' => 'Puede realizar asignacion de areas de trabajo al ING-7.',
+                    'ing7_assignments_personal' => 'Puede realizar asignacion de personal al ING-7.'
+                ]
+            ],
+
+            'ots' => [
+                'icon' => '<i class="fas fa-clone"></i>',
+                'title' => 'Modulo de OTs',
+                'keys' => [
+                    'ot_list' => 'Puede ver el listado de OTs.'
+                ]
+            ],
+
+            'maintenance' => [
+                'icon' => '<i class="fas fa-tools"></i>',
+                'title' => 'Modulo de Mantenimientos',
+                'keys' => [
+                    'maintenance_list' => 'Puede ver el listado de Mantenimientos.'
+                ]
             ]
+
+            
 
         ];
 

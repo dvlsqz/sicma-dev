@@ -1,6 +1,3 @@
-<?php
-    use \App\Http\Controllers\Admin\StoreController;
-?>
 @extends('admin.master')
 @section('title','Proveedores')
 

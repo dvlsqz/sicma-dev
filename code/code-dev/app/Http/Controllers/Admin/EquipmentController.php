@@ -18,23 +18,44 @@ class EquipmentController extends Controller
     }
 
     public function getHome($status){
-        switch ($status) {
-            case '0':
-                $environment = Environment::where('status', '0')->orderBy('id', 'Asc')->paginate(25);
-            break;
+        if(Auth::user()->role == "0"):
+            switch ($status) {
+                case '0':
+                    $environment = Environment::where('status', '0')->orderBy('id', 'Asc')->paginate(25);
+                break;
 
-            case '1':
-                $equipment = Equipment::where('status', '1')->orderBy('id', 'Asc')->paginate(25);
-            break;
+                case '1':
+                    $equipment = Equipment::where('status', '1')->orderBy('id', 'Asc')->paginate(25);
+                break;
 
-            case 'all':
-                $equipment = Equipment::orderby('id','Asc')->get();
-            break;
+                case 'all':
+                    $equipment = Equipment::orderby('id','Asc')->get();
+                break;
 
-            case 'trash':
-                $equipment = Equipment::onlyTrashed()->orderBy('id', 'Asc')->paginate(25);
-            break;
-        }
+                case 'trash':
+                    $equipment = Equipment::onlyTrashed()->orderBy('id', 'Asc')->paginate(25);
+                break;
+            }
+        else:
+            switch ($status) {
+                case '0':
+                    $environment = Environment::where('status', '0')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->paginate(25);
+                break;
+
+                case '1':
+                    $equipment = Equipment::where('status', '1')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->paginate(25);
+                break;
+
+                case 'all':
+                    $equipment = Equipment::orderby('id','Asc')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->get();
+                break;
+
+                case 'trash':
+                    $equipment = Equipment::onlyTrashed()->orderBy('id', 'Asc')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->paginate(25);
+                break;
+            }
+
+        endif;
 
         $data = [
             'equipment' => $equipment
@@ -82,8 +103,8 @@ class EquipmentController extends Controller
         $validator = Validator::make($request->all(),$rules,$messages);
 
         if($validator->fails()):
-            return back()->withErrors($validator)->with('error', '¡Se ha producido un error!.')
-            ->withInput();
+            return back()->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
+            ->with('typealert', 'danger')->withInput();
         else:
 
             $e = new Equipment;
@@ -114,8 +135,9 @@ class EquipmentController extends Controller
                 $b->action = "Registro de equipo ".$e->code_new;
                 $b->user_id = Auth::id();
                 $b->save();
-                Session::flash('success', '¡Equipo guardado con exito!.');
-                return redirect('/admin/equipments/all');
+
+                return redirect('/admin/equipments/all')->with('messages', '¡Equipo registrado y guardado con exito!.')
+                    ->with('typealert', 'success');
             endif;
         endif;
     }

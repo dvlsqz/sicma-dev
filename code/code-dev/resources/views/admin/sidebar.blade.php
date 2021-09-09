@@ -48,9 +48,21 @@
                 </li>
             @endif
 
-            @if(kvfj(Auth::user()->permissions, 'works_list'))
+            @if(kvfj(Auth::user()->permissions, 'ing7_list'))
                 <li>
-                    <a href="{{ url('/admin/works/all') }}" class="lk-user_add lk-user_list lk-user_edit lk-user_permissions lk-user_assignments"><i class="fas fa-tools"></i> Trabajos</a>
+                    <a href="{{ url('/admin/ing_7') }}" class="lk-ing7_list lk-ing7_add lk-ing7_buy_hire lk-ing7_classification lk-ing7_follow lk-ing7_assignments_areas lk-ing7_assignments_personal"><i class="fas fa-copy"></i> ING-7</a>
+                </li>
+            @endif
+
+            @if(kvfj(Auth::user()->permissions, 'ot_list'))
+                <li>
+                    <a href="{{ url('/admin/ot/all') }}" class="lk-ot_list"><i class="fas fa-clone"></i> OT's</a>
+                </li>
+            @endif
+
+            @if(kvfj(Auth::user()->permissions, 'maintenance_list'))
+                <li>
+                    <a href="{{ url('/admin/maintenance/all') }}" class="lk-maintenance_list"><i class="fas fa-tools"></i> Mantenimientos</a>
                 </li>
             @endif
 
