@@ -85,19 +85,11 @@ class EquipmentController extends Controller
 
     public function postEquipmentAdd(Request $request){
         $rules = [
-            'name' => 'required',
-            'brand' => 'required',
-            'no_bien' => 'required',
-            'year_warranty' => 'required',
-            'date_instalaction' => 'required'
+            
         ];
 
         $messages = [
-            'name.required' => 'Se require que ingrese el nombre del equipo.',
-            'brand.required' => 'Se require que ingrese la marca del equipo.',
-            'no_bien.required' => 'Se requiere que ingrese el numero de bien del equipo',
-            'year_warranty.required' => 'Se requiere que ingrese la cantidad de meses de garantia del equipo',
-            'date_instalaction.required' => 'Se requiere que ingrese la fecha de instalacion o entrega del equipo'
+            
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
