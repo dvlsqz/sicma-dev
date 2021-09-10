@@ -52,6 +52,12 @@
                             {!! Form::text('serie', $equipment->serie, ['class'=>'form-control']) !!}
                         </div>
 
+                        <label for="ibm" class="mtop16"><strong>Nivel Critico:</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
+                            {!! Form::select('critical_level', getLevelEquipment('list', null), $equipment->critical_level,['class'=>'form-select']) !!}
+                        </div>
+
                         @if(Auth::user()->role == '0' || Auth::user()->idmaintenancearea == '8')
                             <label for="ibm" class="mtop16"><strong>Tipo: </strong></label>
                             <div class="input-group">
