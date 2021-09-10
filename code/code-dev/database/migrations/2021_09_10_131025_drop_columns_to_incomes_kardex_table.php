@@ -14,8 +14,8 @@ class DropColumnsToIncomesKardexTable extends Migration
     public function up()
     {
         Schema::table('incomes_kardex', function (Blueprint $table) {
-            $table->dropColumn('accountable');
-            $table->dropColumn('ibm-accountable');
+            //$table->dropColumn('accountable');
+            $table->dropColumn('ibm_accountable');
         });
     }
 
