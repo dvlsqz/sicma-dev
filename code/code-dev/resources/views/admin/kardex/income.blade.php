@@ -52,21 +52,18 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 mtop16">
-                        <label for="name"><strong> IBM Responsable: </strong></label>
+                    <div class="col-md-12 mtop16">
+                        <label for="idsupplier"><strong>Personal a Cargo:</strong></label>
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::text('ibm-accountable', null, ['class'=>'form-control']) !!}
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 mtop16">
-                        <label for="name"><strong> Responsable: </strong></label>
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::text('accountable', null, ['class'=>'form-control']) !!}
-                        </div>
-                    </div>                    
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
+                            <select name="iduser" id="idproduct" style="width: 96%" >
+                                @foreach ($users as $u)
+                                    <option value=""></option>
+                                    <option value="{{$u->id}}">{{$u->ibm.' - '.$u->name.' '.$u->lastname}}</option>
+                                @endforeach
+                            </select>
+                        </div>  
+                    </div>                 
                 </div>
                 
                     <div class="row">

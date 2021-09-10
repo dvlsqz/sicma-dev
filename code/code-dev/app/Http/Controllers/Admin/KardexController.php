@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Models\Kardex, App\Http\Models\Product, App\Http\Models\MaintenanceArea, App\Http\Models\Bitacora, App\Http\Models\IncomeKardex, App\Http\Models\IncomeDetailKardex, App\Http\Models\EgressKardex, App\Http\Models\EgressDetailKardex ;
+use App\Http\Models\Kardex, App\Http\Models\Product, App\Http\Models\MaintenanceArea, App\Http\Models\Bitacora, App\Http\Models\IncomeKardex, App\Http\Models\IncomeDetailKardex, App\Http\Models\EgressKardex, App\Http\Models\EgressDetailKardex, App\User;
 use Validator, Str, Config, Auth, Session, DB, Response; 
 
 class KardexController extends Controller
@@ -194,9 +194,12 @@ class KardexController extends Controller
             $kardex = Kardex::get();
         endif;
 
+        $users = User::where('status','!=','0')->get();
+
         $data = [
             'kardex' => $kardex,
-            'maintenance_areas' => $maintenance_areas
+            'maintenance_areas' => $maintenance_areas,
+            'users' => $users
         ];
 
         return view('admin.kardex.income',$data);
@@ -227,8 +230,7 @@ class KardexController extends Controller
             $ingreso->idmaintenancearea=$request->get('idsupplier');
             $ingreso->type_doc=$request->get('type_doc');
             $ingreso->no_doc=$request->get('no_doc');
-            $ingreso->accountable=e($request->get('accountable'));
-            $ingreso->ibm_accountable=e($request->get('ibm-accountable'));
+            $ingreso->idaccountable=$request->get('iduser');
             $ingreso->save();
 
             $idarticulo=$request->get('idarticulo');
@@ -273,11 +275,12 @@ class KardexController extends Controller
             $kardex = Kardex::where('stock', '>', '0')->get();
         endif;
 
-        
+        $users = User::where('status','!=','0')->get();        
 
         $data = [
             'kardex' => $kardex,
-            'maintenance_areas' => $maintenance_areas
+            'maintenance_areas' => $maintenance_areas,
+            'users' => $users
         ];
 
         return view('admin.kardex.egress',$data);
@@ -308,8 +311,7 @@ class KardexController extends Controller
             $ingreso->idmaintenancearea =$request->get('idsupplier');
             $ingreso->type_doc=$request->get('type_doc');
             $ingreso->no_doc=$request->get('no_doc');
-            $ingreso->accountable=e($request->get('accountable'));
-            $ingreso->ibm_accountable=e($request->get('ibm-accountable'));
+            $ingreso->idaccountable=$request->get('iduser');
             $ingreso->save();
 
             $idarticulo=$request->get('idarticulo');

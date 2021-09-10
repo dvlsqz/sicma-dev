@@ -40,7 +40,7 @@
                                                         @if($idp->idproduct == $idproduct && $idp->income->idmaintenancearea == Auth::user()->idmaintenancearea )
                                                             <tr>
                                                                 <td>{{$idp->income->created_at}}</td>
-                                                                <td>{{$idp->income->ibm_accountable.' - '.$idp->income->accountable}}</td>
+                                                                <td>{{$idp->income->user->ibm.' - '.$idp->income->user->name.' '.$idp->income->user->lastname}}</td>
                                                                 <td>{{$idp->income->ma->name }}</td>
                                                                 <td>{{getFormaKardexIncomeArray(null,$idp->income->type_doc).' NO. '.$idp->income->no_doc}}</td>
                                                                 <td>{{$idp->amount}}</td>
@@ -81,7 +81,7 @@
                                                         @if($edp->idproduct == $idproduct && $edp->egress->idmaintenancearea == Auth::user()->idmaintenancearea)
                                                             <tr>
                                                                 <td>{{$edp->egress->created_at}}</td>
-                                                                <td>{{$edp->egress->ibm_accountable.' - '.$edp->egress->accountable}}</td>
+                                                                <td>{{$edp->egress->user->ibm.' - '.$edp->egress->user->name.' '.$edp->egress->user->lastname}}</td>
                                                                 <td>{{$edp->egress->ma->name}}</td>
                                                                 <td>{{getFormaKardexEgressArray(null,$edp->egress->type_doc).' NO. '.$edp->egress->no_doc}}</td>
                                                                 <td>{{$edp->amount}}</td>

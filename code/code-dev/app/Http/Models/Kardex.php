@@ -22,4 +22,6 @@ class Kardex extends Model
     public function area(){
         return $this->hasOne(MaintenanceArea::class,'id','idmaintenancearea');
     }
+
+    
 }

@@ -15,4 +15,8 @@ class EgressKardex extends Model
     public function ma(){
         return $this->hasOne(MaintenanceArea::class,'id','idmaintenancearea');
     }
+
+    public function user(){
+        return $this->hasOne(User::class,'id','idaccountable');
+    }
 }

@@ -40,11 +40,11 @@
                 <table id="table-modules" class="table table-bordered table-striped" style="background-color:#EDF4FB;">
                     <thead>
                         <tr>
-                            <td>OPCIONES</td>
-                            <td>CODIGO ANTERIOR / NUEVO</td>
-                            <td>NOMBRE</td>
-                            <td>MARCA / MODELO / SERIE</td>
-                            <td>ESTADO</td>
+                            <td><strong> OPCIONES </strong></td> 
+                            <td><strong> CODIGO ANTERIOR / NUEVO </strong></td>
+                            <td><strong> NOMBRE </strong></td>
+                            <td><strong> MARCA / MODELO / SERIE </strong></td>
+                            <td><strong> ESTADO </strong></td>
                         </tr>
                     </thead>
                     <tbody>

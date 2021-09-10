@@ -102,7 +102,7 @@
                         <label for="idsupplier"><strong>Proveedor:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            <select name="idproveedor" id="idproduct" style="width: 88%;">
+                            <select name="idsupplier" id="idproduct" style="width: 88%;">
                                 @foreach ($suppliers as $s)                                    
                                     <option></option>
                                     <option value="{{$s->id}}">{{$s->nit.' / '.$s->name}}</option>
