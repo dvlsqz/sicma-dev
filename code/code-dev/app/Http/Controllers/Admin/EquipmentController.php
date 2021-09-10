@@ -84,6 +84,7 @@ class EquipmentController extends Controller
     }
 
     public function postEquipmentAdd(Request $request){
+        
         $rules = [
             
         ];
@@ -99,12 +100,14 @@ class EquipmentController extends Controller
             ->with('typealert', 'danger')->withInput();
         else:
 
+            
+
             $e = new Equipment;
             $e->id =  $request->input('id');
             $e->idmaintenancearea =  $request->input('idmaintenancearea');
             $e->idsupplier =  $request->input('idsupplier');
             $e->code_old = $request->input('code_old');
-            $e->code_new =  $this->GenerateCode($request->input('idsupplier'),$request->input('environment'), $request->input('name'));
+            $e->code_new =  $this->GenerateCode($request->input('idmaintenancearea'),$request->input('environment'), $request->input('name'));
             $e->name =  e($request->input('name'));
             $e->brand =  e($request->input('brand'));
             $e->model =  e($request->input('model'));
@@ -137,7 +140,7 @@ class EquipmentController extends Controller
         endif;
     }
 
-    public function GenerateCode($r_area, $r_ambiente, $r_equipon){
+    public function GenerateCode( $r_area, $r_ambiente, $r_equipon){
         /* Proceso para obtener el codigo del equipo */
         $area = MaintenanceArea::findOrFail($r_area);
         $ambiente = Environment::findOrFail($r_ambiente);
@@ -423,7 +426,11 @@ class EquipmentController extends Controller
 
     public function getEquipmentConecctions($id){
         $equipment = Equipment::findOrFail($id);
-        $equipments = Equipment::where('id', '!=', $id)->get();
+        if(Auth::user()->role == "0"):
+            $equipments = Equipment::where('id', '!=', $id)->get();
+        else:
+            $equipments = Equipment::where('id', '!=', $id)->where('idmaintenancearea', Auth::user()->idmaintenancearea)->get();
+        endif;
         $conecctions = EquipmentConecction::where('idequipment', $id)->get();
 
         $data = [
