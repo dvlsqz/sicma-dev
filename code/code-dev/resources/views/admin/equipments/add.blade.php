@@ -65,7 +65,7 @@
                         <label for="ibm" class="mtop16"><strong>Nivel Critico:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::select('critico', getLevelEquipment('list', null),0,['class'=>'form-select']) !!}
+                            {!! Form::select('critical_level', getLevelEquipment('list', null),0,['class'=>'form-select']) !!}
                         </div>
 
                         @if(Auth::user()->role == '0' || Auth::user()->idmaintenancearea == '8')
@@ -156,7 +156,7 @@
                         <label for="lastname" class="mtop16"><strong>Persona Responable en el Servicio ó Ubicación:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::text('model', null, ['class'=>'form-control']) !!}
+                            {!! Form::text('person_in_charge', null, ['class'=>'form-control']) !!}
                         </div>
 
                         <label for="name" class="mtop16"><strong>Frencuencia de Uso:</strong></label>
@@ -168,9 +168,9 @@
                         <label for="lastname" class="mtop16"><strong>¿Cuenta con personal capacitado el servicio?:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            <select name="idmaintenancearea" id="idmaintenancearea" class="form-select select2" searchable="Search here..">
+                            <select name="trained_staff" id="idmaintenancearea" class="form-select select2" searchable="Search here..">
                                 <option value="0">No</option>
-                                <option value="0">Si</option>
+                                <option value="1">Si</option>
                             </select>
                         </div>
                     </div>

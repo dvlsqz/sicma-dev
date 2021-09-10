@@ -102,6 +102,7 @@ class EquipmentController extends Controller
             $e = new Equipment;
             $e->id =  $request->input('id');
             $e->idmaintenancearea =  $request->input('idmaintenancearea');
+            $e->idsupplier =  $request->input('idsupplier');
             $e->code_old = $request->input('code_old');
             $e->code_new =  $this->GenerateCode($request->input('idsupplier'),$request->input('environment'), $request->input('name'));
             $e->name =  e($request->input('name'));
@@ -109,6 +110,7 @@ class EquipmentController extends Controller
             $e->model =  e($request->input('model'));
             $e->serie =  e($request->input('serie'));
             $e->no_bien =  e($request->input('no_bien'));
+            $e->critical_level =  e($request->input('critical_level')); 
             $e->type =  e($request->input('type'));
             $e->capacity =  e($request->input('capacity'));
             $e->num_station =  e($request->input('num_station'));
@@ -120,6 +122,7 @@ class EquipmentController extends Controller
             $e->idservicegeneral = $request->input('servicegeneral');
             $e->idservice = $request->input('service'); 
             $e->idenvironment = $request->input('environment');
+            $e->trained_staff =  e($request->input('trained_staff'));
             $e->status =  "0";
 
             if($e->save()):
@@ -164,6 +167,7 @@ class EquipmentController extends Controller
     public function getEquipmentEdit($id){
         $equipment = Equipment::findOrFail($id);
         $servicegeneral = Environment::where('parent', '0')->where('status', '0')->pluck('name', 'id');
+        $suppliers = Supplier::get();
 
         if(Auth::user()->idmaintenancearea != 0 ):
             $maintenance_areas = MaintenanceArea::where('id', Auth::user()->idmaintenancearea)->get();
@@ -174,7 +178,8 @@ class EquipmentController extends Controller
         $data = [
             'equipment' => $equipment,
             'maintenance_areas' => $maintenance_areas,
-            'servicegeneral' => $servicegeneral
+            'servicegeneral' => $servicegeneral,
+            'suppliers' => $suppliers
         ];
 
         return view('admin.equipments.edit',$data);
@@ -182,37 +187,28 @@ class EquipmentController extends Controller
 
     public function postEquipmentEdit(Request $request, $id){
         $rules = [
-            'name' => 'required',
-            'brand' => 'required',
-            'no_bien' => 'required',
-            'year_warranty' => 'required',
-            'date_instalaction' => 'required'
-        ];
+            
+        ]; 
 
         $messages = [
-            'name.required' => 'Se require que ingrese el nombre del equipo.',
-            'brand.required' => 'Se require que ingrese la marca del equipo.',
-            'no_bien.required' => 'Se requiere que ingrese el numero de bien del equipo',
-            'year_warranty.required' => 'Se requiere que ingrese la cantidad de meses de garantia del equipo',
-            'date_instalaction.required' => 'Se requiere que ingrese la fecha de instalacion o entrega del equipo'
+            
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
 
         if($validator->fails()):
-            return back()->withErrors($validator)->with('error', '¡Se ha producido un error!.')
-            ->withInput();
+            return back()->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
+            ->with('typealert', 'danger')->withInput();
         else:
 
             $e = Equipment::findOrFail($id);
-            $e->id =  $request->input('id');
-            $e->idmaintenancearea =  $request->input('idmaintenancearea');
             $e->code_old = $request->input('code_old');
-            $e->name =  e($request->input('name'));
+            $e->idsupplier =  $request->input('idsupplier');
             $e->brand =  e($request->input('brand'));
             $e->model =  e($request->input('model'));
             $e->serie =  e($request->input('serie'));
-            $e->no_bien =  e($request->input('no_bien'));
+            $e->no_bien =  e($request->input('no_bien')); 
+            $e->critical_level =  e($request->input('critical_level'));
             $e->type =  e($request->input('type'));
             $e->capacity =  e($request->input('capacity'));
             $e->num_station =  e($request->input('num_station'));
@@ -221,15 +217,16 @@ class EquipmentController extends Controller
             $e->frequency =  $request->input('frequency');
             $e->features =  e($request->input('features'));
             $e->description =  e($request->input('description'));
-            $e->status =  "0";
+            $e->trained_staff =  e($request->input('trained_staff')); 
+            $e->person_in_charge =  e($request->input('person_in_charge'));
 
             if($e->save()):
                 $b = new Bitacora;
                 $b->action = "Actualización de equipo ".$e->code_new;
                 $b->user_id = Auth::id();
                 $b->save();
-                Session::flash('success', '¡Equipo actualizado con exito!.');
-                return redirect('/admin/equipments/all');
+                return back()->with('messages', '¡Equipo actualizado y guardado con exito!.')
+                    ->with('typealert', 'success');
             endif;
         endif;
     }

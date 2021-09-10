@@ -12,7 +12,7 @@
 
 @section('content')
     <div class="container-fluid">
-        {!! Form::open(['url'=>'/admin/equipment/add']) !!}
+        {!! Form::open(['url'=>'/admin/equipment/'.$equipment->id.'/edit']) !!}
         <div class="row">
             <div class="col-md-4 d-flex">
                 <div class="panel shadow">
@@ -21,17 +21,8 @@
                     </div>
 
                     <div class="inside">
-                        <label for="lastname"><strong> Área Encargada: </strong></label>
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            <select name="idmaintenancearea" id="idmaintenancearea" class="form-select select2" searchable="Search here..">
-                                @foreach ($maintenance_areas as $ma)
-                                    <option value="{{$ma->id}}">{{$ma->code.' - '.$ma->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
-                        <label for="name" class="mtop16"><strong> No. Bien: </strong></label>
+                        <label for="name" ><strong> No. Bien: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::text('no_bien', $equipment->no_bien, ['class'=>'form-control']) !!}
@@ -92,6 +83,17 @@
                     </div>
 
                     <div class="inside">
+                        <label for="idsupplier"><strong>Proveedor:</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
+                            <select name="idproveedor" id="idproduct" style="width: 88%;">
+                                @foreach ($suppliers as $s)                                    
+                                    <option></option>
+                                    <option value="{{$s->id}}">{{$s->nit.' / '.$s->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <label for="name"><strong> Garantía (Meses): </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
@@ -138,7 +140,7 @@
                         <label for="lastname" class="mtop16"><strong> Persona Responsable en el Servicio ó Ubicación: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::text('model', null, ['class'=>'form-control']) !!}
+                            {!! Form::text('person_in_charge', null, ['class'=>'form-control']) !!}
                         </div>
 
                         <label for="name" class="mtop16"><strong>Frencuencia de Uso:</strong></label>

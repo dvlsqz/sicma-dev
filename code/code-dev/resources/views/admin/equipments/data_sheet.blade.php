@@ -72,12 +72,16 @@
                 <td > <b> No. de serie: <br> </b> {{ $equipment->serie }}  </td>
             </tr>
 
-            <tr>
-                <td colspan="4">    <b> Descripción del Equipo: </b>  </td>
-            </tr>
+            @if( $equipment->idmaintenancearea == '8' || $equipment->idmaintenancearea == '9' )
+                <tr>
+                    <td > <b> Capacidad: </b>  {{ $equipment->capacity }}  <br> </td>
+                    <td > <b> Tipo:<br> </b> {{ $equipment->type }}  </td>
+                    <td colspan="2"> <b> Número Estación/Equipo: <br> </b> {{ $equipment->num_station }}  </td>
+                </tr>
+            @endif
 
             <tr>
-                <td  colspan="4">   <b> Nivel Critico:  </b> </td>
+                <td  colspan="4">   <b> Nivel Critico:  </b> {{ getLevelEquipment(null, $equipment->critical_level) }} </td>
             </tr>
 
             <tr>
@@ -113,12 +117,12 @@
 
             <tr>
                 <td  colspan="2">   <b> Ambiente:   </b>    {{ $equipment->environment->code.' - '.$equipment->environment->name }} </td>
-                <td  colspan="2">   <b> Usuario responsable:    </b> </td>
+                <td  colspan="2">   <b> Usuario responsable:    </b> {{ $equipment->person_in_charge }} </td>
             </tr>
 
             <tr>
-                <td  colspan="2">   <b> Frecuencia de uso:  </b> </td>
-                <td  colspan="2">   <b> ¿Cuenta con personal capacitado para su uso?:   </b> </td>
+                <td  colspan="2">   <b> Frecuencia de uso:  </b> {{ getFrecuenciasUsosArray(null, $equipment->frequency) }} </td>
+                <td  colspan="2">   <b> ¿Cuenta con personal capacitado para su uso?: </b> @if($equipment->trained_staff == '0') No @else Sí @endif   </td>
             </tr>
 
             <tr>
@@ -130,7 +134,9 @@
             </tr>
 
             <tr>
-                <td colspan="4" >   </td>
+            <td colspan="4" >   
+                    {{ $equipment->description }}
+                </td>
                 
             </tr>
 
@@ -143,7 +149,9 @@
             </tr>
 
             <tr>
-                <td colspan="4" >   </td>
+                <td colspan="4" >   
+                    {{ $equipment->features }}
+                </td>
                 
             </tr>
 
