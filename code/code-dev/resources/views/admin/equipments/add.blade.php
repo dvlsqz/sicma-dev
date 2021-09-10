@@ -24,7 +24,7 @@
                         <label for="idsupplier"><strong>Área:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            <select name="idsupplier" id="idsupplier" style="width: 88%" >
+                            <select name="idmaintenancearea" id="idsupplier" style="width: 88%" >
                                 @foreach ($maintenance_areas as $ma)
                                     <option value=""></option>
                                     <option value="{{$ma->id}}">{{$ma->code.' - '.$ma->name}}</option>
