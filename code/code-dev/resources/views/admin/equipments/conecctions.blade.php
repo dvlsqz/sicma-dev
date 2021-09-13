@@ -73,7 +73,9 @@
                                 @foreach($conecctions as $c)
                                     <tr>
                                         <td>
-                                            <a href="{{ url('/admin/maintenance_area/'.$c->id.'/delete') }}" data-toogle="tooltrip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                        @if(kvfj(Auth::user()->permissions, 'equipment_conecctions_delete'))
+                                            <a href="{{ url('/admin/equipment/connection_to_equipment'.$c->id.'/delete') }}" data-toogle="tooltrip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                        @endif
                                         </td>
                                         <td>{{ $c->equipment->name }}</td>
                                         <td>{{ $c->observation }}</td>

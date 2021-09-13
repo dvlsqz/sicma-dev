@@ -349,8 +349,8 @@ class KardexController extends Controller
     public function getKardexRecord($id){
 
         $kardex = Kardex::findOrFail($id);
-            $incomes_details_kardex = IncomeDetailKardex::get();
-            $egress_details_kardex = EgressDetailKardex::get();
+        $incomes_details_kardex = IncomeDetailKardex::get();
+        $egress_details_kardex = EgressDetailKardex::get();
         $idproduct = $id;
 
         $data = [

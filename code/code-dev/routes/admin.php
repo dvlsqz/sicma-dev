@@ -105,8 +105,10 @@
         Route::get('/equipment/{id}/data_sheet', 'Admin\EquipmentController@getEquipmentDataSheet')->name('equipment_data_sheet');
         Route::get('/equipment/{id}/equipment_parts', 'Admin\EquipmentController@getEquipmentParts')->name('equipment_parts');
         Route::post('/equipment/{id}/equipment_parts', 'Admin\EquipmentController@postEquipmentParts')->name('equipment_parts');
-        Route::get('/equipment/{id}/connection_to_equipment', 'Admin\EquipmentController@getEquipmentConecctions')->name('equipment_parts');
-        Route::post('/equipment/{id}/connection_to_equipment', 'Admin\EquipmentController@postEquipmentConecctions')->name('equipment_parts');
+        Route::get('/equipment/equipment_parts/{id}/delete', 'Admin\EquipmentController@getEquipmentPartsDelete')->name('equipment_parts_delete');
+        Route::get('/equipment/{id}/connection_to_equipment', 'Admin\EquipmentController@getEquipmentConecctions')->name('equipment_conecctions');
+        Route::post('/equipment/{id}/connection_to_equipment', 'Admin\EquipmentController@postEquipmentConecctions')->name('equipment_conecctions');
+        Route::get('/equipment/connection_to_equipment/{id}/delete', 'Admin\EquipmentController@getEquipmentConecctionsDelete')->name('equipment_conecctions_delete');
         Route::get('/equipment/{id}/transfer', 'Admin\EquipmentController@getEquipmentTransfer')->name('equipment_transfer');
 
         //Enviroments

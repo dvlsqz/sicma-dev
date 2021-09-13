@@ -472,6 +472,9 @@
                     'equipment_file' => 'Puede visualizar y subir archivos',
                     'equipment_data_sheet' => 'Puede generar y/o visualizar la ficha tecnica',
                     'equipment_parts' => 'Puede ver y agregar partes del equipo',
+                    'equipment_parts_delete' => 'Puede eliminar partes del equipo',
+                    'equipment_conecctions' => 'Puede ver y agregar conexiones del equipo',
+                    'equipment_conecctions_delete' => 'Puede eliminar conexiones del equipo',
                     'equipment_transfer' => 'Puede ver y registrar cabmios de ambientes',
                     'equipment_banned' => 'Puede dar de baja a equipos.'
                 ]

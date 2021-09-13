@@ -418,9 +418,18 @@ class EquipmentController extends Controller
                 $b->action = "Registro de parte: ".$ep->name_part." al equipo: ".$ep->equipment->name;
                 $b->user_id = Auth::id();
                 $b->save();
-                return back()->with('messages', 'Parte del equipo cargada con exito!.')
+                return back()->with('messages', '¡Parte del equipo cargada con exito!.')
                         ->with('typealert', 'success');
             endif;
+        endif;
+    }
+
+    public function getEquipmentPartsDelete($id){
+        $p = EquipmentPart::findOrFail($id);
+
+        if($p->delete()):
+            return back()->with('messages', '¡Parte del equipo eliminada con exito!.')
+                    ->with('typealert', 'success');
         endif;
     }
 
@@ -471,6 +480,15 @@ class EquipmentController extends Controller
                 return back()->with('messages', 'Conexio del equipo registrada con exito!.')
                         ->with('typealert', 'success');
             endif;
+        endif;
+    }
+
+    public function getEquipmentConecctionsDelete($id){
+        $ec = EquipmentConecction::findOrFail($id);
+
+        if($ec->delete()):
+            return back()->with('messages', '¡Conexión del equipo eliminada con exito!.')
+                    ->with('typealert', 'success');
         endif;
     }
 

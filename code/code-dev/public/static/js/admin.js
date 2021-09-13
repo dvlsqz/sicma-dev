@@ -204,9 +204,9 @@ function setServiceToEquipment(){
             data = JSON.parse(data);
             data.forEach( function(element){
                 if(servicegeneral_actual == element.id){
-                    select.innerHTML += "<option value=\""+element.id+"\" selected>"+element.name+"</option>";
+                    select.innerHTML += "<option value=\""+element.id+"\" selected>"+element.level+' - '+element.name+"</option>";
                 }else{
-                    select.innerHTML += "<option value=\""+element.id+"\">"+element.name+"</option>";
+                    select.innerHTML += "<option value=\""+element.id+"\">"+element.level+' - '+element.name+"</option>";
                 }
             });
         }
@@ -230,9 +230,9 @@ function setEnvironmentToEquipment(){
             data.forEach( function(element){
                 
                 if(service_actual == element.id){
-                    select.innerHTML += "<option value=\""+element.id+"\" selected>"+element.name+"</option>";
+                    select.innerHTML += "<option value=\""+element.id+"\" selected>"+element.code+' - '+element.name+"</option>";
                 }else{
-                    select.innerHTML += "<option value=\""+element.id+"\">"+element.name+"</option>";
+                    select.innerHTML += "<option value=\""+element.id+"\">"+element.code+' - '+element.name+"</option>";
                     console.log(element.code);
                 }
             });

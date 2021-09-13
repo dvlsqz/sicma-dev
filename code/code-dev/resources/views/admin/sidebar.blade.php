@@ -38,7 +38,7 @@
 
             @if(kvfj(Auth::user()->permissions, 'equipments_list'))
                 <li>
-                    <a href="{{ url('/admin/equipments/all') }}" class="lk-equipments_list lk-equipment_add lk-equipment_edit lk-equipment_file lk-equipment_parts lk-equipment_transfer"><i class="fas fa-industry"></i> Equipos</a>
+                    <a href="{{ url('/admin/equipments/all') }}" class="lk-equipments_list lk-equipment_add lk-equipment_edit lk-equipment_file lk-equipment_parts lk-equipment_conecctions lk-equipment_transfer"><i class="fas fa-industry"></i> Equipos</a>
                 </li>
             @endif
 

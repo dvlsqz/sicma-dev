@@ -78,7 +78,9 @@
                                 @foreach($parts as $p)
                                     <tr>
                                         <td>
-                                            <a href="{{ url('/admin/maintenance_area/'.$p->id.'/delete') }}" data-toogle="tooltrip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                            @if(kvfj(Auth::user()->permissions, 'equipment_parts_delete'))
+                                                <a href="{{ url('/admin/equipment/equipment_parts/'.$p->id.'/delete') }}" data-toogle="tooltrip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                            @endif
                                         </td>
                                         <td>{{ $p->name_part }}</td>
                                         <td >{{ $p->amount_part }}</td>
