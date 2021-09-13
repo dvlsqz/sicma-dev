@@ -39,6 +39,10 @@ class ProductController extends Controller
                 $product = Product::where('code_ppr', 's/c')->orderBy('id', 'Asc')->get();
             break;
 
+            case '4':
+                $product = Product::where('stock', '!=', '0')->orderBy('id', 'Asc')->get();
+            break;
+
             case 'trash':
                 $product = Product::onlyTrashed()->orderBy('id', 'Asc')->get();
             break;

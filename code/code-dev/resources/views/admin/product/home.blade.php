@@ -26,6 +26,7 @@
                                 <li><a href="{{url('/admin/product/1')}}"> Herramientas</a></li>
                                 <li><a href="{{url('/admin/product/2')}}"> Repuestos</a></li>
                                 <li><a href="{{url('/admin/product/3')}}"> Sin Código PPR</a></li>
+                                <li><a href="{{url('/admin/product/4')}}"> Con Disponibilidad</a></li>
                                 <li><a href="{{url('/admin/products/home/0')}}"> Todos</a></li>
                             </ul>
                         </div>
