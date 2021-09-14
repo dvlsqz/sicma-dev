@@ -158,10 +158,7 @@
                         <label for="lastname" class="mtop16"><strong> ¿Cuenta con personal capacitado el servicio?: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            <select name="idmaintenancearea" id="idmaintenancearea" class="form-select select2" searchable="Search here..">
-                                <option value="0">No</option>
-                                <option value="0">Si</option>
-                            </select>
+                            {!! Form::select('trained_staff', getTrainedStaff('list', null),$equipment->trained_staff,['class'=>'form-select']) !!}
                         </div>
                     </div>
 

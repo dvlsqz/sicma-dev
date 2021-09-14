@@ -39,6 +39,14 @@
                             <tr>
                                 <td>
                                 <div class="opts">
+                                    @if(kvfj(Auth::user()->permissions, 'ing7_accept_administration'))
+                                        <a href="#" data-action="accept_administration" data-path="admin/ing_7" data-object="{{ $in->id }}" data-toogle="tooltrip" data-placement="top" title="Aceptar ING-7" class="btn-deleted"><i class="far fa-check-circle"></i></a>
+                                    @endif 
+
+                                    @if(kvfj(Auth::user()->permissions, 'ing7_reject_administration'))
+                                        <a href="{{ url('/admin/ing_7/'.$in->id.'/reject_administration') }}" data-toogle="tooltrip" data-placement="top" title="Rechazar ING-7"><i class="far fa-times-circle"></i></a>
+                                    @endif 
+
                                     @if(kvfj(Auth::user()->permissions, 'ing7_classification'))                                   
                                         <a href="{{ url('/admin/ing_7/'.$in->id.'/classification') }}" data-toogle="tooltrip" data-placement="top" title="Clasificacion"><i class="fas fa-clipboard-check"></i></a>
                                     @endif
@@ -57,14 +65,20 @@
                                     
                                     @if(kvfj(Auth::user()->permissions, 'ing7_follow'))
                                         <a href="{{ url('/admin/ing_7/'.$in->id.'/follow') }}" data-toogle="tooltrip" data-placement="top" title="Ficha de Seguimiento"><i class="fas fa-clipboard-list"></i></a>
-                                    @endif
-                                    
+                                    @endif                                    
+
                                     @if(kvfj(Auth::user()->permissions, 'ing7_print'))
-                                        <a href="{{ url('/admin/ing_7/'.$in->id.'/print') }}" target="_blank" data-toogle="tooltrip" data-placement="top" title="Imprimir"><i class="fas fa-file-pdf"></i></a>
+                                        @if($in->print == '0')
+                                            <a href="{{ url('/admin/ing_7/'.$in->id.'/print') }}" target="_blank" data-toogle="tooltrip" data-placement="top" title="Imprimir"><i class="fas fa-file-pdf"></i></a>
+                                        @endif
                                     @endif
 
                                     @if(kvfj(Auth::user()->permissions, 'ing7_delete'))
                                         <a href="{{ url('/admin/ing_7/'.$in->id.'/delete') }}" data-toogle="tooltrip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                    @endif
+
+                                    @if(kvfj(Auth::user()->permissions, 'ing7_record'))
+                                        <a href="{{ url('/admin/ing_7/'.$in->id.'/record') }}" data-toogle="tooltrip" data-placement="top" title="Historial de Seguimiento"><i class="fas fa-history"></i></a>
                                     @endif
 
                                 </div>

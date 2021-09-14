@@ -273,12 +273,16 @@
     function getTypeIng7($mode, $id){
         $roles = [
             '0' => 'Registrado',
-            '1' => 'Autorizado',
-            '2' => 'Recibido por Mantenimiento',
-            '3' => 'Asignado a Area de Trabajo',
-            '4' => 'En Revision',
-            '5' => 'En Proceso',
-            '6' => 'Terminado'
+            '1' => 'Traslado a Firma',
+            '2' => 'Autorizado por Administracion',
+            '3' => 'Rechazado por Administracion',
+            '4' => 'Recibido por Mantenimiento',
+            '5' => 'Autorizado por Mantenimiento',
+            '6' => 'Rechazado por Mantenimiento',
+            '7' => 'Asignado a Area de Trabajo',
+            '8' => 'En Revision',
+            '9' => 'En Proceso de Ejecución',
+            '10' => 'Terminado'
         ];
 
         if(!is_null($mode)):
@@ -330,6 +334,20 @@
         ];
 
         return $p;
+    }
+
+    //Estado de Usuarios
+    function getTrainedStaff($mode, $id){
+        $status = [
+            '0' => 'No',
+            '1' => 'Sí'
+        ];
+
+        if(!is_null($mode)):
+            return $status;
+        else:
+            return $status[$id];
+        endif;
     }
 
     //Key Value From JSON
@@ -437,6 +455,7 @@
                     'product_record' => 'Puede visualizar el historial de movimientos.'
                 ]
             ],
+
             'kardex' => [
                 'icon' => '<i class="fas fa-server"></i> ',
                 'title' => 'Modulo de Kardex',
@@ -508,7 +527,9 @@
                     'ing7_print' => 'Puede imprimir el ING-7.',
                     'ing7_follow' => 'Puede llenar la ficha de seguimiento del ING-7.',
                     'ing7_assignments_areas' => 'Puede realizar asignacion de areas de trabajo al ING-7.',
-                    'ing7_assignments_personal' => 'Puede realizar asignacion de personal al ING-7.'
+                    'ing7_assignments_personal' => 'Puede realizar asignacion de personal al ING-7.',
+                    'ing7_record' => 'Puede ver el historial de seguimiento del ING-7.',
+                    'ing7_accept_administration' => 'Puede aceptar el ING-7.'
                 ]
             ],
 
@@ -527,8 +548,6 @@
                     'maintenance_list' => 'Puede ver el listado de Mantenimientos.'
                 ]
             ]
-
-            
 
         ];
 

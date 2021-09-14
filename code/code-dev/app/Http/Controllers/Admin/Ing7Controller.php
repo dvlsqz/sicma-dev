@@ -65,6 +65,11 @@ class Ing7Controller extends Controller
             $i->status =  "0";
 
             if($i->save()):
+                $if = new Ings7Follow;
+                $if->iding7 = $i->id;
+                $if->action = "Resgistrado";
+                $if->save();
+
                 $b = new Bitacora;
                 $b->action = "Registro de solicitud de ING-7 no. ".$i->correlative;
                 $b->user_id = Auth::id();
@@ -109,6 +114,22 @@ class Ing7Controller extends Controller
 
     public function getIng7Print($id){
         $ings7 = Ings7::findOrFail($id);
+
+        $i = Ings7::findOrFail($id);
+        $i->print = '1';
+        $i->status = '1';
+
+        if($i->save()):
+            $if = new Ings7Follow;
+            $if->iding7 = $i->id;
+            $if->action = "Impreso y traslado a firma";
+            $if->save();
+
+            $b = new Bitacora;
+            $b->action = "Impresion de ING-7 no.: ".$i->correlative;
+            $b->user_id = Auth::id();
+            $b->save();
+        endif;
         
         $data = [
             'ings7' => $ings7
@@ -290,6 +311,35 @@ class Ing7Controller extends Controller
         endif;
     }
 
+
+    public function getIng7Record($id){
+        $ing7 = Ings7Follow::where('iding7', $id)->get();
+
+        return $ing7;
+
+        $data = [
+            'ing7' => $ing7
+        ];
+
+        return view('admin.ing7.record', $data);
+    }
+
+    public function getIng7AcceptRejectAdministration($id){
+        $i = Ings7::findOrFail($id);
+
+        $i->status = '2';
+
+        if($i->save()):
+            $if = new Ings7Follow;
+            $if->iding7 = $i->id;
+            $if->action = "Autorizado por Administración";
+            $if->save();
+
+            return back()->with('messages', '¡ING-7 autorizado con exito!.')
+                    ->with('typealert', 'success');
+        endif;
+
+    }
     
 
 }

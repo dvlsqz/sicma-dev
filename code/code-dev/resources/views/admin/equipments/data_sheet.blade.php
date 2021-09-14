@@ -122,7 +122,7 @@
 
             <tr>
                 <td  colspan="2">   <b> Frecuencia de uso:  </b> {{ getFrecuenciasUsosArray(null, $equipment->frequency) }} </td>
-                <td  colspan="2">   <b> ¿Cuenta con personal capacitado para su uso?: </b> @if($equipment->trained_staff == '0') No @else Sí @endif   </td>
+                <td  colspan="2">   <b> ¿Cuenta con personal capacitado para su uso?: </b> {{ getTrainedStaff(null, $equipment->trained_staff) }}   </td>
             </tr>
 
             <tr>
