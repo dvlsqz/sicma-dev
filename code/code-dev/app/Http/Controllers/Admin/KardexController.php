@@ -21,53 +21,53 @@ class KardexController extends Controller
         if(Auth::user()->role == "0"):
             switch ($status) {
                 case '0':
-                    $kardex = Kardex::where('type', '0')->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::where('type', '0')->orderBy('id', 'Asc')->get();
                 break;
     
                 case '1':
-                    $kardex = Kardex::where('type', '1')->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::where('type', '1')->orderBy('id', 'Asc')->get();
                 break;
     
                 case '2':
-                    $kardex = Kardex::where('type', '2')->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::where('type', '2')->orderBy('id', 'Asc')->get();
                 break;
     
                 case '3':
-                    $kardex = Kardex::where('type', '3')->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::where('type', '3')->orderBy('id', 'Asc')->get();
                 break;
     
                 case 'all':
-                    $kardex = Kardex::orderby('id','Asc')->paginate(30);
+                    $kardex = Kardex::orderby('id','Asc')->get();
                 break;
     
                 case 'trash':
-                    $kardex = Kardex::onlyTrashed()->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::onlyTrashed()->orderBy('id', 'Asc')->get();
                 break;
             }
         else:
             switch ($status) {
                 case '0':
-                    $kardex = Kardex::where('type', '0')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::where('type', '0')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
     
                 case '1':
-                    $kardex = Kardex::where('type', '1')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::where('type', '1')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
     
                 case '2':
-                    $kardex = Kardex::where('type', '2')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::where('type', '2')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
     
                 case '3':
-                    $kardex = Kardex::where('type', '3')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::where('type', '3')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
     
                 case 'all':
-                    $kardex = Kardex::where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderby('id','Asc')->paginate(30);
+                    $kardex = Kardex::where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderby('id','Asc')->get();
                 break;
     
                 case 'trash':
-                    $kardex = Kardex::onlyTrashed()->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->paginate(25);
+                    $kardex = Kardex::onlyTrashed()->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
             }
         endif;

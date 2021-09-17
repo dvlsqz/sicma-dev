@@ -529,7 +529,8 @@
                     'ing7_assignments_areas' => 'Puede realizar asignacion de areas de trabajo al ING-7.',
                     'ing7_assignments_personal' => 'Puede realizar asignacion de personal al ING-7.',
                     'ing7_record' => 'Puede ver el historial de seguimiento del ING-7.',
-                    'ing7_accept_administration' => 'Puede aceptar el ING-7.'
+                    'ing7_accept_administration' => 'Puede aceptar el ING-7.',
+                    'ing7_reject_administration' => 'Puede rechazar el ING-7.'
                 ]
             ],
 

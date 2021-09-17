@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon, Auth, Validator, Str, Config, Session, DB, Response, File, Image, PDF;
 
-use App\Http\Models\Ings7, App\Http\Models\Ings7Follow, App\Http\Models\Ings7AssignmentArea, App\Http\Models\Ings7AssignmentPersonal, App\Http\Models\MaintenanceArea,  App\Http\Models\Bitacora, App\User;
+use App\Http\Models\Ings7, App\Http\Models\Ings7AssignmentArea, App\Http\Models\Ings7AssignmentPersonal, App\Http\Models\MaintenanceArea,  App\Http\Models\Bitacora, App\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
 
@@ -65,10 +65,6 @@ class Ing7Controller extends Controller
             $i->status =  "0";
 
             if($i->save()):
-                $if = new Ings7Follow;
-                $if->iding7 = $i->id;
-                $if->action = "Resgistrado";
-                $if->save();
 
                 $b = new Bitacora;
                 $b->action = "Registro de solicitud de ING-7 no. ".$i->correlative;
@@ -120,10 +116,6 @@ class Ing7Controller extends Controller
         $i->status = '1';
 
         if($i->save()):
-            $if = new Ings7Follow;
-            $if->iding7 = $i->id;
-            $if->action = "Impreso y traslado a firma";
-            $if->save();
 
             $b = new Bitacora;
             $b->action = "Impresion de ING-7 no.: ".$i->correlative;
@@ -311,7 +303,6 @@ class Ing7Controller extends Controller
         endif;
     }
 
-
     public function getIng7Record($id){
         $ing7 = Ings7Follow::where('iding7', $id)->get();
 
@@ -323,17 +314,30 @@ class Ing7Controller extends Controller
 
         return view('admin.ing7.record', $data);
     }
-
-    public function getIng7AcceptRejectAdministration($id){
+    
+    public function getIng7AcceptAdministration(Request $request, $id){
         $i = Ings7::findOrFail($id);
 
         $i->status = '2';
 
+        return $request;
+        
         if($i->save()):
-            $if = new Ings7Follow;
-            $if->iding7 = $i->id;
-            $if->action = "Autorizado por Administración";
-            $if->save();
+
+            return back()->with('messages', '¡ING-7 autorizado con exito!.')
+                    ->with('typealert', 'success');
+        endif;
+
+    }
+
+    public function getIng7RejectAdministration(Request $request, $id){
+        $i = Ings7::findOrFail($id);
+
+        $i->status = '2';
+
+        return $request;
+        
+        if($i->save()):
 
             return back()->with('messages', '¡ING-7 autorizado con exito!.')
                     ->with('typealert', 'success');
