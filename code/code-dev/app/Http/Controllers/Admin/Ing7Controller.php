@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon, Auth, Validator, Str, Config, Session, DB, Response, File, Image, PDF;
 
-use App\Http\Models\Ings7, App\Http\Models\Ings7AssignmentArea, App\Http\Models\Ings7AssignmentPersonal, App\Http\Models\MaintenanceArea,  App\Http\Models\Bitacora, App\User;
+use App\Http\Models\Ings7, App\Http\Models\Ings7AssignmentArea, App\Http\Models\Ings7AssignmentPersonal, App\Http\Models\Ings7Follow, App\Http\Models\MaintenanceArea,  App\Http\Models\Bitacora, App\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
 
@@ -19,11 +19,33 @@ class Ing7Controller extends Controller
         $this->middleware('Permissions');
     }
 
-    public function getHome(){
-        $ings7 = Ings7::orderBy('id', 'Asc')->get();
+    public function getHome($status){
+        /*if(Auth::user()->role == "0" || Auth::user()->role == "6"):
+            $ings7 = Ings7::orderBy('id', 'Asc')->get();
+        elseif(Auth::user()->role == "7"):
+            $ings7 = Ings7::where('status', '1')->orderBy('id', 'Asc')->get();
+        endif;*/
+
+        switch ($status) {
+            case '1':
+                if(Auth::user()->role == "2"):
+                    $ings7 = Ings7::orderBy('id', 'Asc')->get();
+                    $ings7aa = Ings7AssignmentArea::where('idmaintenancearea', Auth::user()->idmaintenancearea)->get(); 
+                else:
+                    $ings7 = Ings7::orderBy('id', 'Asc')->get();
+                    $ings7aa = "";
+                endif;
+            break;
+
+            case 'trash':
+                $ings7 = Ings7::onlyTrashed()->orderBy('id', 'Asc')->get();
+                $ings7aa = "";
+            break;
+        }
 
         $data = [
-            'ings7' => $ings7
+            'ings7' => $ings7,
+            'ings7aa' => $ings7aa
         ];
 
     	return view('admin.ing7.home', $data);
@@ -67,10 +89,11 @@ class Ing7Controller extends Controller
             if($i->save()):
 
                 $b = new Bitacora;
-                $b->action = "Registro de solicitud de ING-7 no. ".$i->correlative;
+                $b->action = "Registro de solicitud ING-7";
                 $b->user_id = Auth::id();
+                $b->iding7 = $i->id;
                 $b->save();
-                return redirect('/admin/ing_7')->with('messages', '¡Solicitud registrada y guardada con exito!.')
+                return redirect('/admin/ing_7/1')->with('messages', '¡Solicitud registrada y guardada con exito!.')
                     ->with('typealert', 'success');
             endif;
         endif;
@@ -78,7 +101,7 @@ class Ing7Controller extends Controller
 
     public function GenerateCorrelative(){
         $year = Carbon::now()->year;
-        $c_anterior = Ings7::whereYear('created_at', $year)->count();
+        $c_anterior = Ings7::whereYear('created_at', $year)->withTrashed()->count();
 
         if($c_anterior != '0'):
             $c = $c_anterior + 1; //Si hay solicitudes registradas con la misma informacion.
@@ -118,8 +141,9 @@ class Ing7Controller extends Controller
         if($i->save()):
 
             $b = new Bitacora;
-            $b->action = "Impresion de ING-7 no.: ".$i->correlative;
+            $b->action = "Impresion de solicitud y traslado a firma";
             $b->user_id = Auth::id();
+            $b->iding7 = $i->id;
             $b->save();
         endif;
         
@@ -128,6 +152,17 @@ class Ing7Controller extends Controller
         ];
 
         $pdf = PDF::loadView('admin.ing7.print',$data)->setPaper('legal', 'portrait');
+        return $pdf->stream('ING-7.pdf');
+    }
+
+    public function getIng7PrintFollow($id){
+        $ings7 = Ings7::findOrFail($id);        
+        
+        $data = [
+            'ings7' => $ings7
+        ];
+
+        $pdf = PDF::loadView('admin.ing7.print_follow',$data)->setPaper('legal', 'portrait');
         return $pdf->stream('ING-7.pdf');
     }
 
@@ -202,13 +237,51 @@ class Ing7Controller extends Controller
     }
 
     public function getIng7Follow($id){
+        $ing7f = Ings7Follow::where('iding7',$id)->get();
         $ing7 = Ings7::findOrFail($id);
-        
+       
         $data = [
+            'ing7f' => $ing7f,
             'ing7' => $ing7
         ];
 
         return view('admin.ing7.follow', $data);
+    }
+
+    public function postIng7Follow(Request $request, $id){
+        $rules = [
+            
+        ];
+
+        $messages = [
+            
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$messages);
+
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
+            ->with('typealert', 'danger')->withInput();
+        else:
+
+            $i = new Ings7Follow;
+            $i->id =  $request->input('id');
+            $i->iding7 = $id;
+            $i->date = $request->input('date');
+            $i->action = $request->input('action');
+            $i->iduser = Auth::user()->id;
+
+            if($i->save()):
+
+                $b = new Bitacora;
+                $b->action = "Llenado de ficha de seguimiento";
+                $b->user_id = Auth::id();
+                $b->iding7 = $i->id;
+                $b->save();
+                return back()->with('messages', '¡Acción de seguimiento registrada y guardada con exito!.')
+                    ->with('typealert', 'success');
+            endif;
+        endif;
     }
 
     public function getIng7AssignmentsAreas($id){
@@ -247,9 +320,21 @@ class Ing7Controller extends Controller
             $in->idmaintenancearea = $request->input('idmaintenancearea');
 
             if($in->save()):
+                $i = Ings7::findOrFail($in->iding7);
+                $status_a = $i->status;
+
+                if($status_a = '2'):
+                    $i->status = '3';
+                else:
+                    $i->status = $status_a;
+                endif;
+                
+                $i->save();
+                
                 $b = new Bitacora;
-                $b->action = "Asignacion de area de trabajo para ING-7 no. ".$in->correlative;
+                $b->action = "Asignacion de area de trabajo. ";
                 $b->user_id = Auth::id();
+                $b->iding7 = $in->iding7;
                 $b->save();
                 return back()->with('messages', '¡Asignacion registrada y guardada con exito!.')
                     ->with('typealert', 'success');
@@ -260,7 +345,7 @@ class Ing7Controller extends Controller
     public function getIng7AssignmentsPersonal($id){
         $ing7 = Ings7::findOrFail($id);
         $iap = Ings7AssignmentPersonal::where('iding7', $id )->get();
-        $users = User::where('status','!=','0')->get();
+        $users = User::where('status','!=','0')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->get();
         
         $data = [
             'ing7' => $ing7,
@@ -291,11 +376,24 @@ class Ing7Controller extends Controller
             $in->id =  $request->input('id');
             $in->iding7 = $request->input('iding7');
             $in->iduser = $request->input('iduser');
+            
 
             if($in->save()):
+                $i = Ings7::findOrFail($in->iding7);
+                $status_a = $i->status;
+                
+                if($status_a == '3'):
+                    $i->status = '4';
+                else:
+                    $i->status = $status_a;
+                endif;
+                
+                $i->save();
+
                 $b = new Bitacora;
-                $b->action = "Asignacion de personal de trabajo para ING-7 no. ".$in->correlative;
+                $b->action = "Asignacion de personal para realizar trabajo. ";
                 $b->user_id = Auth::id();
+                $b->iding7 = $in->iding7;
                 $b->save();
                 return back()->with('messages', '¡Asignacion registrada y guardada con exito!.')
                     ->with('typealert', 'success');
@@ -304,46 +402,146 @@ class Ing7Controller extends Controller
     }
 
     public function getIng7Record($id){
-        $ing7 = Ings7Follow::where('iding7', $id)->get();
-
-        return $ing7;
+        $bitacoras = Bitacora::with(['user','ing7'])->where('iding7',$id)->orderBy('id', 'ASC')->get();
 
         $data = [
-            'ing7' => $ing7
+            'bitacoras' => $bitacoras
         ];
 
         return view('admin.ing7.record', $data);
     }
     
-    public function getIng7AcceptAdministration(Request $request, $id){
+    public function getIng7Receive($id){
         $i = Ings7::findOrFail($id);
-
         $i->status = '2';
-
-        return $request;
         
         if($i->save()):
 
-            return back()->with('messages', '¡ING-7 autorizado con exito!.')
+            $b = new Bitacora;
+            $b->action = "Recepcionado por secretaria de mantenimiento.";
+            $b->user_id = Auth::id();
+            $b->iding7 = $i->id;
+            $b->save();
+
+            return back()->with('messages', '¡ING-7 recepcionado con exito!.')
                     ->with('typealert', 'success');
         endif;
 
     }
 
-    public function getIng7RejectAdministration(Request $request, $id){
+    public function getIng7Reject($id){
         $i = Ings7::findOrFail($id);
-
-        $i->status = '2';
-
-        return $request;
+        $i->status = '110';
         
         if($i->save()):
 
-            return back()->with('messages', '¡ING-7 autorizado con exito!.')
+            $b = new Bitacora;
+            $b->action = "Rechazado por secretaria de mantenimiento.";
+            $b->user_id = Auth::id();
+            $b->iding7 = $i->id;
+            $b->save();
+
+            return back()->with('messages', '¡ING-7 rechazado con exito!.')
                     ->with('typealert', 'success');
         endif;
 
     }
     
+    public function getIng7AnAudit($id){
+        $i = Ings7::findOrFail($id);
+        $i->status = '5';
+        
+        if($i->save()):
+
+            $b = new Bitacora;
+            $b->action = "En revisión por personal asignado.";
+            $b->user_id = Auth::id();
+            $b->iding7 = $i->id;
+            $b->save();
+
+            return back()->with('messages', '¡ING-7 en revision con exito!.')
+                    ->with('typealert', 'success');
+        endif;
+
+    }
+
+    public function getIng7Delete($id){
+        $i = Ings7::findOrFail($id);
+        $i->status = '100';
+        $i->save();
+        
+        if($i->delete()):
+            
+            $b = new Bitacora;
+            $b->action = "Solicitud anulada.";
+            $b->user_id = Auth::id();
+            $b->iding7 = $i->id;
+            $b->save();
+
+            return back()->with('messages', '¡ING-7 anulada con exito!.')
+                    ->with('typealert', 'success');
+        endif;
+
+    }
+
+    public function postIng7AcceptReject(Request $request){
+        $i = Ings7::findOrFail($request->input('iding7'));
+        $i->status = $request->input('status');
+        
+        if($i->save()):
+
+            $b = new Bitacora;
+
+            if($request->input('status') == '6'):
+                $b->action = "Solicitud Verificada y Aceptada.";
+            else:
+                $b->action = "Solicitud Verificada y Rechazada.";
+            endif;
+
+            $b->user_id = Auth::id();
+            $b->iding7 = $i->id;
+            $b->comment = e($request->input('comment'));
+            $b->save();
+
+            return back()->with('messages', '¡ING-7 aceptada y/o rechazada con exito!.')
+                    ->with('typealert', 'success');
+        endif;
+    }
+
+    public function getIng7InAction($id){
+        $i = Ings7::findOrFail($id);
+        $i->status = '8';
+        
+        if($i->save()):
+
+            $b = new Bitacora;
+            $b->action = "En proceso de ejecucion.";
+            $b->user_id = Auth::id();
+            $b->iding7 = $i->id;
+            $b->save();
+
+            return back()->with('messages', '¡ING-7 en ejecucion con exito!.')
+                    ->with('typealert', 'success');
+        endif;
+
+    }
+
+    public function getIng7Finish($id){
+        $i = Ings7::findOrFail($id);
+        $i->status = '9';
+        
+        if($i->save()):
+
+            $b = new Bitacora;
+            $b->action = "Trabajo(s) de solicitud terminado(s).";
+            $b->user_id = Auth::id();
+            $b->iding7 = $i->id;
+            $b->save();
+
+            return back()->with('messages', '¡ING-7 terminado con exito!.')
+                    ->with('typealert', 'success');
+        endif;
+
+    }
 
 }

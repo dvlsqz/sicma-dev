@@ -6,6 +6,7 @@
     <title>ING-7 - NO.{{ $ings7->correlative }} </title>
     
     <body>
+        <br><br>
 
         <div style="float: left;"> 
             <img src="{{ url('img/Isotipo.png') }}" alt="" width="80px" height="80px">    
@@ -32,7 +33,7 @@
         <br><br><br><br>
 
         <div style="float: left;">
-            <span><strong> Señor: </strong> {{ getEncargadosManttoArray(null, $ings7->managed) }} </span> <br>
+            <span><strong> Señor: </strong> @if( $ings7->managed == '0' ) Ing. Jahen Figueroa @elseif( $ings7->managed == '1' ) Ing. Sergio Martinez @else Ing. Gabriel Fuentes @endif </span> <br>
             <span>Jefe de la División de Mantenimiento </span> <br>
             <span>Edificio </span> <br><br>
             <span>Señor Jefe:  </span> <br>
@@ -194,33 +195,73 @@
         </div>
 
         <br>
+        
 
 
-        <table id="table" width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align: center;">
+        <table id="table" width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align: center; font-size: 0.90em;">
             <thead>
                 <tr>
-                    <td colspan="1"> <b> FECHA  </b> </td>
-                    <td colspan="2"> <b> ACCION TOMADA  </b> </td>
-                    <td colspan="1"> <b> RESPONSABLE    </b> </td>
-                    <td colspan="1"> <b> FIRMA Y SELLO  </b> </td>
+                    <td style='width: 10%;'> <b> FECHA  </b> </td>
+                    <td style='width: 30%;'> <b> ACCION TOMADA  </b> </td>
+                    <td style='width: 10%;'> <b> RESPONSABLE    </b> </td>
+                    <td style='width: 10%;'> <b> FIRMA Y SELLO  </b> </td>
                 </tr>  
             </thead>  
             
-            <tbody>
+            <tbody>   
                 <tr>
-                    <td colspan="1">  </td>
-                    <td colspan="2">  </td>
-                    <td colspan="1"> </td>
-                    <td colspan="1">  </td>
-                </tr>
-            </tbody> 
-            
-
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                </tr>  
+                <tr>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                </tr> 
+                <tr>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                </tr> 
+                <tr>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                </tr> 
+                <tr>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                </tr>  
+                <tr>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                </tr> 
+                <tr>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                    <td> <br> </td>
+                </tr>            
+                
+            </tbody>
         </table>
 
         <div style="text-align: left; font-size: 0.600em;">
             <small><strong> TALLERES IGSS </strong></small>  
         </div>
+        
+
+
+        
 
 
     </body>

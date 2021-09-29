@@ -29,6 +29,8 @@ class Permissions
             return $next($request);
         elseif(Auth::user()->role == "6" && kvfj(Auth::user()->permissions, Route::currentRouteName()) == true):
             return $next($request);
+        elseif(Auth::user()->role == "7" && kvfj(Auth::user()->permissions, Route::currentRouteName()) == true):
+            return $next($request);    
         else:
             return redirect('/logout');
         endif;

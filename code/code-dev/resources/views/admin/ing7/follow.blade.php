@@ -3,7 +3,7 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/environments/all') }}" class="nav-link"><i class="fa fa-object-group"></i> Servicios Generales</a>
+        <a href="{{ url('/admin/ing_7') }}" class="nav-link"><i class="fas fa-copy"></i> ING-7</a>
     </li>
     
 @endsection
@@ -19,11 +19,11 @@
                 </div>
 
                 <div class="inside">
-                    {!! Form::open(['url' => '/admin/services/environments/add']) !!}
+                    {!! Form::open(['url'=>'/admin/ing_7/'.$ing7->id.'/follow','files' => true,'enctype'=>'multipart/form-data']) !!}
                         <label for="price"> <strong>Fecha de la Acción:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::date('deadline', new \DateTime(), ['class' => 'form-control']) !!}
+                            {!! Form::date('date', new \DateTime(), ['class' => 'form-control']) !!}
                         </div>
 
                         <label for="price" class="mtop16"> <strong>Acción Tomada:</strong></label>
@@ -45,6 +45,13 @@
 
                 <div class="header">
                     <h2 class="title"><i class="fa fa-object-group"></i> Tabla de Ficha de Seguimiento: <b>ING-7 NO. {{ $ing7->correlative }}</b> </h2>
+                    <ul>
+                        @if(kvfj(Auth::user()->permissions, 'ing7_follow')) 
+                            <li>
+                                <a href="{{ url('/admin/ing_7/'.$ing7->id.'/print/follow') }}" target="_blank" ><i class="fas fa-print"></i> Imprimir</a>
+                            </li>
+                        @endif
+                    </ul>
                 </div>
 
                 <div class="inside">
@@ -58,7 +65,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                                                                                
+                            @foreach($ing7f as $in)
+                                <tr>
+                                    <td></td>
+                                    <td>{{ $in->date }}</td>
+                                    <td>{{ $in->action }}</td>
+                                    <td>{{ $in->user->name.' '.$in->user->lastname }}</td>
+                                </tr>
+                            @endforeach                                                                                
                         </tbody>
                     </table>
 

@@ -43,7 +43,7 @@
                     <div class="row mtop16">
                         <div class="col-md-12">
                             {!! Form::submit('Guardar', ['class'=>'btn btn-success']) !!}
-                            <a href="{{ url('/admin/suppliers') }}" class="btn btn-danger">Cancelar</a>
+                            <a href="{{ url('/admin/ing_7/1') }}" class="btn btn-danger">Cancelar</a>
                         </div>
                     </div>
 

@@ -12,7 +12,7 @@
         <div class="panel shadow">
 
             <div class="header">
-                <h2 class="title"><i class="fas fa-clipboard-list"></i> Seguimiento de ING-7 No. {{$ing7->ing->correlative}} </h2>
+                <h2 class="title"><i class="fas fa-clipboard-list"></i> Seguimiento de ING-7 </h2>
                 <ul>
                     
                     
@@ -24,14 +24,20 @@
                 <table id="table-modules" class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <td>ACCION</td>
-                            <td>FECHA Y HORA</td>
+                            <td><strong> SOLICITUD </strong></td>
+                            <td><strong> ACCION </strong></td>
+                            <td><strong> COMENTARIO / OBSERVACION </strong></td>
+                            <td><strong> REALIZADO POR </strong></td>
+                            <td><strong> FECHA Y HORA </strong></td>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($bitacoras as $b)
                             <tr>
+                                <td>{{$b->ing7->correlative}}</td>
                                 <td>{{$b->action}}</td>
+                                <td>{{$b->comment}}</td>
+                                <td>{{$b->user->name.' '.$b->user->lastname.' - '.$b->user->ibm}}</td>
                                 <td>{{$b->created_at }}</td>
                             </tr>
                         @endforeach

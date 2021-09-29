@@ -163,9 +163,9 @@ function delete_object(e){
     var title, text, icon;
 
     if(action == "delete"){
-        title = "¿Esta seguro de eliminar este elemento?";
+        title = '¿Esta seguro de marcar como '+'"Anulada"'+' esta solictud?';
         text = "Recuerde que esta acción enviara este elemento a la papelera o lo eliminara de forma definitiva.";
-        icon = "warning";
+        icon = "error";
     }
 
     if(action == "restore"){ 
@@ -173,6 +173,37 @@ function delete_object(e){
         text = "Esta acción restaurará este elemento y estará activo en la base de datos.";
         icon = "info";
     }
+
+    if(action == "receive"){
+        title = '¿Esta seguro de marcar como '+'"Recepcionada"'+' esta solictud?';
+        text = "Recuerde que esta acción no se podra realizar nuevamente.";
+        icon = "success";
+    }  
+
+    if(action == "reject"){
+        title = '¿Esta seguro de marcar como '+'"Rechazada"'+' esta solictud?';
+        text = "Recuerde que esta acción no se podra realizar nuevamente.";
+        icon = "error";
+    }
+
+    if(action == "an_audit"){
+        title = '¿Esta seguro de marcar como '+'"En Revision"'+' esta solictud?';
+        text = "Recuerde que esta acción no se podra realizar nuevamente.";
+        icon = "warning";
+    }
+
+    if(action == "in_action"){
+        title = '¿Esta seguro de marcar como '+'"En Ejecucion"'+' esta solictud?';
+        text = "Recuerde que esta acción no se podra realizar nuevamente.";
+        icon = "info";
+    }
+
+    if(action == "finish"){
+        title = '¿Esta seguro de marcar como '+'"Terminada"'+' esta solictud?';
+        text = "Recuerde que esta acción no se podra realizar nuevamente.";
+        icon = "question";
+    }
+    
 
     Swal.fire({
         title: title,

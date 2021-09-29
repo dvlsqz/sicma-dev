@@ -9,7 +9,7 @@
             '4' => 'Bodeguero',
             '5' => 'Inventario',
             '6' => 'Jefe de Servicio',
-            '7' => 'Admistración'
+            '7' => 'Secretaria Mantenimiento'
         ];
 
         if(!is_null($mode)):
@@ -36,8 +36,9 @@
     //Encargados de Mantenimiento y Seguridad Ocupacional
     function getEncargadosManttoArray($mode, $id){
         $status = [
-            '0' => 'Ing. Jahen Figueroa',
-            '1' => 'Ing. Sergio Martinez'
+            '0' => 'Mantenimiento',
+            '1' => 'Seguridad y Salud Ocupacional',
+            '2' => 'Biomedica'
         ];
 
         if(!is_null($mode)):
@@ -274,15 +275,42 @@
         $roles = [
             '0' => 'Registrado',
             '1' => 'Traslado a Firma',
-            '2' => 'Autorizado por Administracion',
-            '3' => 'Rechazado por Administracion',
-            '4' => 'Recibido por Mantenimiento',
-            '5' => 'Autorizado por Mantenimiento',
-            '6' => 'Rechazado por Mantenimiento',
-            '7' => 'Asignado a Area de Trabajo',
-            '8' => 'En Revision',
-            '9' => 'En Proceso de Ejecución',
-            '10' => 'Terminado'
+            '2' => 'Recepcionado por secretaria',
+            '3' => 'Area de Trabajo Asignado ',
+            '4' => 'Personal de Trabajo Asignado',
+            '5' => 'En Revision',            
+            '6' => 'Autorizado por Mantenimiento',
+            '7' => 'Rechazado por Mantenimiento',
+            '8' => 'En Ejecución',
+            '9' => 'Terminado',
+            '100' => 'Anulado por el solicitante',
+            '110' => 'Rechazado por secretaria'
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
+        endif;
+    }
+
+    function getTypeIngSecretaria($mode, $id){
+        $roles = [           
+            '2' => 'Recepcionado',
+            '110' => 'Rechazado'            
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
+        endif;
+    }
+
+    function getTypeIngPersonal($mode, $id){
+        $roles = [           
+            '6' => 'Autorizado',
+            '7' => 'Rechazado'            
         ];
 
         if(!is_null($mode)):
@@ -347,6 +375,59 @@
             return $status;
         else:
             return $status[$id];
+        endif;
+    }
+
+    function getTypeWorkOT($mode, $id){
+        $roles = [           
+            '0' => 'Mantenimiento Preventivo',
+            '1' => 'Mantenimiento Correctivo'            
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
+        endif;
+    }
+
+    function getPriorityOT($mode, $id){
+        $roles = [           
+            '0' => 'Baja',
+            '1' => 'Media',
+            '2' => 'Alta'            
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
+        endif;
+    }
+
+    function getApprovalOT($mode, $id){
+        $roles = [           
+            '0' => 'Ing. Jahen Figueroa',
+            '1' => 'Ing. Manuel Alberto Velarde Gonzalez'       
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
+        endif;
+    }
+
+    function getTypePersonalOT($mode, $id){
+        $roles = [           
+            '0' => 'Personal Interno',
+            '1' => 'Personal Contratista'       
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
         endif;
     }
 
@@ -529,8 +610,13 @@
                     'ing7_assignments_areas' => 'Puede realizar asignacion de areas de trabajo al ING-7.',
                     'ing7_assignments_personal' => 'Puede realizar asignacion de personal al ING-7.',
                     'ing7_record' => 'Puede ver el historial de seguimiento del ING-7.',
-                    'ing7_accept_administration' => 'Puede aceptar el ING-7.',
-                    'ing7_reject_administration' => 'Puede rechazar el ING-7.'
+                    'ing7_receive' => 'Puede recepcionar o rechazar ING-7',
+                    'ing7_an_audit' => 'Puede colocar en revision el ING-7.',
+                    'ing7_delete' => 'Puede anular una solicitud de ING-7',
+                    'ing7_accept_reject' => 'Puede aceptar o rechazar la solicitud.',
+                    'ing7_in_action' => 'Puede colocar en ejecucion el ING-7.',
+                    'ing7_finish' => 'Puede terminar el proceso de ING-7',
+                    'ing7_print_follow' => 'Puede imprimir la ficha de seguimiento del ING-7'
                 ]
             ],
 
@@ -538,7 +624,11 @@
                 'icon' => '<i class="fas fa-clone"></i>',
                 'title' => 'Modulo de OTs',
                 'keys' => [
-                    'ot_list' => 'Puede ver el listado de OTs.'
+                    'ot_list' => 'Puede ver el listado de OTs.',
+                    'ot_add' => 'Puede agregar OTs.',
+                    'ot_assignments_personal' => 'Puede asignar personal a la OT.',
+                    'ot_materials' => 'Puede registrar material a la OT',
+                    'ot_actions' => 'Puede registrar acciones de la OT'
                 ]
             ],
 

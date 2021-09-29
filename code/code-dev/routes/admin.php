@@ -125,10 +125,10 @@
         Route::get('/services/environments/{id}/edit','Admin\EnvironmentController@getServicesEnvironmentsEdit')->name('environment_edit');
         Route::post('/services/environments/{id}/edit','Admin\EnvironmentController@postServicesEnvironmentsEdit')->name('environment_edit');
 
-        //ING-7
-        Route::get('/ing_7', 'Admin\Ing7Controller@getHome')->name('ing7_list');
+        //ING-7        
         Route::get('/ing_7/add', 'Admin\Ing7Controller@getIng7Add')->name('ing7_add');
         Route::post('/ing_7/add', 'Admin\Ing7Controller@postIng7Add')->name('ing7_add');
+        Route::get('/ing_7/{status}', 'Admin\Ing7Controller@getHome')->name('ing7_list');
         Route::get('/ing_7/{id}/print', 'Admin\Ing7Controller@getIng7Print')->name('ing7_print');
         Route::get('/ing_7/{id}/classification', 'Admin\Ing7Controller@getIng7Classification')->name('ing7_classification');
         Route::post('/ing_7/{id}/classification_type_work', 'Admin\Ing7Controller@postIng7ClassificationTypeWork')->name('ing7_classification');
@@ -141,6 +141,22 @@
         Route::post('/ing_7/{id}/assignments_areas', 'Admin\Ing7Controller@postIng7AssignmentsAreas')->name('ing7_assignments_areas');
         Route::get('/ing_7/{id}/assignments_personal', 'Admin\Ing7Controller@getIng7AssignmentsPersonal')->name('ing7_assignments_personal');
         Route::post('/ing_7/{id}/assignments_personal', 'Admin\Ing7Controller@postIng7AssignmentsPersonal')->name('ing7_assignments_personal');
+        Route::get('/ing_7/{id}/record', 'Admin\Ing7Controller@getIng7Record')->name('ing7_record');
+        Route::get('/ing_7/{id}/receive', 'Admin\Ing7Controller@getIng7Receive')->name('ing7_receive');
+        Route::get('/ing_7/{id}/reject', 'Admin\Ing7Controller@getIng7Reject')->name('ing7_receive');
+        Route::get('/ing_7/{id}/an_audit', 'Admin\Ing7Controller@getIng7AnAudit')->name('ing7_an_audit');
+        Route::get('/ing_7/{id}/delete', 'Admin\Ing7Controller@getIng7delete')->name('ing7_delete');
+        Route::post('/ing_7/accept_reject', 'Admin\Ing7Controller@postIng7AcceptReject')->name('ing7_accept_reject');
+        Route::get('/ing_7/{id}/in_action', 'Admin\Ing7Controller@getIng7InAction')->name('ing7_in_action');
+        Route::get('/ing_7/{id}/finish', 'Admin\Ing7Controller@getIng7Finish')->name('ing7_finish');
+        Route::get('/ing_7/{id}/print/follow', 'Admin\Ing7Controller@getIng7PrintFollow')->name('ing7_print_follow');
+        
+        //OT
+        Route::get('/ot', 'Admin\OtController@getHome')->name('ot_list');
+        Route::get('/ot/add', 'Admin\OtController@getOtAdd')->name('ot_add');
+        Route::post('/ot/add', 'Admin\OtController@postOtAdd')->name('ot_add'); 
+        Route::get('/ot/{id}/assignments_personal', 'Admin\OtController@getOtAssignmentsPersonal')->name('ot_assignments_personal');
+        Route::post('/ot/{id}/assignments_personal', 'Admin\OtController@postOtAssignmentsPersonal')->name('ot_assignments_personal');
 
         //Request Ajax
         Route::get('/sicma/api/load/services/{parent}', 'Admin\ApiController@getService');

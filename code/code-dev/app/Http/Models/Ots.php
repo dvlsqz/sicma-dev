@@ -4,16 +4,17 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Ings7Follow extends Model
+
+
+class Ots extends Model
 {
     use HasFactory;
 
-    protected $dates = ['deleted_at'];
-    protected $table = 'ings7_follow';
-    protected $hidden = ['created_at', 'updated_at'];
+    use SoftDeletes;
 
-    public function user(){
-        return $this->hasOne(User::class,'id','iduser');
-    }
+    protected $dates = ['deleted_at'];
+    protected $table = 'ots';
+    protected $hidden = ['created_at', 'updated_at'];
 }

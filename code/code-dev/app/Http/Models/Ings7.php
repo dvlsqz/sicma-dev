@@ -23,4 +23,8 @@ class Ings7 extends Model
     public function user(){
         return $this->hasOne(User::class,'id','idapplicant');
     }
+
+    public function ings7f(){
+        return $this->hasMany(Ings7Follow::class,'iding7','id');
+    }
 }
