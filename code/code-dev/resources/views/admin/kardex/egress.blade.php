@@ -41,7 +41,7 @@
                         <label for="type_doc"> <strong> Tipo de Documento: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            {!! Form::select('type_doc', getFormaKardexEgressArray('list',null), null,['class'=>'form-select']) !!}
+                            {!! Form::select('type_doc', getFormaKardexEgressArray('list',null), null,['class'=>'form-select', 'id' => 'idtype']) !!}
                         </div>
                     </div>
 
@@ -49,7 +49,9 @@
                         <label for="name"> <strong> Numero de Documento: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::text('no_doc', null, ['class'=>'form-control']) !!}
+                            {!! Form::text('no_doc', null, ['class'=>'form-control', 'id' => 'no_doc']) !!}
+                            {!! Form::select('iding7', $ings, 0,['class'=>'form-select', 'id' => 'ing']) !!}
+                            {!! Form::select('idot', $ots, 0,['class'=>'form-select', 'id' => 'ot']) !!}
                         </div>
                     </div>
 
@@ -63,9 +65,9 @@
                                     <option value="{{$u->id}}">{{$u->ibm.' - '.$u->name.' '.$u->lastname}}</option>
                                 @endforeach
                             </select>
-                        </div>  
+                        </div>
                     </div>
-                </div> 
+                </div>
 
                 <div class="row">
                     <div class="col-md-5 mtop16">
@@ -128,6 +130,37 @@
         $(document).ready(function(){
             $('#bt_add').click(function(){
             agregar();
+            });
+
+            var typepersonal = document.getElementById('idtype');
+            var no_doc = document.getElementById('no_doc');
+            var ing = document.getElementById('ing');
+            var ot = document.getElementById('ot');
+
+            ing.hidden = false;
+            ot.hidden = true;
+            no_doc.hidden = true;
+
+            $('#idtype').click(function(){
+                if(typepersonal.value == 0){
+                    ing.hidden = false;
+                    ot.hidden = true;
+                }
+
+                if(typepersonal.value == 1){
+                    ing.hidden = true;
+                    ot.hidden = false;
+                }
+
+                if(typepersonal.value == 0 || typepersonal.value == 1){
+                    no_doc.hidden = true;
+                }
+
+                if(typepersonal.value == 2 || typepersonal.value == 3){
+                    ing.hidden = true;
+                    ot.hidden = true;
+                    no_doc.hidden = false;
+                }
             });
         });
 

@@ -179,7 +179,7 @@
 
     //Forma para quitar kardex Transitorio
     function getFormaKardexEgressArray($mode, $id){
-        $status = [           
+        $status = [
             '0' => 'ING-7',
             '1' => 'OT´S',
             '2' => 'ASIGNADO',
@@ -278,7 +278,7 @@
             '2' => 'Recepcionado por secretaria',
             '3' => 'Area de Trabajo Asignado ',
             '4' => 'Personal de Trabajo Asignado',
-            '5' => 'En Revision',            
+            '5' => 'En Revision',
             '6' => 'Autorizado por Mantenimiento',
             '7' => 'Rechazado por Mantenimiento',
             '8' => 'En Ejecución',
@@ -295,9 +295,9 @@
     }
 
     function getTypeIngSecretaria($mode, $id){
-        $roles = [           
+        $roles = [
             '2' => 'Recepcionado',
-            '110' => 'Rechazado'            
+            '110' => 'Rechazado'
         ];
 
         if(!is_null($mode)):
@@ -308,9 +308,9 @@
     }
 
     function getTypeIngPersonal($mode, $id){
-        $roles = [           
+        $roles = [
             '6' => 'Autorizado',
-            '7' => 'Rechazado'            
+            '7' => 'Rechazado'
         ];
 
         if(!is_null($mode)):
@@ -328,17 +328,17 @@
                 'icon' => '<i class="fas fa-tachometer-alt"></i>',
                 'title' => 'Area ',
                 'keys' => [
-                    
+
                     't_1' => 'Supervisión de Trabajos Contratados',
                     't_2' => 'Evaluación y Mediciones para Contratar',
                     't_3' => 'Supervisión y Reparación de Trabajos'
                 ]
-            ]        
+            ]
 
         ];
 
         return $p;
-    }    
+    }
 
     function areasMantto(){
         $p = [
@@ -357,7 +357,7 @@
                     'a_10' => 'Albañiles',
                     'a_11' => 'Plantas Electricas'
                 ]
-            ]        
+            ]
 
         ];
 
@@ -379,9 +379,9 @@
     }
 
     function getTypeWorkOT($mode, $id){
-        $roles = [           
+        $roles = [
             '0' => 'Mantenimiento Preventivo',
-            '1' => 'Mantenimiento Correctivo'            
+            '1' => 'Mantenimiento Correctivo'
         ];
 
         if(!is_null($mode)):
@@ -392,10 +392,24 @@
     }
 
     function getPriorityOT($mode, $id){
-        $roles = [           
+        $roles = [
             '0' => 'Baja',
             '1' => 'Media',
-            '2' => 'Alta'            
+            '2' => 'Alta'
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
+        endif;
+    }
+
+    function getStatusOT($mode, $id){
+        $roles = [
+            '0' => 'Registrada',
+            '1' => 'Autorizada',
+            '100' => 'Rechazada'
         ];
 
         if(!is_null($mode)):
@@ -406,9 +420,9 @@
     }
 
     function getApprovalOT($mode, $id){
-        $roles = [           
+        $roles = [
             '0' => 'Ing. Jahen Figueroa',
-            '1' => 'Ing. Manuel Alberto Velarde Gonzalez'       
+            '1' => 'Ing. Manuel Alberto Velarde Gonzalez'
         ];
 
         if(!is_null($mode)):
@@ -419,9 +433,9 @@
     }
 
     function getTypePersonalOT($mode, $id){
-        $roles = [           
+        $roles = [
             '0' => 'Personal Interno',
-            '1' => 'Personal Contratista'       
+            '1' => 'Personal Contratista'
         ];
 
         if(!is_null($mode)):
@@ -470,7 +484,7 @@
                     'unit_search' => 'Puede buscar unidades.'
                 ]
             ],
-            
+
             'maintenance_areas' => [
                 'icon' => '<i class="fas fa-hard-hat"></i>',
                 'title' => 'Modulo de Areas de Mantenimiento',
@@ -593,7 +607,7 @@
                     'environment_list' => 'Puede ver el listado de ambientes .',
                     'environment_add' => 'Puede agregar ambientes.',
                     'environment_edit' => 'Puede editar ambientes.',
-                    'environment_banned' => 'Puede dar de baja ambientes.' 
+                    'environment_banned' => 'Puede dar de baja ambientes.'
                 ]
             ],
 
@@ -610,13 +624,14 @@
                     'ing7_assignments_areas' => 'Puede realizar asignacion de areas de trabajo al ING-7.',
                     'ing7_assignments_personal' => 'Puede realizar asignacion de personal al ING-7.',
                     'ing7_record' => 'Puede ver el historial de seguimiento del ING-7.',
-                    'ing7_receive' => 'Puede recepcionar o rechazar ING-7',
+                    'ing7_receive_reject' => 'Puede recepcionar o rechazar ING-7',
                     'ing7_an_audit' => 'Puede colocar en revision el ING-7.',
                     'ing7_delete' => 'Puede anular una solicitud de ING-7',
                     'ing7_accept_reject' => 'Puede aceptar o rechazar la solicitud.',
                     'ing7_in_action' => 'Puede colocar en ejecucion el ING-7.',
                     'ing7_finish' => 'Puede terminar el proceso de ING-7',
-                    'ing7_print_follow' => 'Puede imprimir la ficha de seguimiento del ING-7'
+                    'ing7_print_follow' => 'Puede imprimir la ficha de seguimiento del ING-7',
+                    'ing7_materials' => 'Puede ver el listado de materiales usados en el ING-7'
                 ]
             ],
 
@@ -626,9 +641,12 @@
                 'keys' => [
                     'ot_list' => 'Puede ver el listado de OTs.',
                     'ot_add' => 'Puede agregar OTs.',
+                    'ot_authorize_reject' => 'Puede autorizar o rechazar solicitudes de OT',
                     'ot_assignments_personal' => 'Puede asignar personal a la OT.',
                     'ot_materials' => 'Puede registrar material a la OT',
-                    'ot_actions' => 'Puede registrar acciones de la OT'
+                    'ot_actions' => 'Puede registrar acciones de la OT',
+                    'ot_print' => 'Puede generar PDF de la solicitud de OT',
+                    'ot_materials' => 'Puede ver el listado de materiales usados en la OT'
                 ]
             ],
 
@@ -674,6 +692,10 @@
         }else{
             return $m[$key];
         }
+    }
+
+    function number($number){
+        return 'Q'.number_format($number, 2, '.', ',' );
     }
 
 ?>

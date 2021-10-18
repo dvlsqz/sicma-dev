@@ -160,7 +160,9 @@ class UserController extends Controller
 
         if($rol_actual == '6'):
             $u->idservice = $request->input('idservice');
-        else:
+        endif;
+        
+        if($rol_actual == '2'):
             $u->idservice = 'NULL';
         endif;
 

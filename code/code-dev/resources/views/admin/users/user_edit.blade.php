@@ -40,9 +40,7 @@
                                     <span class="title"><i class="fas fa-user-shield"></i> Rol de Usuario:</span>
                                     <span class="text">{{ getRoleUserArray(null, $u->role) }}</span>
 
-                                    @if($u->role != '0' || $u->role != '1' || $u->role != '4')
-
-                                    @else
+                                    @if($u->role == '2' )
                                         <span class="title"><i class="fas fa-hard-hat"></i> Área de Trabajo:</span>
                                         <span class="text">{{ $u->area->code.' - '.$u->area->name }}</span>
                                     @endif
@@ -109,10 +107,8 @@
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
                                                 {!! Form::select('user_type', getRoleUserArray('list', null),$u->role,['class'=>'form-select']) !!}
                                             </div>
-                                            
-                                            @if($u->role != '0' || $u->role != '1' || $u->role == '4')
 
-                                            @else
+                                            @if( $u->role == '2')
                                                 <label for="module" class="mtop16"><strong> Área de Trabajo: </strong></label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>

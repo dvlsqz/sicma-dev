@@ -27,4 +27,8 @@ class Ings7 extends Model
     public function ings7f(){
         return $this->hasMany(Ings7Follow::class,'iding7','id');
     }
+
+    public function ings7a(){
+        return $this->hasMany(Ings7AssignmentArea::class,'iding7','id');
+    }
 }

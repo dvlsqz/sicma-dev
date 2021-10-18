@@ -20,4 +20,8 @@ class Ings7AssignmentArea extends Model
     public function area(){
         return $this->hasOne(MaintenanceArea::class,'id','idmaintenancearea');
     }
+
+    public function ing(){
+        return $this->hasOne(Ings7::class,'id','iding7');
+    }
 }

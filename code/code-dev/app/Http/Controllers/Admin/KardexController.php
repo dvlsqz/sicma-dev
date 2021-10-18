@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Models\Kardex, App\Http\Models\Product, App\Http\Models\MaintenanceArea, App\Http\Models\Bitacora, App\Http\Models\IncomeKardex, App\Http\Models\IncomeDetailKardex, App\Http\Models\EgressKardex, App\Http\Models\EgressDetailKardex, App\User;
-use Validator, Str, Config, Auth, Session, DB, Response; 
+use App\Http\Models\Kardex, App\Http\Models\Product, App\Http\Models\MaintenanceArea, App\Http\Models\Bitacora, App\Http\Models\IncomeKardex, App\Http\Models\IncomeDetailKardex, App\Http\Models\EgressKardex, App\Http\Models\EgressDetailKardex, App\Http\Models\Ings7, App\Http\Models\Ots, App\User;
+use Validator, Str, Config, Auth, Session, DB, Response;
 
 class KardexController extends Controller
 {
@@ -23,23 +23,23 @@ class KardexController extends Controller
                 case '0':
                     $kardex = Kardex::where('type', '0')->orderBy('id', 'Asc')->get();
                 break;
-    
+
                 case '1':
                     $kardex = Kardex::where('type', '1')->orderBy('id', 'Asc')->get();
                 break;
-    
+
                 case '2':
                     $kardex = Kardex::where('type', '2')->orderBy('id', 'Asc')->get();
                 break;
-    
+
                 case '3':
                     $kardex = Kardex::where('type', '3')->orderBy('id', 'Asc')->get();
                 break;
-    
+
                 case 'all':
                     $kardex = Kardex::orderby('id','Asc')->get();
                 break;
-    
+
                 case 'trash':
                     $kardex = Kardex::onlyTrashed()->orderBy('id', 'Asc')->get();
                 break;
@@ -49,31 +49,36 @@ class KardexController extends Controller
                 case '0':
                     $kardex = Kardex::where('type', '0')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
-    
+
                 case '1':
                     $kardex = Kardex::where('type', '1')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
-    
+
                 case '2':
                     $kardex = Kardex::where('type', '2')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
-    
+
                 case '3':
                     $kardex = Kardex::where('type', '3')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
-    
+
                 case 'all':
                     $kardex = Kardex::where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderby('id','Asc')->get();
                 break;
-    
+
                 case 'trash':
                     $kardex = Kardex::onlyTrashed()->where('idmaintenancearea', Auth::user()->idmaintenancearea)->orderBy('id', 'Asc')->get();
                 break;
             }
         endif;
 
+        $incomes_kardex = IncomeKardex::where('idmaintenancearea', Auth::user()->idmaintenancearea)->get();
+        $incomes_details_kardex = IncomeDetailKardex::get();
+
         $data = [
             'kardex'=>$kardex,
+            'incomes_kardex' => $incomes_kardex,
+            'incomes_details_kardex' => $incomes_details_kardex
         ];
 
         return view('admin.kardex.home',$data);
@@ -88,7 +93,7 @@ class KardexController extends Controller
         else:
             $maintenance_areas = MaintenanceArea::get();
         endif;
- 
+
         $data = [
             'products' => $products,
             'maintenance_areas' => $maintenance_areas
@@ -179,12 +184,12 @@ class KardexController extends Controller
                 Session::flash('success', '¡Producto guardado con exito!.');
                 return redirect('/admin/kardex/all');
             endif;
-        
+
         endif;
     }
 
     public function getKardexIncome(){
-        
+
 
         if(Auth::user()->idmaintenancearea != 0 ):
             $maintenance_areas = MaintenanceArea::where('id', Auth::user()->idmaintenancearea)->get();
@@ -222,7 +227,7 @@ class KardexController extends Controller
             return back()->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
             ->with('typealert', 'danger')->withInput();
         else:
-          
+
             DB::beginTransaction();
 
             $ingreso = new IncomeKardex;
@@ -248,7 +253,7 @@ class KardexController extends Controller
             }
 
             DB::commit();
-           
+
 
             if($ingreso->save()):
                 $b = new Bitacora;
@@ -260,9 +265,9 @@ class KardexController extends Controller
                     ->with('typealert', 'success');
             endif;
 
-            
+
         endif;
-        
+
     }
 
     public function getKardexEgress(){
@@ -270,16 +275,27 @@ class KardexController extends Controller
         if(Auth::user()->idmaintenancearea != 0 ):
             $maintenance_areas = MaintenanceArea::where('id', Auth::user()->idmaintenancearea)->get();
             $kardex = Kardex::where('stock', '>', '0')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->get();
+            $ings = Ings7::where('status', '6')->orWhere('status', '8')->pluck('correlative', 'id');
+            /*$ings = Ings7::with(['ings7a', function (){
+                return $query->where('idmaintenancearea', '=', Auth::user()->idmaintenancearea);
+            }])->pluck('correlative','id');
+            $ings_all = Ings7::where('status', '6')->orWhere('status', '8')->get();
+            $ings = $ings_all->ings7a()->where('idmaintenancearea', Auth::user()->idmaintenancearea)->pluck('correlative', 'id');*/
+            $ots = Ots::where('status', '1')->pluck('correlative', 'id');
         else:
             $maintenance_areas = MaintenanceArea::get();
             $kardex = Kardex::where('stock', '>', '0')->get();
+            $ings = Ings7::where('status', '6')->pluck('correlative', 'id');
+            $ots = Ots::where('status', '1')->pluck('correlative', 'id');
         endif;
 
-        $users = User::where('status','!=','0')->get();        
+        $users = User::where('status','!=','0')->get();
 
         $data = [
             'kardex' => $kardex,
             'maintenance_areas' => $maintenance_areas,
+            'ings' => $ings,
+            'ots' => $ots,
             'users' => $users
         ];
 
@@ -288,12 +304,12 @@ class KardexController extends Controller
 
     public function postKardexEgress(Request $request){
         $rules = [
-            'no_doc' => 'required',
+
             'idsupplier' => 'required'
         ];
 
         $messages = [
-            'no_doc.required' => 'Se requiere un numero para el documento de egreso.',
+
             'idsupplier.required' => 'Se requiere que selecciones un area de mantenimiento para registrar el egreso.'
         ];
 
@@ -303,14 +319,22 @@ class KardexController extends Controller
             return back()->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
             ->with('typealert', 'danger')->withInput();
         else:
-          
+
             DB::beginTransaction();
 
             $ingreso = new EgressKardex;
             $ingreso->id=$request->get('id');
             $ingreso->idmaintenancearea =$request->get('idsupplier');
             $ingreso->type_doc=$request->get('type_doc');
-            $ingreso->no_doc=$request->get('no_doc');
+
+            if($request->get('type_doc') == '0'):
+                $ingreso->iding7 = $request->get('iding7');
+            elseif($request->get('type_doc') == '1'):
+                $ingreso->idot = $request->get('idot');
+            else:
+                $ingreso->no_doc=$request->get('no_doc');
+            endif;
+
             $ingreso->idaccountable=$request->get('iduser');
             $ingreso->save();
 
@@ -329,7 +353,7 @@ class KardexController extends Controller
             }
 
             DB::commit();
-           
+
 
             if($ingreso->save()):
                 $b = new Bitacora;
@@ -341,17 +365,19 @@ class KardexController extends Controller
                     ->with('typealert', 'success');
             endif;
 
-            
+
         endif;
-        
+
     }
 
     public function getKardexRecord($id){
 
         $kardex = Kardex::findOrFail($id);
         $incomes_details_kardex = IncomeDetailKardex::get();
-        $egress_details_kardex = EgressDetailKardex::get();
+        $egress_details_kardex = EgressDetailKardex::with(['egress'])->where('idproduct', $id)->get();
         $idproduct = $id;
+
+
 
         $data = [
             'kardex' => $kardex,

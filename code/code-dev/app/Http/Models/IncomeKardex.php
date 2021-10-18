@@ -19,4 +19,8 @@ class IncomeKardex extends Model
     public function user(){
         return $this->hasOne(User::class,'id','idaccountable');
     }
+
+    public function details(){
+        return $this->hasOne(IncomeDetailKardex::class, 'idincome', 'id');
+    }
 }

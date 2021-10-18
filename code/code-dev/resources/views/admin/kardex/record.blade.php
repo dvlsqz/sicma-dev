@@ -47,14 +47,14 @@
                                                             </tr>
                                                         @endif
 
-                                                        @if($idp->idproduct == $idproduct && Auth::user()->idmaintenancearea == "0" && $kardex->idmaintenancearea == $idp->income->idmaintenancearea )
+                                                        @if($idp->idproduct == $idproduct && Auth::user()->role == "0" )
                                                             <tr>
                                                                 <td>{{$idp->income->created_at}}</td>
                                                                 <td>{{$idp->income->user->ibm.' - '.$idp->income->user->name.' '.$idp->income->user->lastname}}</td>
                                                                 <td>{{$idp->income->ma->name }}</td>
                                                                 <td>{{getFormaKardexIncomeArray(null,$idp->income->type_doc).' NO. '.$idp->income->no_doc}}</td>
                                                                 <td>{{$idp->amount}}</td>
-                                                                
+
                                                             </tr>
                                                         @endif
                                                     @endforeach
@@ -69,7 +69,7 @@
                                             <table id="table-modules1" class="table table-bordered table-striped" style="background-color:#EDF4FB;">
                                                 <thead>
                                                     <tr>
-                                                        <td><strong> FECHA</strong></td>
+                                                        <td><strong>FECHA</strong></td>
                                                         <td><strong>RESPONSABLE</strong></td>
                                                         <td><strong>SERVICIO</strong></td>
                                                         <td><strong>DOCUMENTO</strong></td>
@@ -88,12 +88,18 @@
                                                             </tr>
                                                         @endif
 
-                                                        @if($edp->idproduct == $idproduct && Auth::user()->idmaintenancearea == "0" && $kardex->idmaintenancearea == $edp->egress->idmaintenancearea)
+                                                        @if($edp->idproduct == $idproduct && Auth::user()->role == "0")
                                                             <tr>
                                                                 <td>{{$edp->egress->created_at}}</td>
                                                                 <td>{{$edp->egress->user->ibm.' - '.$edp->egress->user->name.' '.$edp->egress->user->lastname}}</td>
                                                                 <td>{{$edp->egress->ma->name}}</td>
-                                                                <td>{{getFormaKardexEgressArray(null,$edp->egress->type_doc).' NO. '.$edp->egress->no_doc}}</td>
+                                                                @if(!is_null($edp->egress->iding7))
+                                                                    <td>{{getFormaKardexEgressArray(null,$edp->egress->type_doc).' NO. '.$edp->egress->ing7->correlative}}</td>
+                                                                @elseif(!is_null($edp->egress->idot))
+                                                                    <td>{{getFormaKardexEgressArray(null,$edp->egress->type_doc).' NO. '.$edp->egress->ot->correlative}}</td>
+                                                                @else
+                                                                    <td>{{getFormaKardexEgressArray(null,$edp->egress->type_doc).' NO. '.$edp->egress->no_doc}}</td>
+                                                                @endif
                                                                 <td>{{$edp->amount}}</td>
                                                             </tr>
                                                         @endif

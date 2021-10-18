@@ -84,13 +84,13 @@ class EquipmentController extends Controller
     }
 
     public function postEquipmentAdd(Request $request){
-        
+
         $rules = [
-            
+
         ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
@@ -100,7 +100,7 @@ class EquipmentController extends Controller
             ->with('typealert', 'danger')->withInput();
         else:
 
-            
+
 
             $e = new Equipment;
             $e->id =  $request->input('id');
@@ -113,7 +113,7 @@ class EquipmentController extends Controller
             $e->model =  e($request->input('model'));
             $e->serie =  e($request->input('serie'));
             $e->no_bien =  e($request->input('no_bien'));
-            $e->critical_level =  e($request->input('critical_level')); 
+            $e->critical_level =  e($request->input('critical_level'));
             $e->type =  e($request->input('type'));
             $e->capacity =  e($request->input('capacity'));
             $e->num_station =  e($request->input('num_station'));
@@ -123,7 +123,7 @@ class EquipmentController extends Controller
             $e->features =  e($request->input('features'));
             $e->description =  e($request->input('description'));
             $e->idservicegeneral = $request->input('servicegeneral');
-            $e->idservice = $request->input('service'); 
+            $e->idservice = $request->input('service');
             $e->idenvironment = $request->input('environment');
             $e->trained_staff =  e($request->input('trained_staff'));
             $e->status =  "0";
@@ -148,15 +148,22 @@ class EquipmentController extends Controller
 
         $equipo =  $r_equipon;
             /* Se cuentan si hay equipos con los mismos datos para sacar un correlativo */
-        $eq_anteriores = Equipment::where('name', $r_equipon)
+        /*$eq_anteriores = Equipment::where('name', $r_equipon)
                                     ->where('idmaintenancearea', $area->id)
                                     ->where('idenvironment', $ambiente->id)
+                                    ->count();*/
+
+                                    /*Se quito el id del ambiente para que el conteo sea en general
+                                      sin tomar en cuenta este mismo  */
+        $eq_anteriores = Equipment::where('name', $r_equipon)
+                                    ->where('idmaintenancearea', $area->id)
                                     ->count();
+                                    
         if($eq_anteriores != '0'):
             $correlativo = $eq_anteriores + 1; //Si hay equipos registrados con la misma informacion.
         else:
             $correlativo = 1; //Si no hay equipos registrados con la misma informacion, se inicia el correlativo.
-        endif;        
+        endif;
             /* Se extraen las iniciales del nombre del equipo */
         $equipo = explode(" ", $r_equipon);
         $iniciales = "";
@@ -190,11 +197,11 @@ class EquipmentController extends Controller
 
     public function postEquipmentEdit(Request $request, $id){
         $rules = [
-            
-        ]; 
+
+        ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
@@ -210,7 +217,7 @@ class EquipmentController extends Controller
             $e->brand =  e($request->input('brand'));
             $e->model =  e($request->input('model'));
             $e->serie =  e($request->input('serie'));
-            $e->no_bien =  e($request->input('no_bien')); 
+            $e->no_bien =  e($request->input('no_bien'));
             $e->critical_level =  e($request->input('critical_level'));
             $e->type =  e($request->input('type'));
             $e->capacity =  e($request->input('capacity'));
@@ -220,7 +227,7 @@ class EquipmentController extends Controller
             $e->frequency =  $request->input('frequency');
             $e->features =  e($request->input('features'));
             $e->description =  e($request->input('description'));
-            $e->trained_staff =  e($request->input('trained_staff')); 
+            $e->trained_staff =  e($request->input('trained_staff'));
             $e->person_in_charge =  e($request->input('person_in_charge'));
 
             if($e->save()):
@@ -363,7 +370,7 @@ class EquipmentController extends Controller
         $gallery = EquipmentFG::where('idequipment', $id)->where('type_file', '1')->get();
         $files = EquipmentFG::where('idequipment', $id)->where('type_file', '0')->get();
         $transfers = EquipmentTransfer::where('idequipment', $id)->get();
-        
+
         $data = [
             'equipment' => $equipment,
             'parts' => $parts,
@@ -392,11 +399,11 @@ class EquipmentController extends Controller
 
     public function postEquipmentParts(Request $request, $id){
         $rules = [
-            
+
         ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
@@ -453,11 +460,11 @@ class EquipmentController extends Controller
 
     public function postEquipmentConecctions(Request $request, $id){
         $rules = [
-            
+
         ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
@@ -508,11 +515,11 @@ class EquipmentController extends Controller
 
     public function postEquipmentTransfer(Request $request, $id){
         $rules = [
-            
+
         ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);

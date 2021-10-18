@@ -68,7 +68,7 @@
        Route::get('/product/egress/add', 'Admin\ProductController@getProductEgress')->name('product_egress');
        Route::post('/product/egress/add', 'Admin\ProductController@postProductEgress')->name('product_egress');
        Route::get('/product/{id}/record', 'Admin\ProductController@getProductRecord')->name('product_record');
-       
+
         //Kardex
         Route::get('/kardex/add', 'Admin\KardexController@getKardexAdd')->name('kardex_add');
         Route::post('/kardex/add', 'Admin\KardexController@postKardexAdd')->name('kardex_add');
@@ -87,7 +87,7 @@
         Route::get('/kardex/{id}/record', 'Admin\KardexController@getKardexRecord')->name('kardex_edit');
 
         //DAB-75
-        Route::get('/dab_75_fr', 'Admin\DabFrController@getHome')->name('dabs'); 
+        Route::get('/dab_75_fr', 'Admin\DabFrController@getHome')->name('dabs');
         Route::get('/dab_75_fr/add', 'Admin\DabFrController@getDabAdd')->name('dabs_add');
         Route::post('/dab_75_fr/add', 'Admin\DabFrController@postDabAdd')->name('dabs_add');
         Route::get('/dab_75_fr/{id}/show', 'Admin\DabFrController@getDabShow')->name('dabs_show');
@@ -121,11 +121,11 @@
         Route::get('/services_g/services/{id}/edit','Admin\EnvironmentController@getServicesGeneralServicesEdit')->name('service_edit');
         Route::post('/services_g/services/{id}/edit','Admin\EnvironmentController@postServicesGeneralServicesEdit')->name('service_edit');
         Route::get('/services/{id}/environments','Admin\EnvironmentController@getServicesEnvironments')->name('environment_list');
-        Route::post('/services/environments/add','Admin\EnvironmentController@postServicesEnvironmentsAdd')->name('environment_add');       
+        Route::post('/services/environments/add','Admin\EnvironmentController@postServicesEnvironmentsAdd')->name('environment_add');
         Route::get('/services/environments/{id}/edit','Admin\EnvironmentController@getServicesEnvironmentsEdit')->name('environment_edit');
         Route::post('/services/environments/{id}/edit','Admin\EnvironmentController@postServicesEnvironmentsEdit')->name('environment_edit');
 
-        //ING-7        
+        //ING-7
         Route::get('/ing_7/add', 'Admin\Ing7Controller@getIng7Add')->name('ing7_add');
         Route::post('/ing_7/add', 'Admin\Ing7Controller@postIng7Add')->name('ing7_add');
         Route::get('/ing_7/{status}', 'Admin\Ing7Controller@getHome')->name('ing7_list');
@@ -142,21 +142,24 @@
         Route::get('/ing_7/{id}/assignments_personal', 'Admin\Ing7Controller@getIng7AssignmentsPersonal')->name('ing7_assignments_personal');
         Route::post('/ing_7/{id}/assignments_personal', 'Admin\Ing7Controller@postIng7AssignmentsPersonal')->name('ing7_assignments_personal');
         Route::get('/ing_7/{id}/record', 'Admin\Ing7Controller@getIng7Record')->name('ing7_record');
-        Route::get('/ing_7/{id}/receive', 'Admin\Ing7Controller@getIng7Receive')->name('ing7_receive');
-        Route::get('/ing_7/{id}/reject', 'Admin\Ing7Controller@getIng7Reject')->name('ing7_receive');
+        Route::get('/ing_7/{id}/receive_reject/{rrm}', 'Admin\Ing7Controller@getIng7ReceiveReject')->name('ing7_receive_reject');
         Route::get('/ing_7/{id}/an_audit', 'Admin\Ing7Controller@getIng7AnAudit')->name('ing7_an_audit');
         Route::get('/ing_7/{id}/delete', 'Admin\Ing7Controller@getIng7delete')->name('ing7_delete');
-        Route::post('/ing_7/accept_reject', 'Admin\Ing7Controller@postIng7AcceptReject')->name('ing7_accept_reject');
+        Route::get('/ing_7/{id}/accept_reject/{ara}/{comment}', 'Admin\Ing7Controller@getIng7AcceptReject')->name('ing7_accept_reject');
         Route::get('/ing_7/{id}/in_action', 'Admin\Ing7Controller@getIng7InAction')->name('ing7_in_action');
         Route::get('/ing_7/{id}/finish', 'Admin\Ing7Controller@getIng7Finish')->name('ing7_finish');
         Route::get('/ing_7/{id}/print/follow', 'Admin\Ing7Controller@getIng7PrintFollow')->name('ing7_print_follow');
-        
+        Route::get('/ing_7/{id}/materials', 'Admin\Ing7Controller@getIng7Materials')->name('ing7_materials');
+
         //OT
         Route::get('/ot', 'Admin\OtController@getHome')->name('ot_list');
         Route::get('/ot/add', 'Admin\OtController@getOtAdd')->name('ot_add');
-        Route::post('/ot/add', 'Admin\OtController@postOtAdd')->name('ot_add'); 
+        Route::post('/ot/add', 'Admin\OtController@postOtAdd')->name('ot_add');
+        Route::get('/ot/{id}/authorize_reject/{arm}', 'Admin\OtController@getOtAcceptReject')->name('ot_authorize_reject');
         Route::get('/ot/{id}/assignments_personal', 'Admin\OtController@getOtAssignmentsPersonal')->name('ot_assignments_personal');
         Route::post('/ot/{id}/assignments_personal', 'Admin\OtController@postOtAssignmentsPersonal')->name('ot_assignments_personal');
+        Route::get('/ot/{id}/print', 'Admin\OtController@getOtPrint')->name('ot_print');
+        Route::get('/ot/{id}/materials', 'Admin\OtController@getOtMaterials')->name('ot_materials');
 
         //Request Ajax
         Route::get('/sicma/api/load/services/{parent}', 'Admin\ApiController@getService');

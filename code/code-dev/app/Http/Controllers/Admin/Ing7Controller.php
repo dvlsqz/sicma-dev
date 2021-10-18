@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon, Auth, Validator, Str, Config, Session, DB, Response, File, Image, PDF;
 
-use App\Http\Models\Ings7, App\Http\Models\Ings7AssignmentArea, App\Http\Models\Ings7AssignmentPersonal, App\Http\Models\Ings7Follow, App\Http\Models\MaintenanceArea,  App\Http\Models\Bitacora, App\User;
+use App\Http\Models\Ings7, App\Http\Models\Ings7AssignmentArea, App\Http\Models\Ings7AssignmentPersonal, App\Http\Models\Ings7Follow, App\Http\Models\MaintenanceArea,  App\Http\Models\Bitacora, App\Http\Models\EgressKardex, App\Http\Models\EgressDetailKardex, App\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
 
@@ -30,7 +30,7 @@ class Ing7Controller extends Controller
             case '1':
                 if(Auth::user()->role == "2"):
                     $ings7 = Ings7::orderBy('id', 'Asc')->get();
-                    $ings7aa = Ings7AssignmentArea::where('idmaintenancearea', Auth::user()->idmaintenancearea)->get(); 
+                    $ings7aa = Ings7AssignmentArea::where('idmaintenancearea', Auth::user()->idmaintenancearea)->get();
                 else:
                     $ings7 = Ings7::orderBy('id', 'Asc')->get();
                     $ings7aa = "";
@@ -51,10 +51,10 @@ class Ing7Controller extends Controller
     	return view('admin.ing7.home', $data);
     }
 
-    public function getIng7Add(){ 
+    public function getIng7Add(){
 
         $data = [
-            
+
         ];
 
     	return view('admin.ing7.add');
@@ -62,11 +62,11 @@ class Ing7Controller extends Controller
 
     public function postIng7Add(Request $request){
         $rules = [
-            
+
         ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
@@ -83,7 +83,7 @@ class Ing7Controller extends Controller
             $i->idservice = Auth::user()->idservice;
             $i->correlative = $this->GenerateCorrelative();
             $i->description = $request->input('description');
-            $i->idapplicant = Auth::user()->id;            
+            $i->idapplicant = Auth::user()->id;
             $i->status =  "0";
 
             if($i->save()):
@@ -122,7 +122,7 @@ class Ing7Controller extends Controller
 
     public function getIng7Digital($id){
         $ings7 = Ings7::findOrFail($id);
-        
+
         $data = [
             'ings7' => $ings7
         ];
@@ -146,7 +146,7 @@ class Ing7Controller extends Controller
             $b->iding7 = $i->id;
             $b->save();
         endif;
-        
+
         $data = [
             'ings7' => $ings7
         ];
@@ -156,8 +156,8 @@ class Ing7Controller extends Controller
     }
 
     public function getIng7PrintFollow($id){
-        $ings7 = Ings7::findOrFail($id);        
-        
+        $ings7 = Ings7::findOrFail($id);
+
         $data = [
             'ings7' => $ings7
         ];
@@ -168,7 +168,7 @@ class Ing7Controller extends Controller
 
     public function getIng7Classification($id){
         $ing7 = Ings7::findOrFail($id);
-        
+
         $data = [
             'ing7' => $ing7
         ];
@@ -194,11 +194,11 @@ class Ing7Controller extends Controller
     }
 
     public function postIng7ClassificationAreaWork(Request $request, $id){
-        $i = Ings7::findOrFail($id);        
+        $i = Ings7::findOrFail($id);
 
         $a = collect($request->only('type_work'));
         $i->area_work = $request->except(['_token']);
-               
+
         if($i->save()):
             $b = new Bitacora;
             $b->action = "Registro de clasificacion de area de trabajo de ING-7 no.: ".$i->correlative;
@@ -212,7 +212,7 @@ class Ing7Controller extends Controller
 
     public function getIng7ClassificationBuyHire($id){
         $ing7 = Ings7::findOrFail($id);
-        
+
         $data = [
             'ing7' => $ing7
         ];
@@ -221,10 +221,10 @@ class Ing7Controller extends Controller
     }
 
     public function postIng7ClassificationBuyHire(Request $request, $id){
-        $i = Ings7::findOrFail($id); 
+        $i = Ings7::findOrFail($id);
         $i->buy_materials = $request->input('buy_materials');
         $i->hire_jobs = $request->input('hire_jobs');
-               
+
         if($i->save()):
             $b = new Bitacora;
             $b->action = "Registro de clasificacion de compra o contratación de ING-7 no.: ".$i->correlative;
@@ -239,7 +239,7 @@ class Ing7Controller extends Controller
     public function getIng7Follow($id){
         $ing7f = Ings7Follow::where('iding7',$id)->get();
         $ing7 = Ings7::findOrFail($id);
-       
+
         $data = [
             'ing7f' => $ing7f,
             'ing7' => $ing7
@@ -250,11 +250,11 @@ class Ing7Controller extends Controller
 
     public function postIng7Follow(Request $request, $id){
         $rules = [
-            
+
         ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
@@ -288,7 +288,7 @@ class Ing7Controller extends Controller
         $ing7 = Ings7::findOrFail($id);
         $iaa = Ings7AssignmentArea::where('iding7', $id )->get();
         $maintenance_areas = MaintenanceArea::get();
-        
+
         $data = [
             'ing7' => $ing7,
             'iaa' => $iaa,
@@ -300,11 +300,11 @@ class Ing7Controller extends Controller
 
     public function postIng7AssignmentsAreas(Request $request, $id){
         $rules = [
-            
+
         ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
@@ -328,9 +328,9 @@ class Ing7Controller extends Controller
                 else:
                     $i->status = $status_a;
                 endif;
-                
+
                 $i->save();
-                
+
                 $b = new Bitacora;
                 $b->action = "Asignacion de area de trabajo. ";
                 $b->user_id = Auth::id();
@@ -346,7 +346,7 @@ class Ing7Controller extends Controller
         $ing7 = Ings7::findOrFail($id);
         $iap = Ings7AssignmentPersonal::where('iding7', $id )->get();
         $users = User::where('status','!=','0')->where('idmaintenancearea', Auth::user()->idmaintenancearea)->get();
-        
+
         $data = [
             'ing7' => $ing7,
             'iap' => $iap,
@@ -358,11 +358,11 @@ class Ing7Controller extends Controller
 
     public function postIng7AssignmentsPersonal(Request $request, $id){
         $rules = [
-            
+
         ];
 
         $messages = [
-            
+
         ];
 
         $validator = Validator::make($request->all(),$rules,$messages);
@@ -376,18 +376,18 @@ class Ing7Controller extends Controller
             $in->id =  $request->input('id');
             $in->iding7 = $request->input('iding7');
             $in->iduser = $request->input('iduser');
-            
+
 
             if($in->save()):
                 $i = Ings7::findOrFail($in->iding7);
                 $status_a = $i->status;
-                
+
                 if($status_a == '3'):
                     $i->status = '4';
                 else:
                     $i->status = $status_a;
                 endif;
-                
+
                 $i->save();
 
                 $b = new Bitacora;
@@ -410,47 +410,38 @@ class Ing7Controller extends Controller
 
         return view('admin.ing7.record', $data);
     }
-    
-    public function getIng7Receive($id){
+
+    public function getIng7ReceiveReject($id, $rrs){
         $i = Ings7::findOrFail($id);
-        $i->status = '2';
-        
+
+        if($rrs == "1"):
+            $i->status = '2';
+        elseif($rrs == "2"):
+            $i->status = '110';
+        endif;
+
         if($i->save()):
 
             $b = new Bitacora;
-            $b->action = "Recepcionado por secretaria de mantenimiento.";
+            if($rrs == "1"):
+                $b->action = "Recepcionado por secretaria de mantenimiento.";
+            elseif($rrs == "2"):
+                $b->action = "Rechazado por secretaria de mantenimiento.";
+            endif;
+
             $b->user_id = Auth::id();
             $b->iding7 = $i->id;
             $b->save();
 
-            return back()->with('messages', '¡ING-7 recepcionado con exito!.')
+            return back()->with('messages', '¡ING-7 recepcionado o rechazado con exito!.')
                     ->with('typealert', 'success');
         endif;
-
     }
 
-    public function getIng7Reject($id){
-        $i = Ings7::findOrFail($id);
-        $i->status = '110';
-        
-        if($i->save()):
-
-            $b = new Bitacora;
-            $b->action = "Rechazado por secretaria de mantenimiento.";
-            $b->user_id = Auth::id();
-            $b->iding7 = $i->id;
-            $b->save();
-
-            return back()->with('messages', '¡ING-7 rechazado con exito!.')
-                    ->with('typealert', 'success');
-        endif;
-
-    }
-    
     public function getIng7AnAudit($id){
         $i = Ings7::findOrFail($id);
         $i->status = '5';
-        
+
         if($i->save()):
 
             $b = new Bitacora;
@@ -466,12 +457,13 @@ class Ing7Controller extends Controller
     }
 
     public function getIng7Delete($id){
+
         $i = Ings7::findOrFail($id);
         $i->status = '100';
         $i->save();
-        
+
         if($i->delete()):
-            
+
             $b = new Bitacora;
             $b->action = "Solicitud anulada.";
             $b->user_id = Auth::id();
@@ -484,15 +476,20 @@ class Ing7Controller extends Controller
 
     }
 
-    public function postIng7AcceptReject(Request $request){
-        $i = Ings7::findOrFail($request->input('iding7'));
-        $i->status = $request->input('status');
-        
+    public function getIng7AcceptReject($id, $ara, $comment){
+        $i = Ings7::findOrFail($id);
+
+        if($ara == "1"):
+            $i->status = "6";
+        elseif($ara == "2"):
+            $i->status = "7";
+        endif;
+
         if($i->save()):
 
             $b = new Bitacora;
 
-            if($request->input('status') == '6'):
+            if($i->status == '6'):
                 $b->action = "Solicitud Verificada y Aceptada.";
             else:
                 $b->action = "Solicitud Verificada y Rechazada.";
@@ -500,18 +497,23 @@ class Ing7Controller extends Controller
 
             $b->user_id = Auth::id();
             $b->iding7 = $i->id;
-            $b->comment = e($request->input('comment'));
+
+            if($comment != "1"):
+                $b->comment = e($comment);
+            endif;
+
             $b->save();
 
             return back()->with('messages', '¡ING-7 aceptada y/o rechazada con exito!.')
                     ->with('typealert', 'success');
         endif;
+
     }
 
     public function getIng7InAction($id){
         $i = Ings7::findOrFail($id);
         $i->status = '8';
-        
+
         if($i->save()):
 
             $b = new Bitacora;
@@ -529,7 +531,7 @@ class Ing7Controller extends Controller
     public function getIng7Finish($id){
         $i = Ings7::findOrFail($id);
         $i->status = '9';
-        
+
         if($i->save()):
 
             $b = new Bitacora;
@@ -542,6 +544,18 @@ class Ing7Controller extends Controller
                     ->with('typealert', 'success');
         endif;
 
+    }
+
+    public function getIng7Materials($id){
+        $egress = EgressDetailKardex::with(['egress'])->get();
+        $ing7 = Ings7::findOrFail($id);
+
+        $data = [
+            'ing7' => $ing7,
+            'egress' => $egress
+        ];
+
+        return view('admin.ing7.materials', $data);
     }
 
 }

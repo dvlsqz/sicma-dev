@@ -19,4 +19,16 @@ class EgressKardex extends Model
     public function user(){
         return $this->hasOne(User::class,'id','idaccountable');
     }
+
+    public function ing7(){
+        return $this->hasOne(Ings7::class, 'id', 'iding7');
+    }
+
+    public function ot(){
+        return $this->hasOne(Ots::class, 'id', 'idot');
+    }
+
+    public function details(){
+        return $this->hasOne(EgressDetailKardex::class,'idegress','id');
+    }
 }

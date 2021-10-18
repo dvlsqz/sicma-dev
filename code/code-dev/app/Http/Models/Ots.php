@@ -17,4 +17,13 @@ class Ots extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'ots';
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function area(){
+        return $this->hasOne(MaintenanceArea::class,'id','idmaintenancearea');
+        
+    }
+
+    public function user(){
+        return $this->hasOne(User::class,'id','idapplicant');
+    }
 }

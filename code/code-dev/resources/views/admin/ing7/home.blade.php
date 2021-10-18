@@ -19,7 +19,7 @@
                     <div class="modal-header" style="background-color:#256B92; color:#fff; text-align:center;">
                         <h5 class="modal-title">Proceso de la Solicitud</h5>
                     </div>
-                    
+
                     {!! Form::open(['url'=>'/admin/ing_7/accept_reject']) !!}
                         <div class="modal-body">
 
@@ -31,7 +31,7 @@
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::select('status', getTypeIngPersonal('list', null),0,['class'=>'form-select']) !!}
                                 </div>
-                            </div>                            
+                            </div>
 
                             <div class="col-md-12 mtop16">
                                 <div class="form-group">
@@ -68,7 +68,7 @@
                             </ul>
                         </div>
                     </li>
-                    @if(kvfj(Auth::user()->permissions, 'ing7_add')) 
+                    @if(kvfj(Auth::user()->permissions, 'ing7_add'))
                         <li>
                             <a href="{{ url('/admin/ing_7/add') }}" ><i class="fas fa-plus-circle"></i> Solicitar</a>
                         </li>
@@ -88,52 +88,56 @@
                             <td> <strong>ESTADO</strong></td>
                         </tr>
                     </thead>
-                    @if(Auth::user()->role == "2")                        
+                    @if(Auth::user()->role == "2")
                         <tbody>
-                            @foreach($ings7aa as $ia) 
+                            @foreach($ings7aa as $ia)
                                 @foreach($ings7 as $in)
                                     @if($ia->iding7 == $in->id)
                                         <tr>
                                             <td>
-                                                <div class="opts">                              
+                                                <div class="opts">
 
-                                                    @if(kvfj(Auth::user()->permissions, 'ing7_assignments_personal')) 
-                                                        @if($in->status != '100' && $in->status != '110' && $in->status != '9' && $in->status != '7')   
-                                                            <a href="{{ url('/admin/ing_7/'.$in->id.'/assignments_personal') }}" data-toogle="tooltrip" data-placement="top" title="Asignar Personal"><i class="fas fa-people-arrows"></i></a>                                   
+                                                    @if(kvfj(Auth::user()->permissions, 'ing7_assignments_personal'))
+                                                        @if($in->status != '100' && $in->status != '110' && $in->status != '9' && $in->status != '7')
+                                                            <a href="{{ url('/admin/ing_7/'.$in->id.'/assignments_personal') }}" data-toogle="tooltrip" data-placement="top" title="Asignar Personal"><i class="fas fa-people-arrows"></i></a>
                                                         @endif
                                                     @endif
 
                                                     @if(kvfj(Auth::user()->permissions, 'ing7_an_audit'))
-                                                        @if($in->status == '3' && $in->status != '100' && $in->status != '110')                                   
+                                                        @if($in->status == '4' && $in->status != '100' && $in->status != '110')
                                                             <a href="#" data-action="an_audit" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="En Revision"><i class="fas fa-search"></i></a>
-                                                        @endif 
-                                                    @endif 
-
-                                                    @if(kvfj(Auth::user()->permissions, 'ing7_accept_reject'))
-                                                        @if($in->status == '5' && $in->status != '100' && $in->status != '110')                                   
-                                                            <a href="#" id="bt_search" data-object="{{ $in->id }}" data-toogle="tooltrip" data-placement="top" title="Accion"><i class="fas fa-archive"></i></a>
-                                                        @endif 
-                                                    @endif 
-
-                                                    @if(kvfj(Auth::user()->permissions, 'ing7_in_action'))
-                                                        @if($in->status == '6' && $in->status != '100' && $in->status != '110')                                   
-                                                            <a href="#" data-action="in_action" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="En Ejecucion"><i class="fas fa-tools"></i></a>
-                                                        @endif 
-                                                    @endif 
-
-                                                    @if(kvfj(Auth::user()->permissions, 'ing7_follow'))
-                                                        @if($in->status == '8' && $in->status != '100' && $in->status != '110') 
-                                                            <a href="{{ url('/admin/ing_7/'.$in->id.'/follow') }}" data-toogle="tooltrip" data-placement="top" title="Ficha de Seguimiento"><i class="fas fa-clipboard-list"></i></a>
-                                                        @endif 
-                                                    @endif                                                    
-
-                                                    @if(kvfj(Auth::user()->permissions, 'ing7_finish'))
-                                                        @if($in->status == '8' && $in->status != '100' && $in->status != '110')                                   
-                                                            <a href="#" data-action="finish" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="Cerrar / Terminar"><i class="fas fa-sign-out-alt"></i></a>
-                                                        @endif 
+                                                        @endif
                                                     @endif
 
-                                                    @if(kvfj(Auth::user()->permissions, 'ing7_record'))                                        
+                                                    @if(kvfj(Auth::user()->permissions, 'ing7_accept_reject'))
+                                                        @if($in->status == '5' && $in->status != '100' && $in->status != '110')
+                                                            <a href="#" data-action="accept_reject" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="Recepcionar/Rechazar"><i class="fas fa-exchange-alt"></i></a>
+                                                        @endif
+                                                    @endif
+
+                                                    @if(kvfj(Auth::user()->permissions, 'ing7_in_action'))
+                                                        @if($in->status == '6' && $in->status != '100' && $in->status != '110')
+                                                            <a href="#" data-action="in_action" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="En Ejecucion"><i class="fas fa-tools"></i></a>
+                                                        @endif
+                                                    @endif
+
+                                                    @if(kvfj(Auth::user()->permissions, 'ing7_follow'))
+                                                        @if($in->status == '8' && $in->status != '100' && $in->status != '110')
+                                                            <a href="{{ url('/admin/ing_7/'.$in->id.'/follow') }}" data-toogle="tooltrip" data-placement="top" title="Ficha de Seguimiento"><i class="fas fa-clipboard-list"></i></a>
+                                                        @endif
+                                                    @endif
+
+                                                    @if(kvfj(Auth::user()->permissions, 'ing7_finish'))
+                                                        @if($in->status == '8' && $in->status != '100' && $in->status != '110')
+                                                            <a href="#" data-action="finish" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="Cerrar / Terminar"><i class="fas fa-sign-out-alt"></i></a>
+                                                        @endif
+                                                    @endif
+
+                                                    @if(kvfj(Auth::user()->permissions, 'ing7_materials'))
+                                                        <a href="{{ url('/admin/ing_7/'.$in->id.'/materials') }}" data-toogle="tooltrip" data-placement="top" title="Listado de Materiales"><i class="fas fa-cubes"></i></a>
+                                                    @endif
+
+                                                    @if(kvfj(Auth::user()->permissions, 'ing7_record'))
                                                         <a href="{{ url('/admin/ing_7/'.$in->id.'/record') }}" data-toogle="tooltrip" data-placement="top" title="Historial de Seguimiento"><i class="fas fa-history"></i></a>
                                                     @endif
 
@@ -141,61 +145,60 @@
                                             </td>
                                             <td>{{ $in->correlative  }}</td>
                                             <td>{{ \Carbon\Carbon::parse($in->created_at)->format('d/m/Y') }}</td>
-                                            <td>{{ $in->description }}</td>  
+                                            <td>{{ $in->description }}</td>
                                             <td>
                                                 {{ $in->service->name }}<br>
-                                                {{ $in->user->name.' '.$in->user->lastname }}                                         
-                                            </td>                                  
+                                                {{ $in->user->name.' '.$in->user->lastname }}
+                                            </td>
                                             <td>{{ getTypeIng7(null, $in->status) }}</td>
                                         </tr>
                                     @endif
                                 @endforeach
                             @endforeach
-                        </tbody>                    
+                        </tbody>
                     @else
-                        <tbody> 
+                        <tbody>
                             @foreach($ings7 as $in)
                                 <tr>
                                     <td>
                                         <div class="opts">
-                                            @if(kvfj(Auth::user()->permissions, 'ing7_receive'))    
-                                                @if($in->status == '1' && $in->status != '100' && $in->status != '110')   
-                                                    <a href="#" data-action="receive" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="Recepcionar"><i class="fas fa-check-circle"></i></a>
-                                                    <a href="#" data-action="reject" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="Rechazar"><i class="fas fa-times-circle"></i></a>
+                                            @if(kvfj(Auth::user()->permissions, 'ing7_receive_reject'))
+                                                @if($in->status == '1' && $in->status != '100' && $in->status != '110')
+                                                    <a href="#" data-action="receive_reject" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="Recepcionar/Rechazar"><i class="fas fa-exchange-alt"></i></a>
                                                 @endif
-                                            @endif                                       
+                                            @endif
 
-                                            <!--@if(kvfj(Auth::user()->permissions, 'ing7_classification'))                                   
+                                            <!--@if(kvfj(Auth::user()->permissions, 'ing7_classification'))
                                                 <a href="{{ url('/admin/ing_7/'.$in->id.'/classification') }}" data-toogle="tooltrip" data-placement="top" title="Clasificacion"><i class="fas fa-clipboard-check"></i></a>
                                             @endif-->
 
                                             <!--@if(kvfj(Auth::user()->permissions, 'ing7_buy_hire'))
-                                                <a href="{{ url('/admin/ing_7/'.$in->id.'/buy_hire') }}" data-toogle="tooltrip" data-placement="top" title="Compra y/o Contratación"><i class="fas fa-hand-holding-usd"></i></a> 
+                                                <a href="{{ url('/admin/ing_7/'.$in->id.'/buy_hire') }}" data-toogle="tooltrip" data-placement="top" title="Compra y/o Contratación"><i class="fas fa-hand-holding-usd"></i></a>
                                             @endif-->
 
                                             @if(kvfj(Auth::user()->permissions, 'ing7_assignments_areas'))
-                                                @if($in->status != '100' && $in->status != '110' && $in->status != '9' && $in->status != '7')  
+                                                @if($in->status != '100' && $in->status != '110' && $in->status != '9' && $in->status != '7')
                                                     <a href="{{ url('/admin/ing_7/'.$in->id.'/assignments_areas') }}" data-toogle="tooltrip" data-placement="top" title="Asignar Area de Mantenimiento"><i class="fas fa-hard-hat"></i></a>
-                                                @endif     
-                                            @endif                                
+                                                @endif
+                                            @endif
 
-                                            @if(kvfj(Auth::user()->permissions, 'ing7_assignments_personal')) 
-                                                @if($in->status != '100' && $in->status != '110' && $in->status != '9' && $in->status != '7')   
-                                                    <a href="{{ url('/admin/ing_7/'.$in->id.'/assignments_personal') }}" data-toogle="tooltrip" data-placement="top" title="Asignar Personal"><i class="fas fa-people-arrows"></i></a>                                   
+                                            @if(kvfj(Auth::user()->permissions, 'ing7_assignments_personal'))
+                                                @if($in->status != '100' && $in->status != '110' && $in->status != '9' && $in->status != '7')
+                                                    <a href="{{ url('/admin/ing_7/'.$in->id.'/assignments_personal') }}" data-toogle="tooltrip" data-placement="top" title="Asignar Personal"><i class="fas fa-people-arrows"></i></a>
                                                 @endif
                                             @endif
 
                                             @if(kvfj(Auth::user()->permissions, 'ing7_an_audit'))
-                                                @if($in->print == '4' && $in->status != '100' && $in->status != '110')                                   
+                                                @if($in->print == '4' && $in->status != '100' && $in->status != '110')
                                                     <a href="#" data-action="an_audit" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="En Revision"><i class="fas fa-search"></i></a>
                                                 @endif
-                                            @endif                                  
+                                            @endif
 
                                             @if(kvfj(Auth::user()->permissions, 'ing7_print'))
                                                 @if($in->print == '0' && $in->status != '100' && $in->status != '110')
                                                     <a href="{{ url('/admin/ing_7/'.$in->id.'/print') }}" target="_blank" data-toogle="tooltrip" data-placement="top" title="Imprimir"><i class="fas fa-file-pdf"></i></a>
                                                 @endif
-                                            @endif                                  
+                                            @endif
 
                                             @if(kvfj(Auth::user()->permissions, 'ing7_delete'))
                                                 @if($in->print == '0' && $in->status != '100' && $in->status != '110')
@@ -203,7 +206,7 @@
                                                 @endif
                                             @endif
 
-                                            @if(kvfj(Auth::user()->permissions, 'ing7_record'))                                      
+                                            @if(kvfj(Auth::user()->permissions, 'ing7_record'))
                                                 <a href="{{ url('/admin/ing_7/'.$in->id.'/record') }}" data-toogle="tooltrip" data-placement="top" title="Historial de Seguimiento"><i class="fas fa-history"></i></a>
                                             @endif
 
@@ -211,14 +214,14 @@
                                     </td>
                                     <td>{{ $in->correlative  }}</td>
                                     <td>{{ \Carbon\Carbon::parse($in->created_at)->format('d/m/Y') }}</td>
-                                    <td>{{ $in->description }}</td>  
+                                    <td>{{ $in->description }}</td>
                                     <td>
-                                        {{ $in->service->name }}<br> 
-                                        {{ $in->user->name.' '.$in->user->lastname }}                                         
-                                    </td>                                  
+                                        {{ $in->service->name }}<br>
+                                        {{ $in->user->name.' '.$in->user->lastname }}
+                                    </td>
                                     <td>{{ getTypeIng7(null, $in->status) }}</td>
                                 </tr>
-                                
+
                             @endforeach
                         </tbody>
                     @endif
@@ -227,9 +230,9 @@
         </div>
     </div>
 
-    <script> 
+    <script>
         var modal = document.getElementById('modelId');
-        
+
         $(document).ready(function(){
             $('#bt_add').click(function(){
                 agregar();
@@ -246,7 +249,7 @@
                 $('#modelId').modal("hide");
             });
         });
-        
+
 
     </script>
 
