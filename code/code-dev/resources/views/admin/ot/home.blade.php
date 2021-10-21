@@ -50,7 +50,9 @@
                                             @endif
 
                                             @if(kvfj(Auth::user()->permissions, 'ot_print'))
-                                                <a href="{{ url('/admin/ot/'.$ot->id.'/print') }}" target="_blank" data-toogle="tooltrip" data-placement="top" title="Imprimir"><i class="fas fa-file-pdf"></i></a>
+                                                @if($ot->status == '1')
+                                                    <a href="{{ url('/admin/ot/'.$ot->id.'/print') }}" target="_blank" data-toogle="tooltrip" data-placement="top" title="Imprimir"><i class="fas fa-file-pdf"></i></a>
+                                                @endif
                                             @endif
 
                                             @if(kvfj(Auth::user()->permissions, 'ot_assignments_personal'))
@@ -68,6 +70,12 @@
                                             @if(kvfj(Auth::user()->permissions, 'ot_actions'))
                                                 @if($ot->status == '2')
                                                     <a href="{{ url('/admin/ot/'.$ot->id.'/actions') }}" data-toogle="tooltrip" data-placement="top" title="Acciones"><i class="fas fa-clipboard-list"></i></a>
+                                                @endif
+                                            @endif
+
+                                            @if(kvfj(Auth::user()->permissions, 'ot_materials'))
+                                                @if($ot->status == '1')
+                                                    <a href="{{ url('/admin/ot/'.$ot->id.'/files') }}" data-toogle="tooltrip" data-placement="top" title="Carga de Archivos"><i class="fas fa-upload"></i></a>
                                                 @endif
                                             @endif
                                         </div>

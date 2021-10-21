@@ -141,6 +141,10 @@
                                                         <a href="{{ url('/admin/ing_7/'.$in->id.'/record') }}" data-toogle="tooltrip" data-placement="top" title="Historial de Seguimiento"><i class="fas fa-history"></i></a>
                                                     @endif
 
+                                                    @if(kvfj(Auth::user()->permissions, 'ing7_materials'))
+                                                        <a href="{{ url('/admin/ing_7/'.$in->id.'/files') }}" data-toogle="tooltrip" data-placement="top" title="Carga y Visualización de Archivos"><i class="fas fa-upload"></i></a>
+                                                    @endif
+
                                                 </div>
                                             </td>
                                             <td>{{ $in->correlative  }}</td>
@@ -204,6 +208,14 @@
                                                 @if($in->print == '0' && $in->status != '100' && $in->status != '110')
                                                     <a href="#" data-toogle="tooltrip" data-action="delete" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-placement="top" title="Anular"><i class="fas fa-trash-alt"></i></a>
                                                 @endif
+                                            @endif
+
+                                            @if(kvfj(Auth::user()->permissions, 'ing7_materials'))
+                                                <a href="{{ url('/admin/ing_7/'.$in->id.'/materials') }}" data-toogle="tooltrip" data-placement="top" title="Listado de Materiales"><i class="fas fa-cubes"></i></a>
+                                            @endif
+
+                                            @if(kvfj(Auth::user()->permissions, 'ing7_materials'))
+                                                <a href="{{ url('/admin/ing_7/'.$in->id.'/files') }}" data-toogle="tooltrip" data-placement="top" title="Carga y Visualización de Archivos"><i class="fas fa-upload"></i></a>
                                             @endif
 
                                             @if(kvfj(Auth::user()->permissions, 'ing7_record'))

@@ -20,7 +20,7 @@
                     </div>
                     <div class="inside">
                         {!! Form::open(['url'=>'/admin/equipment/'.$equipment->id.'/transfer','files' => true,'enctype'=>'multipart/form-data']) !!}
-                            <div class="row">  
+                            <div class="row">
 
                                 <div class="col-md-12 ">
                                     <label for="name" class="mtop16"><strong>Fecha de Movimiento ó Traslado:</strong></label>
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row mtop16">
                                 <div class="input-group">
                                     {!! Form::submit('Guardar', ['class'=>'btn btn-primary']) !!}&nbsp;
@@ -88,8 +88,8 @@
                                 <tr>
                                     <td><strong>OPCIONES</strong></td>
                                     <td><strong>FECHA</strong></td>
-                                    <td><strong>AMBIENTE</strong></td>  
-                                    <td><strong>MOTIVO</strong></td>                                    
+                                    <td><strong>UBICACIÓN</strong></td>
+                                    <td><strong>MOTIVO</strong></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,11 +99,13 @@
                                             <a href="{{ url('/admin/equipment/'.$t->id.'/transfer/delete') }}" data-toogle="tooltrip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                         <td>{{ $t->date }}</td>
-                                        <td >{{ $t->idservicegeneral.'/'.$t->idservice.'/'.$t->idenvironment}}</td>
+                                        <td>Servicio General: {{ $t->servicegeneral->name}} <br>
+                                            Servicio: {{ $t->service->level.' - '.$t->service->name }} <br>
+                                            Ambiente: {{ $t->environment->code.' - '.$t->environment->name}}</td>
                                         <td>{{ $t->reason }}</td>
                                     </tr>
                                 @endforeach
-                                                            
+
                             </tbody>
                         </table>
                     </div>

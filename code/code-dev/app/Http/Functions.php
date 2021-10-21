@@ -435,7 +435,7 @@
     function getTypePersonalOT($mode, $id){
         $roles = [
             '0' => 'Personal Interno',
-            '1' => 'Personal Contratista'
+            '1' => 'Personal Contratista' 
         ];
 
         if(!is_null($mode)):
@@ -631,7 +631,8 @@
                     'ing7_in_action' => 'Puede colocar en ejecucion el ING-7.',
                     'ing7_finish' => 'Puede terminar el proceso de ING-7',
                     'ing7_print_follow' => 'Puede imprimir la ficha de seguimiento del ING-7',
-                    'ing7_materials' => 'Puede ver el listado de materiales usados en el ING-7'
+                    'ing7_materials' => 'Puede ver el listado de materiales usados en el ING-7',
+                    'ing7_file' => 'Puede visualizar y subir archivos'
                 ]
             ],
 
@@ -646,7 +647,8 @@
                     'ot_materials' => 'Puede registrar material a la OT',
                     'ot_actions' => 'Puede registrar acciones de la OT',
                     'ot_print' => 'Puede generar PDF de la solicitud de OT',
-                    'ot_materials' => 'Puede ver el listado de materiales usados en la OT'
+                    'ot_materials' => 'Puede ver el listado de materiales usados en la OT',
+                    'ot_file' => 'Puede visualizar y subir archivos'
                 ]
             ],
 

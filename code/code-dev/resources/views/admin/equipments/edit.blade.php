@@ -92,15 +92,15 @@
                         <label for="idsupplier"><strong>Proveedor:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
-                            <select name="idproveedor" id="idproduct" style="width: 88%;">
-                                @foreach ($suppliers as $s)                                    
+                            <select name="idsupplier" id="idproduct" style="width: 88%;">
+                                @foreach ($suppliers as $s)
                                     <option></option>
                                     <option value="{{$s->id}}">{{$s->nit.' / '.$s->name}}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <label for="name"><strong> Garantía (Meses): </strong></label>
+                        <label for="name" class="mtop16"><strong> Garantía (Meses): </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                             {!! Form::number('year_warranty', $equipment->year_warranty, ['class'=>'form-control','placeholder'=>'Ingrese la cantidad en meses']) !!}
@@ -112,7 +112,11 @@
                             {!! Form::date('date_instalaction', $equipment->date_instalaction, ['class'=>'form-control']) !!}
                         </div>
 
-                        
+                        <label for="name" class="mtop16">
+                            <strong> Tiempo de Garantia Restante: </strong>
+                            {{ $tiempo_restante }} Meses
+                        </label>
+
                     </div>
 
                 </div>
@@ -183,15 +187,17 @@
                         <!--<label for="ibm" class="mtop16">Nuevo Código del Equipo:</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                            {!! Form::text('code', $equipment->new, ['class'=>'form-control']) !!} 
+                            {!! Form::text('code', $equipment->new, ['class'=>'form-control']) !!}
                             <a href="#" class="btn btn-sm btn-primary " ><i class="fas fa-qrcode"></i> Generar Codigo</a>
                         </div>-->
 
-                        <label for="name" class="mtop16"><strong> Codigo QR Actual: </strong></label>
+                        <label for="name" class="mtop16"><strong> Codigo QR Actual: </strong> </label>
+                        <br> {{ $equipment->code_new }} <br>
                         <div class="input-group">
+
                             {!! QrCode::size(75)->generate('http://10.11.0.30:8500/admin/equipment/'.$equipment->id.'/edit'); !!}
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -203,7 +209,7 @@
                         <h2 class="title"><i class="fas fa-wallet"></i> Información Extra</h2>
                     </div>
 
-                    <div class="inside">               
+                    <div class="inside">
                         <label for="ibm"><strong> Características: </strong></label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
@@ -226,7 +232,7 @@
                     <div class="inside">
                         {!! Form::submit('Guardar', ['class'=>'btn btn-success']) !!}
                     </div>
-                </div>                    
+                </div>
             </div>
         </div>
         {!! Form::close() !!}

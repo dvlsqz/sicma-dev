@@ -110,6 +110,7 @@
         Route::post('/equipment/{id}/connection_to_equipment', 'Admin\EquipmentController@postEquipmentConecctions')->name('equipment_conecctions');
         Route::get('/equipment/connection_to_equipment/{id}/delete', 'Admin\EquipmentController@getEquipmentConecctionsDelete')->name('equipment_conecctions_delete');
         Route::get('/equipment/{id}/transfer', 'Admin\EquipmentController@getEquipmentTransfer')->name('equipment_transfer');
+        Route::post('/equipment/{id}/transfer', 'Admin\EquipmentController@postEquipmentTransfer')->name('equipment_transfer');
 
         //Enviroments
         Route::post('/services_g/add', 'Admin\EnvironmentController@postServicesGeneralAdd')->name('serviceg_add');
@@ -150,6 +151,9 @@
         Route::get('/ing_7/{id}/finish', 'Admin\Ing7Controller@getIng7Finish')->name('ing7_finish');
         Route::get('/ing_7/{id}/print/follow', 'Admin\Ing7Controller@getIng7PrintFollow')->name('ing7_print_follow');
         Route::get('/ing_7/{id}/materials', 'Admin\Ing7Controller@getIng7Materials')->name('ing7_materials');
+        Route::get('/ing_7/{id}/files', 'Admin\Ing7Controller@getIng7Files')->name('ing7_file');
+        Route::post('/ing_7/{id}/files/upload/file', 'Admin\Ing7Controller@postIng7UploadFile')->name('ing7_file');
+        Route::post('/ing_7/{id}/files/upload/image', 'Admin\Ing7Controller@postIng7UploadImage')->name('ing7_file');
 
         //OT
         Route::get('/ot', 'Admin\OtController@getHome')->name('ot_list');
@@ -160,6 +164,9 @@
         Route::post('/ot/{id}/assignments_personal', 'Admin\OtController@postOtAssignmentsPersonal')->name('ot_assignments_personal');
         Route::get('/ot/{id}/print', 'Admin\OtController@getOtPrint')->name('ot_print');
         Route::get('/ot/{id}/materials', 'Admin\OtController@getOtMaterials')->name('ot_materials');
+        Route::get('/ot/{id}/files', 'Admin\OtController@getOtFiles')->name('ot_file');
+        Route::post('/ot/{id}/files/upload/file', 'Admin\OtController@postOtUploadFile')->name('ot_file');
+        Route::post('/ot/{id}/files/upload/image', 'Admin\OtController@postOtUploadImage')->name('ot_file');
 
         //Request Ajax
         Route::get('/sicma/api/load/services/{parent}', 'Admin\ApiController@getService');

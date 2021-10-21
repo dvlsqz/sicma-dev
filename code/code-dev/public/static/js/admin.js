@@ -160,7 +160,7 @@ function delete_object(e){
     var action = this.getAttribute('data-action');
     var path = this.getAttribute('data-path');
     var url = base + '/' + path + '/' + object + '/' + action;
-    var title, text, icon;
+    var title, text, icon, arm, ara, comment;
 
     if(action == "delete"){
         title = '¿Esta seguro de marcar como '+'"Anulada"'+' esta solictud?';
@@ -172,18 +172,6 @@ function delete_object(e){
         title = "¿Quiere restaurar este elemento?";
         text = "Esta acción restaurará este elemento y estará activo en la base de datos.";
         icon = "info";
-    }
-
-    if(action == "receive"){
-        title = '¿Esta seguro de marcar como '+'"Recepcionada"'+' esta solictud?';
-        text = "Recuerde que esta acción no se podra realizar nuevamente.";
-        icon = "success";
-    }  
-
-    if(action == "reject"){
-        title = '¿Esta seguro de marcar como '+'"Rechazada"'+' esta solictud?';
-        text = "Recuerde que esta acción no se podra realizar nuevamente.";
-        icon = "error";
     }
 
     if(action == "an_audit"){
@@ -203,18 +191,106 @@ function delete_object(e){
         text = "Recuerde que esta acción no se podra realizar nuevamente.";
         icon = "question";
     }
-    
 
-    Swal.fire({
-        title: title,
-        text: text,
-        icon: icon,
-        showCancelButton: true,
-    }).then((result) =>{
-        if (result.isConfirmed) {
-            window.location.href = url;
-        }
-    });
+    if(action == "authorize_reject"){
+        title = '¿Esta seguro de marcar como '+'"Autorizada o Rechazada"'+' esta solictud?';
+        text = "Recuerde que esta acción no se podra realizar nuevamente.";
+        icon = "question";
+    }
+
+    if(action == "receive_reject"){
+        title = '¿Esta seguro de marcar como '+'"Recepcionada o Rechazada"'+' esta solictud?';
+        text = "Recuerde que esta acción no se podra realizar nuevamente.";
+        icon = "question";
+    }
+
+    if(action == "accept_reject"){
+        title = '¿Esta seguro de marcar como '+'"Aceptar o Rechazar"'+' esta solictud?';
+        text = "Recuerde que esta acción no se podra realizar nuevamente.";
+        icon = "question";
+    }
+    
+    if(action == "authorize_reject"){
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+            showCancelButton: true,
+            showDenyButton: true,
+            confirmButtonText: 'Autorizar',
+            denyButtonText: `Rechazar`,
+        }).then((result) =>{
+            
+            if (result.isConfirmed) {
+                arm = "1";
+                window.location.href = url+'/'+arm; 
+            }else if (result.isDenied){
+                arm = "2";
+                window.location.href = url+'/'+arm;
+            }
+        });
+    }else if(action == "receive_reject"){
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+            showCancelButton: true,
+            showDenyButton: true,
+            confirmButtonText: 'Recepcionar',
+            denyButtonText: `Rechazar`,
+        }).then((result) =>{
+            
+            if (result.isConfirmed) {
+                arm = "1";
+                window.location.href = url+'/'+arm; 
+            }else if (result.isDenied){
+                arm = "2";
+                window.location.href = url+'/'+arm;
+            }
+        });
+    }else if(action == "accept_reject"){
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+            showCancelButton: true,
+            showDenyButton: true,
+            confirmButtonText: 'Aceptar',
+            denyButtonText: `Rechazar`,
+            input: 'textarea',
+            inputLabel: 'Comentario:',
+            inputAttributes: {
+                'aria-label': 'Type your message here'
+            },
+        }).then((result) =>{
+            
+            if (result.isConfirmed) {
+                ara = "1";                
+            }else if (result.isDenied){
+                ara = "2";
+            }
+
+            if(result.value){
+                comment = result.value;
+            }else{
+                comment = "1";
+            }
+            
+            window.location.href = url+'/'+ara+'/'+comment; 
+        });
+    }else{
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+            showCancelButton: true,
+        }).then((result) =>{
+            
+            if (result.isConfirmed) {
+                window.location.href = url; 
+            }
+        });
+    }
 
 }
 

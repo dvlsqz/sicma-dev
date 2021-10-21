@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Models\Equipment, App\Http\Models\EquipmentFG, App\Http\Models\EquipmentPart, App\Http\Models\EquipmentConecction, App\Http\Models\EquipmentTransfer, App\Http\Models\Environment, App\Http\Models\MaintenanceArea, App\Http\Models\Supplier, App\Http\Models\Bitacora;
-use Validator, Str, Config, Auth, Session, DB, Response, File, Image, PDF;
+use Validator, Str, Config, Auth, Session, DB, Response, File, Image, PDF, Carbon\Carbon;
 
 class EquipmentController extends Controller
 {
@@ -107,7 +107,11 @@ class EquipmentController extends Controller
             $e->idmaintenancearea =  $request->input('idmaintenancearea');
             $e->idsupplier =  $request->input('idsupplier');
             $e->code_old = $request->input('code_old');
-            $e->code_new =  $this->GenerateCode($request->input('idmaintenancearea'),$request->input('environment'), $request->input('name'));
+            if(Auth::user()->role == "0"):
+                $e->code_new =  $this->GenerateCode($request->input('idmaintenancearea'),$request->input('environment'), $request->input('name'),$request->input('idmaintenancearea'));
+            else:
+                $e->code_new =  $this->GenerateCode($request->input('idmaintenancearea'),$request->input('environment'), $request->input('name'));
+            endif;
             $e->name =  e($request->input('name'));
             $e->brand =  e($request->input('brand'));
             $e->model =  e($request->input('model'));
@@ -140,11 +144,15 @@ class EquipmentController extends Controller
         endif;
     }
 
-    public function GenerateCode( $r_area, $r_ambiente, $r_equipon){
+    public function GenerateCode( $r_area, $r_ambiente, $r_equipon, $id_area_usuario = null){
         /* Proceso para obtener el codigo del equipo */
         $area = MaintenanceArea::findOrFail($r_area);
         $ambiente = Environment::findOrFail($r_ambiente);
-        $area_usuario = MaintenanceArea::findOrFail(Auth::user()->idmaintenancearea);
+        if(Auth::user()->role == "0"):
+            $area_usuario = MaintenanceArea::findOrFail($id_area_usuario);
+        else:
+            $area_usuario = MaintenanceArea::findOrFail(Auth::user()->idmaintenancearea);
+        endif;
 
         $equipo =  $r_equipon;
             /* Se cuentan si hay equipos con los mismos datos para sacar un correlativo */
@@ -158,7 +166,7 @@ class EquipmentController extends Controller
         $eq_anteriores = Equipment::where('name', $r_equipon)
                                     ->where('idmaintenancearea', $area->id)
                                     ->count();
-                                    
+
         if($eq_anteriores != '0'):
             $correlativo = $eq_anteriores + 1; //Si hay equipos registrados con la misma informacion.
         else:
@@ -179,6 +187,12 @@ class EquipmentController extends Controller
         $servicegeneral = Environment::where('parent', '0')->where('status', '0')->pluck('name', 'id');
         $suppliers = Supplier::get();
 
+        $fecha_actual = Carbon::now()->format('Y-m-d'); //fecha actual
+        $tiempo_garantia = $equipment->year_warranty; //mese de garantia del equipo
+        $instalacion = $equipment->date_instalaction; // fecha de instalacion del equipo
+        $garantia_hasta = Carbon::parse($instalacion)->addMonths($tiempo_garantia)->format('Y-m-d'); // suma del tiempo de meses de garantia y la fecha de instalacion
+        $tiempo_restante = Carbon::parse($garantia_hasta)->diffInMonths(Carbon::now()); //Tiempo restante de garantia en meses - diferencia entre la fecha total de la garantia y fecha actual
+
         if(Auth::user()->idmaintenancearea != 0 ):
             $maintenance_areas = MaintenanceArea::where('id', Auth::user()->idmaintenancearea)->get();
         else:
@@ -189,7 +203,8 @@ class EquipmentController extends Controller
             'equipment' => $equipment,
             'maintenance_areas' => $maintenance_areas,
             'servicegeneral' => $servicegeneral,
-            'suppliers' => $suppliers
+            'suppliers' => $suppliers,
+            'tiempo_restante' => $tiempo_restante
         ];
 
         return view('admin.equipments.edit',$data);
@@ -248,7 +263,7 @@ class EquipmentController extends Controller
 
         $data = [
             'equipment' => $equipment,
-            'files' => $files,
+            'files' => $files, 
             'gallery' => $gallery
         ];
 
@@ -529,17 +544,20 @@ class EquipmentController extends Controller
             ->withInput();
         else:
 
-            $ec = new EquipmentConecction;
-            $ec->idequipment =  $id;
-            $ec->idequipment_conecction =  $request->input('idequipmentconecction');
-            $ec->observation =  e($request->input('observation'));
+            $et = new EquipmentTransfer;
+            $et->date =  $request->input('date');
+            $et->idequipment =  $id;
+            $et->idservicegeneral = $request->input('servicegeneral');
+            $et->idservice = $request->input('service');
+            $et->idenvironment = $request->input('environment');
+            $et->reason =  e($request->input('reason'));
 
-            if($ec->save()):
+            if($et->save()):
                 $b = new Bitacora;
-                $b->action = "Registro de conexion: ".$ec->idequipment_conecction." al equipo: ".$id;
+                $b->action = "Registro de cambio de ambiente del equipo ID: ".$id;
                 $b->user_id = Auth::id();
                 $b->save();
-                return back()->with('messages', 'Conexio del equipo registrada con exito!.')
+                return back()->with('messages', '¡Traslado del equipo registrado con exito!.')
                         ->with('typealert', 'success');
             endif;
         endif;

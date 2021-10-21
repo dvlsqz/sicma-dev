@@ -1,12 +1,9 @@
 @extends('admin.master')
-@section('title','Agregar Equipo')
+@section('title','Clasificacion de ING-7')
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/equipments/all') }}" class="nav-link"><i class="fas fa-columns"></i> Equipos</a>
-    </li>
-    <li class="breadcrumb-item">
-        <a href="{{ url('/admin/equipments/add') }}" class="nav-link"><i class="fas fa-plus-circle"></i> Agregar</a>
+        <a href="{{ url('/admin/ot') }}" class="nav-link"><i class="fas fa-copy"></i> ING-7</a>
     </li>
 @endsection
 
@@ -24,20 +21,18 @@
                                 <tr>
                                     <td> <strong> OPCION</strong> </td>
                                     <td colspan="2"><strong> DOCUMENTO PDF</strong> </td>
-                                    <td><strong> TIPO MANUAL</strong> </td>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($files as $f)
                                     <tr>
                                         <td>
-                                            <a href="{{ url('/admin/equipment/'.$equipment->id.'/delete') }}" data-toogle="tooltrip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ url('/admin/ot/'.$ot->id.'/delete') }}" data-toogle="tooltrip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
                                             <a href="{{ url('/uploads/files/'.$f->file_path.'/'.$f->file_name) }} " target="_blank" data-toogle="tooltrip" data-placement="top" title="Abrir en Pestaña"><i class="fas fa-file-pdf"></i></a>
                                         </td>
                                         <td colspan="2">
                                             <embed width="100%" height="250" src="{{ asset('/uploads/files/'.$f->file_path.'/'.$f->file_name) }}" />
                                          </td>
-                                        <td>{{ getTypeFilesArray(null, $f->type_manual) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -69,10 +64,10 @@
 
                 <div class="panel shadow">
                     <div class="header">
-                        <h2 class="title"><i class="fas fa-file-upload"></i> Carga de Archivos del Equipo</h2>
+                        <h2 class="title"><i class="fas fa-file-upload"></i> Carga de Archivos de la OT</h2>
                     </div>
                     <div class="inside">
-                        {!! Form::open(['url'=>'/admin/equipment/'.$equipment->id.'/files/upload/file','files' => true,'enctype'=>'multipart/form-data']) !!}
+                        {!! Form::open(['url'=>'/admin/ot/'.$ot->id.'/files/upload/file','files' => true,'enctype'=>'multipart/form-data']) !!}
                             <div class="row">
 
                                 <div class="col-md-12 ">
@@ -83,18 +78,10 @@
                                 </div>
 
                                 <div class="col-md-12 mtop16">
-                                    <label for="name"><strong> Tipo de Manual: </strong> </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                                        {!! Form::select('type_manual',getTypeFilesArray('list',null), null, ['class'=>'form-select']) !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 mtop16">
                                     <label for="name"><strong> Descripción:</strong> </label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                                        {!! Form::textarea('description', null, ['class'=>'form-control','rows'=>'1']) !!}
+                                        {!! Form::textarea('description', null, ['class'=>'form-control','rows'=>'2']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -111,10 +98,10 @@
 
                 <div class="panel shadow mtop16">
                     <div class="header">
-                        <h2 class="title"><i class="fas fa-upload"></i> Carga de Fotos del Equipo </h2>
+                        <h2 class="title"><i class="fas fa-upload"></i> Carga de Fotos de la OT </h2>
                     </div>
                     <div class="inside">
-                        {!! Form::open(['url'=>'/admin/equipment/'.$equipment->id.'/files/upload/image', 'files' => true]) !!}
+                        {!! Form::open(['url'=>'/admin/ot/'.$ot->id.'/files/upload/image', 'files' => true]) !!}
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="name"><strong> Seleccionar Archivo:</strong> </label>
@@ -127,7 +114,7 @@
                                     <label for="ibm"><strong> Descripción:</strong> </label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                                        {!! Form::textarea('description', null, ['class'=>'form-control','rows'=>'1']) !!}
+                                        {!! Form::textarea('description', null, ['class'=>'form-control','rows'=>'2']) !!}
                                     </div>
                                 </div>
                             </div>

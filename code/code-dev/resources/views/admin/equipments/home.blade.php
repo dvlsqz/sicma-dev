@@ -40,7 +40,7 @@
                 <table id="table-modules" class="table table-bordered table-striped" style="background-color:#EDF4FB;">
                     <thead>
                         <tr>
-                            <td><strong> OPCIONES </strong></td> 
+                            <td><strong> OPCIONES </strong></td>
                             <td><strong> CODIGO ANTERIOR / NUEVO </strong></td>
                             <td><strong> NOMBRE </strong></td>
                             <td><strong> MARCA / MODELO / SERIE </strong></td>
@@ -57,11 +57,11 @@
                                         @endif
 
                                         @if(kvfj(Auth::user()->permissions, 'equipment_file'))
-                                            <a href="{{ url('/admin/equipment/'.$eq->id.'/files') }}"  title="Visualización y Carga de Archivos"><i class="fas fa-file-upload"></i></a>
+                                            <a href="{{ url('/admin/equipment/'.$eq->id.'/files') }}"  title="Carga y Visualización de Archivos"><i class="fas fa-upload"></i></a>
                                         @endif
 
                                         @if(kvfj(Auth::user()->permissions, 'equipment_data_sheet'))
-                                            <a href="{{ url('/admin/equipment/'.$eq->id.'/data_sheet') }}" target="_blank"  title="Ficha Tecnica"><i class="fas fa-file-invoice"></i></a> 
+                                            <a href="{{ url('/admin/equipment/'.$eq->id.'/data_sheet') }}" target="_blank"  title="Ficha Tecnica"><i class="fas fa-file-invoice"></i></a>
                                         @endif
 
                                         @if(kvfj(Auth::user()->permissions, 'equipment_parts'))
@@ -72,7 +72,7 @@
                                             <a href="{{ url('/admin/equipment/'.$eq->id.'/connection_to_equipment') }}"  title="Conexión a otros Equipos"><i class="fas fa-project-diagram"></i></a>
                                         @endif
 
-                                        @if(kvfj(Auth::user()->permissions, 'equipment_transfer')) 
+                                        @if(kvfj(Auth::user()->permissions, 'equipment_transfer'))
                                             <a href="{{ url('/admin/equipment/'.$eq->id.'/transfer') }}"  title="Traslado de Ambiente"><i class="fas fa-people-carry"></i></a>
                                         @endif
                                     </div>
@@ -80,9 +80,9 @@
                                 <td>{{$eq->code_old.' / '.$eq->code_new}}</td>
                                 <td>{{$eq->name}}</td>
                                 <td>{{$eq->brand.' / '.$eq->model.' / '.$eq->serie }}</td>
-                                <td> 
+                                <td>
                                     @if($eq->status == '0')
-                                        <a href="#" class="btn btn-sm btn-success " ><i class="fas fa-check-circle"></i> Funcionamiento Optimo</a>
+                                        <p class="btn btn-sm btn-success" ><i class="fas fa-check-circle"></i> Funcionamiento Optimo</p>
                                     @elseif($eq->status == '1')
                                         <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-tools"></i> En Reparacion</a>
                                     @elseif($eq->status == '2')
