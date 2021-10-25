@@ -389,4 +389,34 @@ class KardexController extends Controller
         return view('admin.kardex.record',$data);
     }
 
+    public function postKardexDabSearch(Request $request){
+        $rules = [
+            'search' => 'required'
+        ];
+
+        $messages = [
+            'search.required' => 'El campo consulta es requerido.'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$messages);
+
+        if($validator->fails()):
+            return redirect('/admin/kardex/all')->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
+            ->with('typealert', 'danger')->withInput();
+        else:
+            $dab = IncomeKardex::where('no_doc','LIKE', '%'.$request->input('search').'%')->limit(1)->get();
+            $dab_det = IncomeDetailKardex::all();
+
+
+
+        $data = [
+            'dab' => $dab,
+            'dab_det' => $dab_det
+        ];
+
+        return view('admin.kardex.search', $data);
+
+        endif;
+    }
+
 }

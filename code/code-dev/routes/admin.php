@@ -79,7 +79,8 @@
         Route::get('/kardex/{id}/banned', 'Admin\KardexController@getKardexBanned')->name('kardex_banned');
         Route::get('/kardex/{id}/delete', 'Admin\KardexController@getKardexDelete')->name('kardex_delete');
         Route::post('/kardex/{id}/delete', 'Admin\KardexController@postKardexDelete')->name('kardex_delete');
-        Route::get('/kardex/{id}/search', 'Admin\KardexController@getKardexSearch')->name('kardex_search');
+        Route::get('/kardex/{id}/search', 'Admin\KardexController@postKardexDabSearch')->name('kardex_search');
+        Route::post('/kardex/dab/search', 'Admin\KardexController@postKardexDabSearch')->name('kardex_search');
         Route::get('/kardex/income/add', 'Admin\KardexController@getKardexIncome')->name('kardex_income');
         Route::post('/kardex/income/add', 'Admin\KardexController@postKardexIncome')->name('kardex_income');
         Route::get('/kardex/egress/add', 'Admin\KardexController@getKardexEgress')->name('kardex_egress');
@@ -111,6 +112,8 @@
         Route::get('/equipment/connection_to_equipment/{id}/delete', 'Admin\EquipmentController@getEquipmentConecctionsDelete')->name('equipment_conecctions_delete');
         Route::get('/equipment/{id}/transfer', 'Admin\EquipmentController@getEquipmentTransfer')->name('equipment_transfer');
         Route::post('/equipment/{id}/transfer', 'Admin\EquipmentController@postEquipmentTransfer')->name('equipment_transfer');
+        Route::get('/equipment/{id}/print_label', 'Admin\EquipmentController@getEquipmentPrintLabel')->name('equipment_edit');
+        Route::get('/equipment/{id}/panel', 'Admin\EquipmentController@getEquipmentPanel')->name('equipment_edit');
 
         //Enviroments
         Route::post('/services_g/add', 'Admin\EnvironmentController@postServicesGeneralAdd')->name('serviceg_add');

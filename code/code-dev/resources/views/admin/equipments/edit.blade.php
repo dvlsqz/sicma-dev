@@ -195,8 +195,10 @@
                         <br> {{ $equipment->code_new }} <br>
                         <div class="input-group">
 
-                            {!! QrCode::size(75)->generate('http://10.11.0.30:8500/admin/equipment/'.$equipment->id.'/edit'); !!}
+                            {!! QrCode::size(75)->generate('http://10.11.0.30:8500/admin/equipment/'.$equipment->id.'/panel'); !!}
+
                         </div>
+                        <br><a href="{{ url('/admin/equipment/'.$equipment->id.'/print_label') }}" target="_blank"  title="Imprimir Etiqueta" class="btn btn-outline-primary"><i class="fas fa-print"></i> Imprimir</a>
 
                     </div>
 

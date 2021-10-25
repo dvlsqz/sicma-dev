@@ -23,5 +23,5 @@ class Kardex extends Model
         return $this->hasOne(MaintenanceArea::class,'id','idmaintenancearea');
     }
 
-    
+
 }

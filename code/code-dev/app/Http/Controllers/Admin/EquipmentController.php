@@ -263,7 +263,7 @@ class EquipmentController extends Controller
 
         $data = [
             'equipment' => $equipment,
-            'files' => $files, 
+            'files' => $files,
             'gallery' => $gallery
         ];
 
@@ -561,6 +561,33 @@ class EquipmentController extends Controller
                         ->with('typealert', 'success');
             endif;
         endif;
+    }
+
+    public function getEquipmentPrintLabel($id){
+        $equipment = Equipment::findOrFail($id);
+
+        $data = [
+            'equipment' => $equipment
+        ];
+
+        $pdf = PDF::loadView('admin.equipments.print_label',$data)->setPaper(array(0, 0, 175.75, 249.45), 'portrait');
+        return $pdf->stream('Etiqueta de Equipo.pdf');
+    }
+
+    public function getEquipmentPanel($id){
+        $equipment = Equipment::findOrFail($id);
+        $parts = EquipmentPart::where('idequipment', $id)->get();
+        $conecctions = EquipmentConecction::where('idequipment', $id)->get();
+        $transfers = EquipmentTransfer::where('idequipment', $id)->get();
+
+        $data = [
+            'equipment' => $equipment,
+            'parts' => $parts,
+            'conecctions' => $conecctions,
+            'transfers' => $transfers
+        ];
+
+        return view('admin.equipments.panel',$data);
     }
 
 

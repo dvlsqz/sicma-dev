@@ -435,7 +435,7 @@
     function getTypePersonalOT($mode, $id){
         $roles = [
             '0' => 'Personal Interno',
-            '1' => 'Personal Contratista' 
+            '1' => 'Personal Contratista'
         ];
 
         if(!is_null($mode)):
@@ -562,7 +562,8 @@
                     'kardex_edit_stock' => 'Puede modificar existencias de insumos/herramientas/equipos.',
                     'kardex_delete' => 'Puede eliminar insumos/herramientas/equipos.',
                     'kardex_income' => 'Puede registrar ingresos a kardex',
-                    'kardex_egress' => 'Puede registrar egresos de kardex'
+                    'kardex_egress' => 'Puede registrar egresos de kardex',
+                    'kardex_search' => 'Puede ingresos por numero de DAB-75'
                 ]
             ],
 
