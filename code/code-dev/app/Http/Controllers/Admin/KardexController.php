@@ -409,12 +409,12 @@ class KardexController extends Controller
 
 
 
-        $data = [
-            'dab' => $dab,
-            'dab_det' => $dab_det
-        ];
+            $data = [
+                'dab' => $dab,
+                'dab_det' => $dab_det
+            ];
 
-        return view('admin.kardex.search', $data);
+            return view('admin.kardex.search', $data);
 
         endif;
     }

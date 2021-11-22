@@ -20,10 +20,10 @@
                     </div>
                     <div class="inside">
                         {!! Form::open(['url'=>'/admin/equipment/'.$equipment->id.'/connection_to_equipment','files' => true,'enctype'=>'multipart/form-data']) !!}
-                            <div class="row">  
+                            <div class="row">
 
                                 <div class="col-md-12 ">
-                                    <label for="name">Nombre del Equipo:</label>
+                                    <label for="name"><strong>Nombre del Equipo:</strong></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-layer-group"></i></span>
                                         <select name="idequipmentconecction" id="idequipmentconecction" class="form-control ">
@@ -35,14 +35,14 @@
                                 </div>
 
                                 <div class="col-md-12 mtop16">
-                                    <label for="name">Observaciones:</label>
+                                    <label for="name"><strong>Observaciones:</strong></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                         {!! Form::textarea('observation', null, ['class'=>'form-control','rows'=>'1']) !!}
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row mtop16">
                                 <div class="input-group">
                                     {!! Form::submit('Guardar', ['class'=>'btn btn-primary']) !!}&nbsp;
@@ -64,9 +64,9 @@
                         <table id="table-modules" class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <td>OPCIONES</td>
-                                    <td>NOMBRE EQUIPO</td>
-                                    <td>OBSERVACIONES</td>                                    
+                                    <td><strong>OPCIONES</strong></td>
+                                    <td><strong>NOMBRE EQUIPO</strong></td>
+                                    <td><strong>OBSERVACIONES</strong></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,7 +81,7 @@
                                         <td>{{ $c->observation }}</td>
                                     </tr>
                                 @endforeach
-                                                            
+
                             </tbody>
                         </table>
                     </div>

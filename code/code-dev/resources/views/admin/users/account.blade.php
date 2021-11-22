@@ -20,7 +20,7 @@
                     {!! Form::open(['url' => '/admin/user/account/chance/password']) !!}
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="name">Contraseña Actual:</label>
+                                <label for="name"><strong>Contraseña Actual:</strong></label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::password('apassword', ['class'=>'form-control']) !!}
@@ -30,7 +30,7 @@
 
                         <div class="row mtop16">
                             <div class="col-md-12">
-                                <label for="name">Nueva Contraseña:</label>
+                                <label for="name"><strong>Nueva Contraseña:</strong></label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::password('password', ['class'=>'form-control']) !!}
@@ -40,7 +40,7 @@
 
                         <div class="row mtop16">
                             <div class="col-md-12">
-                                <label for="name">Confirmar Contraseña:</label>
+                                <label for="name"><strong>Confirmar Contraseña:</strong></label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::password('cpassword', ['class'=>'form-control']) !!}
@@ -68,7 +68,7 @@
                         <div class="row">
 
                             <div class="col-md-4">
-                                <label for="ibm">IBM:</label>
+                                <label for="ibm"><strong>IBM:</strong></label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::text('ibm', Auth::user()->ibm, ['class'=>'form-control', 'disabled']) !!}
@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="name">Nombre:</label>
+                                <label for="name"><strong>Nombre:</strong></label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::text('name', Auth::user()->name, ['class'=>'form-control', 'disabled']) !!}
@@ -84,7 +84,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="lastname">Apellidos:</label>
+                                <label for="lastname"><strong>Apellidos:</strong></label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::text('lastname', Auth::user()->lastname, ['class'=>'form-control', 'disabled']) !!}
@@ -95,16 +95,16 @@
                         </div>
 
                         <div class="row mtop16">
-                            <div class="col-md-8">
-                                <label for="email">Correo Institucional:</label>
+                            <div class="col-md-6">
+                                <label for="email"><strong>Correo Institucional:</strong></label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::text('email', Auth::user()->email, ['class'=>'form-control', 'disabled']) !!}
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <label for="phone">Teléfono:</label>
+                            <div class="col-md-6">
+                                <label for="phone"><strong>Teléfono:</strong></label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                     {!! Form::number('phone', Auth::user()->phone, ['class'=>'form-control', 'disabled']) !!}

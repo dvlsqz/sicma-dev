@@ -24,7 +24,7 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('code_ppr', $product->code_ppr, ['class'=>'form-control']) !!}
-                            </div>                            
+                            </div>
                         </div>
 
                         <div class="col-md-4">
@@ -32,7 +32,7 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('code_int', $product->code_int, ['class'=>'form-control']) !!}
-                            </div>                            
+                            </div>
                         </div>
 
                         <div class="col-md-4">
@@ -40,7 +40,7 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('row', $product->row, ['class'=>'form-control']) !!}
-                            </div>                            
+                            </div>
                         </div>
 
                         <div class="col-md-12 mtop16">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="col-md-6 mtop16">
-                            <label for="lastname"><strong> Cantidad Disponible Inicial: </strong></label>
+                            <label for="lastname"><strong>Cantidad Disponible: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::number('stock', $product->stock, ['class'=>'form-control', 'min' => '0']) !!}
@@ -73,7 +73,7 @@
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::number('price_unit', $product->price_unit, ['class'=>'form-control', 'min'=>'0.00', 'step'=>'0.01']) !!}
                             </div>
-                        </div>                       
+                        </div>
 
                         <div class="col-md-6 mtop16">
                             <label for="lastname"><strong>Tipo: </strong></label>
@@ -106,8 +106,8 @@
                                 {!! Form::textarea('description', $product->description, ['class'=>'form-control', 'rows'=>'2']) !!}
                             </div>
                         </div>
-                    </div>  
-                    
+                    </div>
+
                     <div class="row mtop16">
                         <div class="input-group">
                             {!! Form::submit('Guardar', ['class'=>'btn btn-success']) !!}&nbsp;
@@ -116,9 +116,9 @@
                     </div>
                     {!! Form::close() !!}
                 </div>
-                
-                        
+
+
             </div>
-        </div>        
+        </div>
     </div>
 @endsection

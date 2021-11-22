@@ -5,7 +5,7 @@
     <li class="breadcrumb-item">
         <a href="{{ url('/admin/environments/all') }}" class="nav-link"><i class="fa fa-object-group"></i> Servicios Generales</a>
     </li>
-    
+
 @endsection
 
 @section('content')
@@ -61,15 +61,15 @@
                                 <tr>
                                     <td>
                                         <div class="opts">
-                                            @if(kvfj(Auth::user()->permissions, 'environment_list'))
-                                                <a href="{{ url('/admin/services/'.$ia->id.'/environments') }}"  title="Ambientes"><i class="fas fa-stream"></i></a>
+                                            @if(kvfj(Auth::user()->permissions, 'ing7_assignments_areas_delete'))
+                                                <a href="#" data-toogle="tooltrip" data-action="assignments_areas_delete" data-path="admin/ing_7" data-object="{{ $ia->id }}" class="btn-deleted" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
                                             @endif
                                         </div>
                                     </td>
                                     <td>{{ $ia->area->code.' - '.$ia->area->name }}</td>
-                                    
+
                                 </tr>
-                            @endforeach                                                      
+                            @endforeach
                         </tbody>
                     </table>
 

@@ -46,6 +46,7 @@ class UnitsController extends Controller
             $u = new Unit;
             $u->name = e($request->input('name'));
             $u->code = $request->input('code');
+            $u->municipality_id = $request->input('municipality_id');
 
             if($u->save()):
                 $b = new Bitacora;

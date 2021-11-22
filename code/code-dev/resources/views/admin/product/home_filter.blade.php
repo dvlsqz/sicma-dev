@@ -33,6 +33,9 @@
                     </li>
 
                     @include('admin.product.renglones')
+                    <li>
+                        <a href="#" id="btn_search" ><i class="fas fa-search"></i> Buscar Ingreso</a>
+                    </li>
 
                     @if(kvfj(Auth::user()->permissions, 'product_add'))
                         <li>
@@ -58,12 +61,28 @@
             </div>
 
             <div class="inside">
+                <div class="form_search" id="form_search">
+                    {!! Form::open(['url'=> '/admin/product/income/search']) !!}
+                    <div class="row">
+                        <div class="col-md-8">
+                            {!! Form::text('search', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el número de documento', 'required']) !!}
+                        </div>
+                        <div class="col-md-2">
+                            {!! Form::select('type_search',['0'=>'Factura', '1'=>'SIAF', '2' => 'Orden de Compra'], 0, ['class' => 'form-select']) !!}
+                        </div>
+                        <div class="col-md-2">
+                            {!! Form::submit('Buscar', ['class'=>'btn btn-primary']) !!}
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+
                 <table id="table-modules" class="table table-bordered table-striped" style="background-color:#EDF4FB;">
                     <thead>
                         <tr>
                             <td width="24px"><strong>OPCIONES</strong></td>
-                            <td width="120px"><strong>REGLÓN y CODIGO PPR</strong></td>
-                            <td><strong>NOMBRE y DESCRIPCION</strong></td>
+                            <td width="120px"><strong>REGLÓN Y CODIGO PPR</strong></td>
+                            <td><strong>NOMBRE Y DESCRIPCION</strong></td>
                             <td><strong>PRESENTACIÓN</strong></td>
                             <td width="120px"><strong>CANTIDAD DISPONIBLE</strong></td>
                             <td width="120px"><strong>PRECIO UNITARIO</strong></td>
@@ -96,5 +115,5 @@
 
         </div>
     </div>
-    
+
 @endsection

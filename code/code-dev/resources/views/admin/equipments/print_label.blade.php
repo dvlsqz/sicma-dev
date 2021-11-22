@@ -12,7 +12,7 @@
         <strong> Codigo </strong> <br>
         {{ $equipment->code_new }} <br><br>
         <div class="input-group">
-            <img src="data:image/png;base64, {{ base64_encode( QrCode::size(125)->generate('http://10.11.0.30:8500/admin/equipment/'.$equipment->id.'/edit')) }} ">
+            <img src="data:image/png;base64, {{ base64_encode( QrCode::size(125)->generate('http://10.11.0.30:8500/admin/equipment/'.$equipment->id.'/panel')) }} ">
         </div>
     </body>
 

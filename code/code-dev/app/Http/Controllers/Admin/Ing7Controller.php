@@ -285,6 +285,21 @@ class Ing7Controller extends Controller
         endif;
     }
 
+    public function getIng7FollowDelete($id){
+        $i = Ings7Follow::findOrFail($id);
+
+        if($i->delete()):
+
+            $b = new Bitacora;
+            $b->action = "Registro eliminado.";
+            $b->user_id = Auth::id();
+            $b->save();
+
+            return back()->with('messages', '¡Registro eliminado con exito!.')
+                    ->with('typealert', 'success');
+        endif;
+    }
+
     public function getIng7AssignmentsAreas($id){
         $ing7 = Ings7::findOrFail($id);
         $iaa = Ings7AssignmentArea::where('iding7', $id )->get();
@@ -340,6 +355,21 @@ class Ing7Controller extends Controller
                 return back()->with('messages', '¡Asignacion registrada y guardada con exito!.')
                     ->with('typealert', 'success');
             endif;
+        endif;
+    }
+
+    public function getIng7AssignmentsAreasDelete($id){
+        $i = Ings7AssignmentArea::findOrFail($id);
+
+        if($i->delete()):
+
+            $b = new Bitacora;
+            $b->action = "Area asignada eliminada.";
+            $b->user_id = Auth::id();
+            $b->save();
+
+            return back()->with('messages', '¡Asignacion eliminada con exito!.')
+                    ->with('typealert', 'success');
         endif;
     }
 
@@ -399,6 +429,21 @@ class Ing7Controller extends Controller
                 return back()->with('messages', '¡Asignacion registrada y guardada con exito!.')
                     ->with('typealert', 'success');
             endif;
+        endif;
+    }
+
+    public function getIng7AssignmentsPersonalDelete($id){
+        $i = Ings7AssignmentPersonal::findOrFail($id);
+
+        if($i->delete()):
+
+            $b = new Bitacora;
+            $b->action = "Personal asignado eliminado.";
+            $b->user_id = Auth::id();
+            $b->save();
+
+            return back()->with('messages', '¡Asignacion eliminada con exito!.')
+                    ->with('typealert', 'success');
         endif;
     }
 
@@ -680,5 +725,6 @@ class Ing7Controller extends Controller
             endif;
         endif;
     }
+
 
 }

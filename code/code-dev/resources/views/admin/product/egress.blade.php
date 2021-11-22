@@ -61,9 +61,9 @@
                             <div class="form">
                                 <label> <strong>Articulo </strong></label>
                                 <select name="pidarticulo" id="pidarticulo" class="form-control" data-live-search="true">
-                                @foreach($products as $p)
-                                <option value="{{$p->id}}">{{'ppr: '.$p->code_ppr.' - '.$p->name.' - '.$p->description}}</option>
-                                @endforeach
+                                    @foreach($products as $p)
+                                        <option value="{{$p->id}}">{{'ppr: '.$p->code_ppr.' - '.$p->name.' - '.$p->description.' - '.$p->presentation}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

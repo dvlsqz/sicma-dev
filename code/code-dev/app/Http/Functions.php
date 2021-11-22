@@ -445,6 +445,21 @@
         endif;
     }
 
+    function getStatusEquipment($mode, $id){
+        $roles = [
+            '0' => 'Funcionamiento Optimo',
+            '1' => 'En Reparación',
+            '2' => 'Dañado',
+            '3' => 'Dado de Baja'
+        ];
+
+        if(!is_null($mode)):
+            return $roles;
+        else:
+            return $roles[$id];
+        endif;
+    }
+
     //Key Value From JSON
     function kvfj($json, $key){
         if($json == null):
@@ -591,7 +606,8 @@
                     'equipment_conecctions' => 'Puede ver y agregar conexiones del equipo',
                     'equipment_conecctions_delete' => 'Puede eliminar conexiones del equipo',
                     'equipment_transfer' => 'Puede ver y registrar cabmios de ambientes',
-                    'equipment_banned' => 'Puede dar de baja a equipos.'
+                    'equipment_banned' => 'Puede dar de baja a equipos.',
+                    'equipment_change_status' => 'Puede cambiar el estado del equipo'
                 ]
             ],
 
@@ -622,8 +638,11 @@
                     'ing7_buy_hire' => 'Puede realizar la clasificación de compra ó contratación de ING-7.',
                     'ing7_print' => 'Puede imprimir el ING-7.',
                     'ing7_follow' => 'Puede llenar la ficha de seguimiento del ING-7.',
+                    'ing7_follow_delete' => 'Puede eliminar registro de la ficha de seguimiento del ING-7.',
                     'ing7_assignments_areas' => 'Puede realizar asignacion de areas de trabajo al ING-7.',
+                    'ing7_assignments_areas_delete' => 'Puede eliminar asignacion de areas de trabajo al ING-7.',
                     'ing7_assignments_personal' => 'Puede realizar asignacion de personal al ING-7.',
+                    'ing7_assignments_personal_delete' => 'Puede eliminar asignacion de personal de trabajo al ING-7.',
                     'ing7_record' => 'Puede ver el historial de seguimiento del ING-7.',
                     'ing7_receive_reject' => 'Puede recepcionar o rechazar ING-7',
                     'ing7_an_audit' => 'Puede colocar en revision el ING-7.',

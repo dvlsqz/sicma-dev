@@ -22,7 +22,7 @@
                         <div class="modal-header" style="background-color:#256B92; color:#fff; text-align:center;">
                             <h5 class="modal-title">Agregar Producto/Insumo al Detalle</h5>
                         </div>
-                        
+
                         <div class="modal-body">
 
                             <div class="col-md-12">
@@ -36,10 +36,10 @@
                                 </div>
                             </div>
 
-                                                            
+
 
                             {!! Form::hidden('pidarticulo', null, ['class'=>'form-control', 'id'=> 'pidarticulo', 'placeholder' => 'Cantidad' ]) !!}
-                                
+
 
                             <div class="col-md-12 mtop16">
                                 <div class="form-group">
@@ -76,14 +76,14 @@
 
                         <div class="col-md-6">
                             <div class="input-group">
-                                
+
                                 <button type="button" id="bt_search" class="btn btn-info">
                                     Buscar Producto
                                 </button>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row mtop16">
 
                         {!! Form::hidden('idproduct', null, ['class'=>'form-control', 'id'=> 'idproduct']) !!}
@@ -104,31 +104,23 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mtop16">
+                        <div class="col-md-6 mtop16">
                             <label for="lastname"><strong> Área: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 <select name="idmaintenancearea" id="idmaintenancearea" class="form-control ">
-                                    @foreach ($maintenance_areas as $ma)                                        
+                                    @foreach ($maintenance_areas as $ma)
                                         <option value="{{$ma->id}}">{{$ma->code.' - '.$ma->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div> 
+                        </div>
 
-                        <div class="col-md-4 mtop16">
+                        <div class="col-md-6 mtop16">
                             <label for="ibm"><strong> Código Interno Mantenimiento: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('code_mantto_int', null, ['class'=>'form-control']) !!}
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mtop16">
-                            <label for="lastname"><strong> Existencia: </strong></label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                                {!! Form::number('stock', 0, ['class'=>'form-control']) !!}
                             </div>
                         </div>
 
@@ -153,9 +145,9 @@
         </div>
     </div>
 
-    <script> 
+    <script>
         var modal = document.getElementById('modelId');
-        
+
         $(document).ready(function(){
             $('#bt_add').click(function(){
                 agregar();
@@ -189,7 +181,7 @@
             $("#particulo").val("");
             $("#description").val("");
         }
-        
+
 
     </script>
 

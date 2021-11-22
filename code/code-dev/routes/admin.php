@@ -5,6 +5,7 @@
         //Dashboard
         Route::get('/','Admin\DashboardController@getDashboard')->name('dashboard');
         Route::get('/grafica','Admin\DashboardController@graficaUsuarios')->name('dashboard');
+        Route::get('/pdf','Admin\DashboardController@pdf')->name('dashboard');
 
         //Units
         Route::get('/units', 'Admin\UnitsController@getHome')->name('units');
@@ -68,6 +69,7 @@
        Route::get('/product/egress/add', 'Admin\ProductController@getProductEgress')->name('product_egress');
        Route::post('/product/egress/add', 'Admin\ProductController@postProductEgress')->name('product_egress');
        Route::get('/product/{id}/record', 'Admin\ProductController@getProductRecord')->name('product_record');
+       Route::post('/product/income/search', 'Admin\ProductController@postProductIncomeSearch')->name('product_edit');
 
         //Kardex
         Route::get('/kardex/add', 'Admin\KardexController@getKardexAdd')->name('kardex_add');
@@ -114,6 +116,7 @@
         Route::post('/equipment/{id}/transfer', 'Admin\EquipmentController@postEquipmentTransfer')->name('equipment_transfer');
         Route::get('/equipment/{id}/print_label', 'Admin\EquipmentController@getEquipmentPrintLabel')->name('equipment_edit');
         Route::get('/equipment/{id}/panel', 'Admin\EquipmentController@getEquipmentPanel')->name('equipment_edit');
+        Route::get('/equipment/{id}/change_status/{status}', 'Admin\EquipmentController@getEquipmentChangeStatus')->name('equipment_change_status');
 
         //Enviroments
         Route::post('/services_g/add', 'Admin\EnvironmentController@postServicesGeneralAdd')->name('serviceg_add');
@@ -157,6 +160,9 @@
         Route::get('/ing_7/{id}/files', 'Admin\Ing7Controller@getIng7Files')->name('ing7_file');
         Route::post('/ing_7/{id}/files/upload/file', 'Admin\Ing7Controller@postIng7UploadFile')->name('ing7_file');
         Route::post('/ing_7/{id}/files/upload/image', 'Admin\Ing7Controller@postIng7UploadImage')->name('ing7_file');
+        Route::get('/ing_7/{id}/follow_delete', 'Admin\Ing7Controller@getIng7Followdelete')->name('ing7_follow_delete');
+        Route::get('/ing_7/{id}/assignments_areas_delete', 'Admin\Ing7Controller@getIng7AssignmentsAreasdelete')->name('ing7_assignments_areas_delete');
+        Route::get('/ing_7/{id}/assignments_personal_delete', 'Admin\Ing7Controller@getIng7AssignmentsPersonaldelete')->name('ing7_assignments_personal_delete');
 
         //OT
         Route::get('/ot', 'Admin\OtController@getHome')->name('ot_list');

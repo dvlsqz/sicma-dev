@@ -111,13 +111,13 @@
                 <tr>
                     <td id="gris" colspan="2"  style="border-right: 0px; width: 50%; " >
                         <div  >
-                            <b> Personal Interno: </b> @if(empty($ots->personal->type_personal))  @else @if($ots->personal->type_personal == "0") X @endif @endif
+                            <b> Personal Interno: </b> @if(!empty($ots->personal->type_personal))  @if($ots->personal->type_personal == "0") X @endif @endif
                         </div>
                     </td>
 
                     <td id="gris" colspan="2"  style="border-left:0px; width: 50%; " >
                         <div >
-                            <b> Personal Contratista: </b> @if(empty($ots->personal->type_personal))  @else @if($ots->personal->type_personal == "1") X @endif @endif
+                            <b> Personal Contratista: </b> @if(!empty($ots->personal->type_personal))  @if($ots->personal->type_personal == "1") X @endif @endif
                         </div>
                     </td>
 

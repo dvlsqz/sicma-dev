@@ -20,10 +20,10 @@
                     </div>
                     <div class="inside">
                         {!! Form::open(['url'=>'/admin/equipment/'.$equipment->id.'/equipment_parts','files' => true,'enctype'=>'multipart/form-data']) !!}
-                            <div class="row">  
+                            <div class="row">
 
                                 <div class="col-md-12 ">
-                                    <label for="name">Nombre de la Parte:</label>
+                                    <label for="name"><strong>Nombre de la Parte:</strong></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                         {!! Form::text('name_part', null, ['class'=>'form-control']) !!}
@@ -31,7 +31,7 @@
                                 </div>
 
                                 <div class="col-md-12 mtop16">
-                                    <label for="name">Cantidad:</label>
+                                    <label for="name"><strong>Cantidad:</strong></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                         {!! Form::number('amount_part', null, ['class'=>'form-control']) !!}
@@ -39,14 +39,14 @@
                                 </div>
 
                                 <div class="col-md-12 mtop16">
-                                    <label for="name">Observaciones:</label>
+                                    <label for="name"><strong>Observaciones:</strong></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                         {!! Form::textarea('observation_part', null, ['class'=>'form-control','rows'=>'1']) !!}
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row mtop16">
                                 <div class="input-group">
                                     {!! Form::submit('Guardar', ['class'=>'btn btn-primary']) !!}&nbsp;
@@ -68,10 +68,10 @@
                         <table id="table-modules" class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <td>OPCIONES</td>
-                                    <td >NOMBRE</td>
-                                    <td>CANTIDAD</td>  
-                                    <td>OBSERVACIONES</td>                                    
+                                    <td><strong>OPCIONES</strong></td>
+                                    <td><strong>NOMBRE</strong></td>
+                                    <td><strong>CANTIDAD</strong></td>
+                                    <td><strong>OBSERVACIONES</strong></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,7 +87,7 @@
                                         <td>{{ $p->observation_part }}</td>
                                     </tr>
                                 @endforeach
-                                                            
+
                             </tbody>
                         </table>
                     </div>

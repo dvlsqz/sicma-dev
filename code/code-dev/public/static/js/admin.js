@@ -4,15 +4,15 @@ var base = location.protocol+'//'+location.host;
 var route = document.getElementsByName('routeName')[0].getAttribute('content');
 
 document.addEventListener('DOMContentLoaded', function(){
-        
+
     var btn_search = document.getElementById('btn_search');
     var form_search = document.getElementById('form_search');
     var servicegeneral = document.getElementById('servicegeneral');
     var service = document.getElementById('service');
     var btn_income_product_search = document.getElementById('btn_income_product_search');
     var btn_add_product_search = document.getElementById('btn_add_product_search');
-    
-    
+
+
     if(btn_search){
         btn_search.addEventListener('click', function(e){
             e.preventDefault();
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
-    if(route == "equipment_add"){        
+    if(route == "equipment_add"){
         setServiceToEquipment();
         setEnvironmentToEquipment();
     }
@@ -131,10 +131,6 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
 
-    $("#pidarticulo").select2({
-        placeholder: "Seleccione una Opción",
-        allowClear: true
-    });
 
     $("#idsupplier").select2({
         placeholder: "Seleccione una Opción",
@@ -146,9 +142,9 @@ document.addEventListener('DOMContentLoaded', function(){
         allowClear: true
     });
 
-    
 
-    
+
+
 
 });
 
@@ -160,7 +156,7 @@ function delete_object(e){
     var action = this.getAttribute('data-action');
     var path = this.getAttribute('data-path');
     var url = base + '/' + path + '/' + object + '/' + action;
-    var title, text, icon, arm, ara, comment;
+    var title, text, icon, arm, ara, comment, status;
 
     if(action == "delete"){
         title = '¿Esta seguro de marcar como '+'"Anulada"'+' esta solictud?';
@@ -168,7 +164,7 @@ function delete_object(e){
         icon = "error";
     }
 
-    if(action == "restore"){ 
+    if(action == "restore"){
         title = "¿Quiere restaurar este elemento?";
         text = "Esta acción restaurará este elemento y estará activo en la base de datos.";
         icon = "info";
@@ -209,7 +205,31 @@ function delete_object(e){
         text = "Recuerde que esta acción no se podra realizar nuevamente.";
         icon = "question";
     }
-    
+
+    if(action == "change_status"){
+        title = '¿Esta seguro de cambiar el estado de este equipo?';
+        text = "Recuerde que esta acción puede cambiar ciertas funciones sobre el equipo.";
+        icon = "question";
+    }
+
+    if(action == "assignments_areas_delete"){
+        title = '¿Esta seguro de eliminar esta asignacion?';
+        text = "Recuerde que esta acción enviara este elemento a la papelera o lo eliminara de forma definitiva.";
+        icon = "error";
+    }
+
+    if(action == "assignments_personal_delete"){
+        title = '¿Esta seguro de eliminar esta asignacion?';
+        text = "Recuerde que esta acción enviara este elemento a la papelera o lo eliminara de forma definitiva.";
+        icon = "error";
+    }
+
+    if(action == "follow_delete"){
+        title = '¿Esta seguro de eliminar este registro?';
+        text = "Recuerde que esta acción enviara este elemento a la papelera o lo eliminara de forma definitiva.";
+        icon = "error";
+    }
+
     if(action == "authorize_reject"){
         Swal.fire({
             title: title,
@@ -220,10 +240,10 @@ function delete_object(e){
             confirmButtonText: 'Autorizar',
             denyButtonText: `Rechazar`,
         }).then((result) =>{
-            
+
             if (result.isConfirmed) {
                 arm = "1";
-                window.location.href = url+'/'+arm; 
+                window.location.href = url+'/'+arm;
             }else if (result.isDenied){
                 arm = "2";
                 window.location.href = url+'/'+arm;
@@ -239,10 +259,10 @@ function delete_object(e){
             confirmButtonText: 'Recepcionar',
             denyButtonText: `Rechazar`,
         }).then((result) =>{
-            
+
             if (result.isConfirmed) {
                 arm = "1";
-                window.location.href = url+'/'+arm; 
+                window.location.href = url+'/'+arm;
             }else if (result.isDenied){
                 arm = "2";
                 window.location.href = url+'/'+arm;
@@ -263,9 +283,9 @@ function delete_object(e){
                 'aria-label': 'Type your message here'
             },
         }).then((result) =>{
-            
+
             if (result.isConfirmed) {
-                ara = "1";                
+                ara = "1";
             }else if (result.isDenied){
                 ara = "2";
             }
@@ -275,19 +295,42 @@ function delete_object(e){
             }else{
                 comment = "1";
             }
-            
-            window.location.href = url+'/'+ara+'/'+comment; 
+
+            window.location.href = url+'/'+ara+'/'+comment;
         });
-    }else{
+    }else if(action == "change_status"){
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+            showCancelButton: true,
+            input: 'select',
+            inputOptions: {
+                'Estados Disponibles': {
+                    0: 'Funcionamiento Optimo',
+                    1: 'En Reparación',
+                    2: 'Dañado',
+                    3: 'Dado de Baja'
+                }
+            },
+            inputPlaceholder: 'Seleccione una opción'
+        }).then((result) =>{
+
+            status = result.value;
+
+            window.location.href = url+'/'+status;
+        });
+    }
+    else{
         Swal.fire({
             title: title,
             text: text,
             icon: icon,
             showCancelButton: true,
         }).then((result) =>{
-            
+
             if (result.isConfirmed) {
-                window.location.href = url; 
+                window.location.href = url;
             }
         });
     }
@@ -335,7 +378,7 @@ function setEnvironmentToEquipment(){
             var data = this.responseText;
             data = JSON.parse(data);
             data.forEach( function(element){
-                
+
                 if(service_actual == element.id){
                     select.innerHTML += "<option value=\""+element.id+"\" selected>"+element.code+' - '+element.name+"</option>";
                 }else{
@@ -348,7 +391,7 @@ function setEnvironmentToEquipment(){
 }
 
 function setInfoIncomeProduct(){
-    var code_ppr = document.getElementById('code_ppr').value;    
+    var code_ppr = document.getElementById('code_ppr').value;
     var url = base + '/admin/sicma/api/load/income/product/'+code_ppr;
     var idproduct = document.getElementById('pidarticulo');
     var name = document.getElementById('particulo');
@@ -362,16 +405,16 @@ function setInfoIncomeProduct(){
             var data = this.responseText;
             data = JSON.parse(data);
             data.forEach( function(element){
-                  idproduct.value = element.id; 
-                  name.value = element.name; 
-                  description.value = element.description;             
+                  idproduct.value = element.id;
+                  name.value = element.name;
+                  description.value = element.description;
             });
         }
     }
 }
 
 function setInfoEgressProduct(){
-    var code_ppr = document.getElementById('code_ppr').value;    
+    var code_ppr = document.getElementById('code_ppr').value;
     var url = base + '/admin/sicma/api/load/egress/product/'+code_ppr;
     var idproduct = document.getElementById('pidarticulo');
     var name = document.getElementById('particulo');
@@ -379,15 +422,15 @@ function setInfoEgressProduct(){
 
     http.open('GET', url, true);
     http.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-    http.send(); 
+    http.send();
     http.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             var data = this.responseText;
             data = JSON.parse(data);
             data.forEach( function(element){
-                  idproduct.value = element.id; 
-                  name.value = element.name; 
-                  description.value = element.description;             
+                  idproduct.value = element.id;
+                  name.value = element.name;
+                  description.value = element.description;
             });
         }
     }

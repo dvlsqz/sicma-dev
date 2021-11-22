@@ -18,7 +18,7 @@
                 <div class="modal-header" style="background-color:#256B92; color:#fff; text-align:center;">
                     <h5 class="modal-title">Agregar Producto/Insumo al Detalle</h5>
                 </div>
-                
+
                 <div class="modal-body">
 
                     <div class="col-md-12">
@@ -32,9 +32,9 @@
                         </div>
                     </div>
 
-                    
+
                     {!! Form::hidden('pidarticulo', null, ['class'=>'form-control', 'id'=> 'pidarticulo', 'placeholder' => 'Cantidad' ]) !!}
-                        
+
 
                     <div class="col-md-12 mtop16">
                         <div class="form-group">
@@ -65,10 +65,10 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
     <div class="container-fluid">
-        <div class="panel shadow">            
+        <div class="panel shadow">
 
             <div class="header">
                 <h2 class="title"><i class="fas fa-plus-circle"></i> <strong> Registrar Ingreso </strong></h2>
@@ -84,8 +84,8 @@
                         <div class=" col-md-12">
                             <div class="form-group">
                                 <label> <strong> Proveedor: </strong></label>
-                                <select name="idproveedor" id="idproduct" style="width: 100%;">
-                                    @foreach ($suppliers as $s)                                    
+                                <select name="idproveedor" id="idsupplier" style="width: 100%;">
+                                    @foreach ($suppliers as $s)
                                         <option></option>
                                         <option value="{{$s->id}}">{{$s->nit.' / '.$s->name}}</option>
                                     @endforeach
@@ -139,7 +139,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                
+
                                 <button type="button" id="bt_search" class="btn btn-info">
                                     Agregar Producto
                                 </button>
@@ -176,9 +176,10 @@
         </div>
     </div>
 
-        
 
-    <script> 
+
+    <script>
+
         var modal = document.getElementById('modelId');
         var cont=0;
         total=0;
@@ -219,7 +220,7 @@
             $("#code_ppr").val("");
             $("#pidarticulo").val("");
             $("#particulo").val("");
-            $("#description").val("");            
+            $("#description").val("");
             $("#pcantidad").val("");
         }
 

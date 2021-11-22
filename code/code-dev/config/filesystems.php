@@ -57,22 +57,31 @@ return [
 
         'uploads_files' => [
             'driver' => 'local',
-            'root' => 'C:/xampp/htdocs/sicma/public/uploads/files'
+            'root' => 'C:/desarrollos/sicma/public/uploads/files'
         ],
 
         'uploads_photos' => [
             'driver' => 'local',
-            'root' => 'C:/xampp/htdocs/sicma/public/uploads/photos'
+            'root' => 'C:/desarrollos/sicma/public/uploads/photos'
         ],
 
         'uploads_user' => [
             'driver' => 'local',
-            'root' => 'C:/xampp/htdocs/sicma/public/uploads_users'
+            'root' => 'C:/desarrollos/sicma/public/uploads_users'
         ],
 
         'uploads_services_photos' => [
             'driver' => 'local',
-            'root' => 'C:/xampp/htdocs/sicma/public/services_photos'
+            'root' => 'C:/desarrollos/sicma/public/services_photos'
+        ],
+
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'root' => '/root/prueba', // for example: /var/www/html/dev/images
+            'port' => 22
         ],
 
         's3' => [

@@ -55,8 +55,8 @@ class ProductController extends Controller
         return view('admin.product.home_filter',$data);
     }
 
-    public function index($r){  
-        
+    public function index($r){
+
         if(!is_null($r)):
             $product = Product::where('row', $r)->orderBy('id', 'Asc')->get();
         else:
@@ -69,19 +69,19 @@ class ProductController extends Controller
 
         return view('admin.product.home',$data);
     }
-    
+
     public function getProductAll(){
            $data = Product::select('id','row','code_ppr', 'name', 'description', 'presentation', 'stock', 'price_unit')
-                ->get();        
-            
+                ->get();
+
            return DataTables()->of($data)
-               ->addColumn('action', function($row){     
+               ->addColumn('action', function($row){
                        $btn = "<a href='/admin/product/$row->id/edit' class='btn btn-light btn-sm' style='margin-right: 4px;' title='Editar'><i class='fas fa-edit' style='color: #256B92;'></i></a>";
                         $btn = $btn."<a href='/admin/product/$row->id/record' class='btn btn-light btn-sm' title='Historial de Movimientos'><i class='fas fa-history'></i></a>";
-                       return $btn;        
-                   })        
+                       return $btn;
+                   })
                     ->rawColumns(['action'])
-               ->toJson();    
+               ->toJson();
     }
 
     public function getProductAdd(Request $request){
@@ -120,7 +120,7 @@ class ProductController extends Controller
             $p->price_unit = $request->input('price_unit');
             $p->type = $request->input('type');
             $p->date_prod = $request->input('date_prod');
-            $p->date_ven = $request->input('date_ven');            
+            $p->date_ven = $request->input('date_ven');
             $p->description = e($request->input('description'));
             $p->status =  '1';
 
@@ -202,7 +202,7 @@ class ProductController extends Controller
     public function getProductIncome(){
         $suppliers = Supplier::get();
         $products = Product::get();
- 
+
         $data = [
             'suppliers' => $suppliers,
             'products' => $products
@@ -226,7 +226,7 @@ class ProductController extends Controller
             return back()->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
             ->with('typealert', 'danger')->withInput();
         else:
-          
+
             DB::beginTransaction();
 
             $ingreso = new IncomeProduct;
@@ -254,7 +254,7 @@ class ProductController extends Controller
             }
 
             DB::commit();
-           
+
 
             if($ingreso->save()):
                 $b = new Bitacora;
@@ -266,9 +266,9 @@ class ProductController extends Controller
                     ->with('typealert', 'success');
             endif;
 
-            
+
         endif;
-        
+
     }
 
     public function getProductEgress(){
@@ -298,7 +298,7 @@ class ProductController extends Controller
             return back()->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
             ->with('typealert', 'danger')->withInput();
         else:
-          
+
             DB::beginTransaction();
 
             $egreso = new EgressProduct;
@@ -323,7 +323,7 @@ class ProductController extends Controller
             }
 
             DB::commit();
-           
+
 
             if($egreso->save()):
                 $b = new Bitacora;
@@ -335,9 +335,9 @@ class ProductController extends Controller
                     ->with('typealert', 'success');
             endif;
 
-            
+
         endif;
-        
+
     }
 
     public function getProductRecord($id){
@@ -352,5 +352,52 @@ class ProductController extends Controller
         ];
 
         return view('admin.product.record',$data);
+    }
+
+    public function postProductIncomeSearch(Request $request){
+        $rules = [
+            'search' => 'required'
+        ];
+
+        $messages = [
+            'search.required' => 'El campo consulta es requerido.'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$messages);
+
+        if($validator->fails()):
+
+            return redirect('/admin/products/home/0')->withErrors($validator)->with('messages', '¡Se ha producido un error!.')
+            ->with('typealert', 'danger')->withInput();
+
+        else:
+            $search = $request->input('search');
+            $type_search = $request->input('type_search');
+
+            switch($type_search){
+
+                case '0':
+                    $inc = IncomeProduct::where('no_doc','LIKE', '%'.$search.'%')->limit(1)->get();
+                break;
+
+                case '1':
+                    $inc = IncomeProduct::where('no_siaf','LIKE', '%'.$search.'%')->limit(1)->get();
+                break;
+
+                case '2':
+                    $inc = IncomeProduct::where('no_oc','LIKE', '%'.$search.'%')->limit(1)->get();
+                break;
+            }
+
+            $inc_det = IncomeDetailProduct::all();
+
+            $data = [
+                'inc' => $inc,
+                'inc_det' => $inc_det
+            ];
+
+            return view('admin.product.search', $data);
+
+        endif;
     }
 }

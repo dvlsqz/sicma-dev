@@ -590,5 +590,21 @@ class EquipmentController extends Controller
         return view('admin.equipments.panel',$data);
     }
 
+    public function getEquipmentChangeStatus($id, $status){
+        $e = Equipment::findOrFail($id);
+        $e->status = $status;
+
+        if($e->save()):
+            $b = new Bitacora;
+            $b->action = "Cambio de estado de equipo ".$e->code_new;
+            $b->user_id = Auth::id();
+            $b->save();
+
+            return redirect('/admin/equipments/all')->with('messages', '¡Estado actualizado y guardado con exito!.')
+                ->with('typealert', 'success');
+        endif;
+
+    }
+
 
 }

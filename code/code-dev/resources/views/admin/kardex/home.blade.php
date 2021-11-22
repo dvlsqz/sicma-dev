@@ -16,7 +16,6 @@
             <ul>
                 <li>
                     <a href="#" id="btn_search" ><i class="fas fa-search"></i> Buscar DAB-75</a>
-
                 </li>
                 @if(kvfj(Auth::user()->permissions, 'kardex_add'))
                     <li>
@@ -94,27 +93,6 @@
     </div>
 </div>
 
-<script>
 
-
-    var modal = document.getElementById('modelId');
-
-    $(document).ready(function(){
-        $('#bt_search').click(function(){
-
-            $('#modelId').modal("show");
-        });
-
-        $('#bt_closeModal').click(function(){
-            $('#modelId').modal("hide");
-        });
-    });
-
-    function getId(){
-        return 1;
-    }
-
-
-</script>
 
 @endsection

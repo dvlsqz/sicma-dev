@@ -62,17 +62,17 @@
                                     <option value="{{$u->id}}">{{$u->ibm.' - '.$u->name.' '.$u->lastname}}</option>
                                 @endforeach
                             </select>
-                        </div>  
-                    </div>                 
+                        </div>
+                    </div>
                 </div>
-                
+
                     <div class="row">
                         <div class="col-md-6 mtop16">
                             <div class="form">
                                 <label><strong> Articulo: </strong></label>
                                 <select name="pidarticulo" id="pidarticulo" class="form-select">
                                     @foreach($kardex as $k)
-                                        <option value=""></option>
+                                        <option value=""></option> 
                                         <option value="{{$k->id}}">{{'ppr: '.$k->product->code_ppr.' - '.$k->product->name.' - '.$k->product->description}}</option>
                                     @endforeach
                                 </select>

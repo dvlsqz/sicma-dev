@@ -23,28 +23,20 @@
                 {!! Form::open(['url'=>'/admin/product/add']) !!}
                     <div class="row">
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label for="lastname"> <strong> Código Financiero/PPR: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('code_ppr', null, ['class'=>'form-control']) !!}
-                            </div>                            
+                            </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label for="lastname"> <strong> Código Interno (Llenar si PPR es S/C): </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::text('code_int', null, ['class'=>'form-control']) !!}
-                            </div>                            
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="lastname"> <strong> Reglón Presupuestario: </strong></label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                                {!! Form::text('row', null, ['class'=>'form-control']) !!}
-                            </div>                            
+                            </div>
                         </div>
 
                         <div class="col-md-12 mtop16">
@@ -56,10 +48,10 @@
                         </div>
 
                         <div class="col-md-6 mtop16">
-                            <label for="lastname"><strong> Cantidad Disponible Inicial: </strong></label>
+                            <label for="lastname"> <strong> Reglón Presupuestario: </strong></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
-                                {!! Form::number('stock', 0, ['class'=>'form-control', 'min' => '0']) !!}
+                                {!! Form::text('row', null, ['class'=>'form-control']) !!}
                             </div>
                         </div>
 
@@ -77,7 +69,7 @@
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-keyboard"></i></span>
                                 {!! Form::number('price_unit', null, ['class'=>'form-control']) !!}
                             </div>
-                        </div>                       
+                        </div>
 
                         <div class="col-md-6 mtop16">
                             <label for="lastname"><strong>Tipo: </strong></label>

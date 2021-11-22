@@ -5,7 +5,7 @@
     <li class="breadcrumb-item">
         <a href="{{ url('/admin/ing_7') }}" class="nav-link"><i class="fas fa-copy"></i> ING-7</a>
     </li>
-    
+
 @endsection
 
 @section('content')
@@ -46,7 +46,7 @@
                 <div class="header">
                     <h2 class="title"><i class="fa fa-object-group"></i> Tabla de Ficha de Seguimiento: <b>ING-7 NO. {{ $ing7->correlative }}</b> </h2>
                     <ul>
-                        @if(kvfj(Auth::user()->permissions, 'ing7_follow')) 
+                        @if(kvfj(Auth::user()->permissions, 'ing7_follow'))
                             <li>
                                 <a href="{{ url('/admin/ing_7/'.$ing7->id.'/print/follow') }}" target="_blank" ><i class="fas fa-print"></i> Imprimir</a>
                             </li>
@@ -67,12 +67,18 @@
                         <tbody>
                             @foreach($ing7f as $in)
                                 <tr>
-                                    <td></td>
+                                    <td>
+                                        <div class="opts">
+                                            @if(kvfj(Auth::user()->permissions, 'ing7_follow_delete'))
+                                                <a href="#" data-toogle="tooltrip" data-action="follow_delete" data-path="admin/ing_7" data-object="{{ $in->id }}" class="btn-deleted" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                            @endif
+                                        </div>
+                                    </td>
                                     <td>{{ $in->date }}</td>
                                     <td>{{ $in->action }}</td>
                                     <td>{{ $in->user->name.' '.$in->user->lastname }}</td>
                                 </tr>
-                            @endforeach                                                                                
+                            @endforeach
                         </tbody>
                     </table>
 

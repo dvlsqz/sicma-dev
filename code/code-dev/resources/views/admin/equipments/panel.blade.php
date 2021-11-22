@@ -14,7 +14,7 @@
 <div class="container-fluid">
     <div class="page_user">
         <div class="row ">
-            <div class="col-md-2 d-flex mb16">
+            <div class="col-md-2 mb16">
                 <div class="panel shadow">
                     <div class="header">
                         <h2 class="title"><i class="fas fa-info-circle"></i> Código QR</h2>
@@ -27,7 +27,7 @@
                                 <div class="input-group" style="align-items: center;">
                                     {!! QrCode::size(125)->generate('http://10.11.0.30:8500/admin/equipment/'.$equipment->id.'/edit'); !!}
                                 </div>
-                                <br><a href="{{ url('/admin/equipment/'.$equipment->id.'/print_label') }}" target="_blank"  title="Imprimir Etiqueta" class="btn btn-outline-primary"><i class="fas fa-print"></i> Imprimir</a>
+                                <br><a href="{{ url('/admin/equipment/'.$equipment->id.'/panel') }}" target="_blank"  title="Imprimir Etiqueta" class="btn btn-outline-primary"><i class="fas fa-print"></i> Imprimir</a>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
         </div>
 
         <div class="row mtop16">
-            <div class="col-md-2 d-flex mb16">
+            <div class="col-md-2 mb16">
                 <div class="panel shadow">
                     <div class="header">
                         <h2 class="title"><i class="fas fa-info-circle"></i> Acciones</h2>
@@ -139,8 +139,7 @@
                         <table class="table table-bordered table-striped" >
                             <thead>
                                 <tr>
-                                    <td><strong>Cantidad</strong></td>
-                                    <td><strong>Nombre</strong></td>
+                                    <td><strong>Equipo</strong></td>
                                 </tr>
                             </thead>
                             <tbody>

@@ -41,7 +41,7 @@
                     <thead>
                         <tr>
                             <td><strong> OPCIONES </strong></td>
-                            <td><strong> CODIGO ANTERIOR / NUEVO </strong></td>
+                            <td><strong> CODIGO </strong></td>
                             <td><strong> NOMBRE </strong></td>
                             <td><strong> MARCA / MODELO / SERIE </strong></td>
                             <td><strong> ESTADO </strong></td>
@@ -75,21 +75,18 @@
                                         @if(kvfj(Auth::user()->permissions, 'equipment_transfer'))
                                             <a href="{{ url('/admin/equipment/'.$eq->id.'/transfer') }}"  title="Traslado de Ambiente"><i class="fas fa-people-carry"></i></a>
                                         @endif
+
+                                        @if(kvfj(Auth::user()->permissions, 'equipment_change_status'))
+                                            <a href="#" data-action="change_status" data-path="admin/equipment" data-object="{{ $eq->id }}" class="btn-deleted" data-toogle="tooltrip" data-placement="top" title="Cambio de Estado"><i class="fas fa-toggle-on"></i></a>
+                                        @endif
                                     </div>
                                 </td>
-                                <td>{{$eq->code_old.' / '.$eq->code_new}}</td>
+                                <td>{{$eq->code_new}}</td>
                                 <td>{{$eq->name}}</td>
                                 <td>{{$eq->brand.' / '.$eq->model.' / '.$eq->serie }}</td>
                                 <td>
-                                    @if($eq->status == '0')
-                                        <p class="btn btn-sm btn-success" ><i class="fas fa-check-circle"></i> Funcionamiento Optimo</p>
-                                    @elseif($eq->status == '1')
-                                        <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-tools"></i> En Reparacion</a>
-                                    @elseif($eq->status == '2')
-                                        <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-exclamation-triangle"></i> Dañado</a>
-                                    @elseif($eq->status == '3')
-                                        <a href="#" class="btn btn-sm btn-dark"><i class="fas fa-times-circle"></i> Dado de Baja</a>
-                                    @endif
+                                    <p @if($eq->status == "0") style="background-color:#668C4A; color: white; text-align: center; border-radius: 2px; " @elseif($eq->status == "1") style="background-color:#FFF447; color: black; text-align: center; border-radius: 2px; " @elseif($eq->status == "2") style="background-color:#D94C1A; color: white; text-align: center; border-radius: 2px; " @else style="background-color:#3D3D3D; color: white; text-align: center; border-radius: 2px;" @endif > {{ getStatusEquipment(null, $eq->status) }} </p>
+
                                 </td>
                             </tr>
                         @endforeach

@@ -211,11 +211,15 @@
                                             @endif
 
                                             @if(kvfj(Auth::user()->permissions, 'ing7_materials'))
-                                                <a href="{{ url('/admin/ing_7/'.$in->id.'/materials') }}" data-toogle="tooltrip" data-placement="top" title="Listado de Materiales"><i class="fas fa-cubes"></i></a>
+                                                @if($in->status != '100' && $in->status != '110')
+                                                    <a href="{{ url('/admin/ing_7/'.$in->id.'/materials') }}" data-toogle="tooltrip" data-placement="top" title="Listado de Materiales"><i class="fas fa-cubes"></i></a>
+                                                @endif
                                             @endif
 
-                                            @if(kvfj(Auth::user()->permissions, 'ing7_materials'))
-                                                <a href="{{ url('/admin/ing_7/'.$in->id.'/files') }}" data-toogle="tooltrip" data-placement="top" title="Carga y Visualización de Archivos"><i class="fas fa-upload"></i></a>
+                                            @if(kvfj(Auth::user()->permissions, 'ing7_file')) 
+                                                @if($in->status != '100' && $in->status != '110')
+                                                    <a href="{{ url('/admin/ing_7/'.$in->id.'/files') }}" data-toogle="tooltrip" data-placement="top" title="Carga y Visualización de Archivos"><i class="fas fa-upload"></i></a>
+                                                @endif
                                             @endif
 
                                             @if(kvfj(Auth::user()->permissions, 'ing7_record'))

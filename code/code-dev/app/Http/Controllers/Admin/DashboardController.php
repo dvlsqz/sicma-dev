@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Models\Product, App\Http\Models\Environment, App\Http\Models\IncomeDetailProduct;
-use DB;
+use DB, PDF;
 use Carbon\Carbon;
 
 
@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $this->middleware('IsAdmin');
         $this->middleware('Permissions');
         $this->middleware('UserStatus');
-        
+
     }
 
     public function getDashboard(){
@@ -54,5 +54,14 @@ class DashboardController extends Controller
         return view('admin.dashboard',$data);
     }
 
-    
+    public function pdf(){
+        $data = [
+
+        ];
+
+        $pdf = PDF::loadView('admin.pdf',$data);
+        return $pdf->stream('Ficha Tecnica.pdf');
+    }
+
+
 }

@@ -66,7 +66,7 @@
             </tr>
 
             <tr>
-                <td > <b> Equipo/Instalación: </b>  {{ $equipment->name }}  <br> </td>
+                <td > <b> Equipo: </b>  {{ $equipment->name }}  <br> </td>
                 <td > <b> Marca:<br> </b> {{ $equipment->brand }}  </td>
                 <td > <b> Modelo: <br> </b> {{ $equipment->model }}  </td>
                 <td > <b> No. de serie: <br> </b> {{ $equipment->serie }}  </td>
@@ -79,6 +79,10 @@
                     <td colspan="2"> <b> Número Estación/Equipo: <br> </b> {{ $equipment->num_station }}  </td>
                 </tr>
             @endif
+
+            <tr>
+                <td  colspan="4">   <b> Estado:  </b> {{ getStatusEquipment(null, $equipment->status)  }} </td>
+            </tr>
 
             <tr>
                 <td  colspan="4">   <b> Nivel Critico:  </b> {{ getLevelEquipment(null, $equipment->critical_level) }} </td>
